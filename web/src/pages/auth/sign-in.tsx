@@ -66,24 +66,24 @@ export type PageProps = {
     auth0: boolean;
     cognito: boolean;
     keycloak:
-      | {
-          name: string;
-        }
-      | boolean;
+    | {
+      name: string;
+    }
+    | boolean;
     workos:
-      | {
-          organizationId: string;
-        }
-      | {
-          connectionId: string;
-        }
-      | boolean;
+    | {
+      organizationId: string;
+    }
+    | {
+      connectionId: string;
+    }
+    | boolean;
     wordpress: boolean;
     custom:
-      | {
-          name: string;
-        }
-      | false;
+    | {
+      name: string;
+    }
+    | false;
     sso: boolean;
   };
   runningOnHuggingFaceSpaces: boolean;
@@ -137,15 +137,15 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
           env.AUTH_COGNITO_ISSUER !== undefined,
         keycloak:
           env.AUTH_KEYCLOAK_CLIENT_ID !== undefined &&
-          env.AUTH_KEYCLOAK_CLIENT_SECRET !== undefined &&
-          env.AUTH_KEYCLOAK_ISSUER !== undefined
+            env.AUTH_KEYCLOAK_CLIENT_SECRET !== undefined &&
+            env.AUTH_KEYCLOAK_ISSUER !== undefined
             ? env.AUTH_KEYCLOAK_NAME !== undefined
               ? { name: env.AUTH_KEYCLOAK_NAME }
               : true
             : false,
         workos:
           env.AUTH_WORKOS_CLIENT_ID !== undefined &&
-          env.AUTH_WORKOS_CLIENT_SECRET !== undefined
+            env.AUTH_WORKOS_CLIENT_SECRET !== undefined
             ? env.AUTH_WORKOS_ORGANIZATION_ID !== undefined
               ? { organizationId: env.AUTH_WORKOS_ORGANIZATION_ID }
               : env.AUTH_WORKOS_CONNECTION_ID !== undefined
@@ -157,9 +157,9 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
           env.AUTH_WORDPRESS_CLIENT_SECRET !== undefined,
         custom:
           env.AUTH_CUSTOM_CLIENT_ID !== undefined &&
-          env.AUTH_CUSTOM_CLIENT_SECRET !== undefined &&
-          env.AUTH_CUSTOM_ISSUER !== undefined &&
-          env.AUTH_CUSTOM_NAME !== undefined
+            env.AUTH_CUSTOM_CLIENT_SECRET !== undefined &&
+            env.AUTH_CUSTOM_ISSUER !== undefined &&
+            env.AUTH_CUSTOM_NAME !== undefined
             ? { name: env.AUTH_CUSTOM_NAME }
             : false,
         sso,
@@ -738,9 +738,9 @@ export default function SignIn({
                       showPasswordStep
                         ? credentialsForm.handleSubmit(onCredentialsSubmit)
                         : (e) => {
-                            e.preventDefault();
-                            void handleContinue();
-                          }
+                          e.preventDefault();
+                          void handleContinue();
+                        }
                     }
                   >
                     {/* Email input – always visible */}
@@ -835,8 +835,8 @@ export default function SignIn({
           </div>
 
           {!signUpDisabled &&
-          env.NEXT_PUBLIC_SIGN_UP_DISABLED !== "true" &&
-          authProviders.credentials ? (
+            env.NEXT_PUBLIC_SIGN_UP_DISABLED !== "true" &&
+            authProviders.credentials ? (
             <p className="mt-10 text-center text-sm text-muted-foreground">
               No account yet?{" "}
               <Link
