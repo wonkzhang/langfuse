@@ -1,6 +1,18 @@
 {
-  "PromptsOnboardingPageTitle": "开始进行提示管理",
-  "PromptsOnboardingPageDescription": "提示管理功能可让您集中管理、进行版本控制，并协同迭代您的提示内容。现在就开始使用提示管理功能，以提升您的语言模型应用程序的性能和可维护性。",
+  "PromptsOnboardingPageTitle": "开始进行提示词管理",
+  "PromptsOnboardingPageDescription": "提示词管理功能可让您集中管理、进行版本控制，并协同迭代您的提示词。现在就开始使用提示词管理功能，以提升您的语言模型应用程序的性能和可维护性。",
   "PromptsOnboardingPageCreateButtonText": "创建提示词",
-  "PromptsOnboardingPageLearnMoreButtonText": "了解更多"
+  "PromptsOnboardingPageLearnMoreButtonText": "了解更多",
+
+  "PromptsOnboardingVP1Title": "与代码解耦",
+  "PromptsOnboardingVP1Description": "在不重新部署应用的情况下部署新提示词，使更新更快更简单",
+
+  "PromptsOnboardingVP2Title": "在 UI 或程序化方式编辑",
+  "PromptsOnboardingVP2Description": "非技术用户可以在 UI 中轻松编辑提示词。开发者也可以通过 API 和 SDK 程序化地更新提示词",
+
+  "PromptsOnboardingVP3Title": "性能优化",
+  "PromptsOnboardingVP3Description": "客户端缓存可防止延迟或可用性问题，提升应用稳定性",
+
+  "PromptsOnboardingVP4Title": "比较指标",
+  "PromptsOnboardingVP4Description": "跟踪不同提示词版本的延迟、成本和评估指标"
 }

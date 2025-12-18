@@ -2,5 +2,17 @@
   "PromptsOnboardingPageTitle": "Get Started with Prompt Management",
   "PromptsOnboardingPageDescription": "Prompt Management helps you centrally manage, version control, and collaboratively iterate on your prompts. Start using prompt management to improve your LLM application's performance and maintainability.",
   "PromptsOnboardingPageCreateButtonText": "Create Prompt",
-  "PromptsOnboardingPagLearnMoreButtonText": "Learn More"
+  "PromptsOnboardingPageLearnMoreButtonText": "Learn More",
+
+  "PromptsOnboardingVP1Title": "Decoupled from code",
+  "PromptsOnboardingVP1Description": "Deploy new prompts without application redeployment, making updates faster and easier",
+
+  "PromptsOnboardingVP2Title": "Edit in UI or programmatically",
+  "PromptsOnboardingVP2Description": "Non-technical users can easily edit prompts in the UI. Developers can optionally update prompts programmatically via the API and SDKs",
+
+  "PromptsOnboardingVP3Title": "Performance optimized",
+  "PromptsOnboardingVP3Description": "Client-side caching prevents latency or availability issues for your applications",
+
+  "PromptsOnboardingVP4Title": "Compare metrics",
+  "PromptsOnboardingVP4Description": "Track latency, cost, and evaluation metrics across different prompt versions"
 }
