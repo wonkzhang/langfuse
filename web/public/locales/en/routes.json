@@ -1,0 +1,20 @@
+{
+  "Routes.GoTo": "Go to...",
+  "Routes.Organizations": "Organizations",
+  "Routes.Projects": "Projects",
+  "Routes.Home": "Home",
+  "Routes.Dashboards": "Dashboards",
+  "Routes.Tracing": "Tracing",
+  "Routes.Sessions": "Sessions",
+  "Routes.Users": "Users",
+  "Routes.Prompts": "Prompts",
+  "Routes.Playground": "Playground",
+  "Routes.Scores": "Scores",
+  "Routes.LLMAsAJudge": "LLM-as-a-Judge",
+  "Routes.HumanAnnotation": "Human Annotation",
+  "Routes.Datasets": "Datasets",
+  "Routes.Upgrade": "Upgrade",
+  "Routes.CloudStatus": "Cloud Status",
+  "Routes.Settings": "Settings",
+  "Routes.Support": "Support"
+}

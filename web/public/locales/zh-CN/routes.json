@@ -1,0 +1,20 @@
+{
+  "Routes.GoTo": "前往...",
+  "Routes.Organizations": "组织",
+  "Routes.Projects": "项目",
+  "Routes.Home": "首页",
+  "Routes.Dashboards": "仪表盘",
+  "Routes.Tracing": "跟踪",
+  "Routes.Sessions": "会话",
+  "Routes.Users": "用户",
+  "Routes.Prompts": "提示词",
+  "Routes.Playground": "沙盒",
+  "Routes.Scores": "分数",
+  "Routes.LLMAsAJudge": "LLM 作为裁判",
+  "Routes.HumanAnnotation": "人工注释",
+  "Routes.Datasets": "数据集",
+  "Routes.Upgrade": "升级",
+  "Routes.CloudStatus": "云状态",
+  "Routes.Settings": "设置",
+  "Routes.Support": "支持"
+}
