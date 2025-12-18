@@ -28,7 +28,7 @@ interface QueueDecision {
  * ```
  * GRANT SELECT(database, `table`, is_done) ON system.mutations TO <role>;
  * ```
- * where `role` is the role used by Langfuse to connect to ClickHouse, usually `app`.
+ * where `role` is the role used by Tedi to connect to ClickHouse, usually `app`.
  *
  * `QUEUE_TABLE_MAPPING` below shows how mutations on various tables map to queues.
  *
@@ -46,23 +46,23 @@ export class MutationMonitor {
   private static readonly QUEUE_TABLE_MAPPING: Partial<
     Record<QueueName, string[]>
   > = {
-    [QueueName.TraceDelete]: ["traces", "observations", "scores", "events"],
-    [QueueName.ScoreDelete]: ["scores"],
-    [QueueName.DatasetDelete]: ["dataset_run_items_rmt"],
-    [QueueName.ProjectDelete]: [
-      "traces",
-      "observations",
-      "scores",
-      "dataset_run_items_rmt",
-      "events",
-    ],
-    [QueueName.DataRetentionProcessingQueue]: [
-      "traces",
-      "observations",
-      "scores",
-      "events",
-    ],
-  };
+      [QueueName.TraceDelete]: ["traces", "observations", "scores", "events"],
+      [QueueName.ScoreDelete]: ["scores"],
+      [QueueName.DatasetDelete]: ["dataset_run_items_rmt"],
+      [QueueName.ProjectDelete]: [
+        "traces",
+        "observations",
+        "scores",
+        "dataset_run_items_rmt",
+        "events",
+      ],
+      [QueueName.DataRetentionProcessingQueue]: [
+        "traces",
+        "observations",
+        "scores",
+        "events",
+      ],
+    };
 
   private static readonly TABLES_TO_MONITOR = Array.from(
     new Set(Object.values(this.QUEUE_TABLE_MAPPING).flat()).values(),

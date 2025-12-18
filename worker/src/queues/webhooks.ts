@@ -233,9 +233,9 @@ async function executeHttpAction({
           error: error instanceof Error ? error.message : "Unknown error",
           output: httpStatus
             ? {
-                httpStatus,
-                responseBody: responseBody?.substring(0, 1000),
-              }
+              httpStatus,
+              responseBody: responseBody?.substring(0, 1000),
+            }
             : undefined,
         },
       });
@@ -423,7 +423,7 @@ async function executeGitHubDispatchAction({
 
   const githubConfig = actionConfig.config;
 
-  // Validate and prepare Langfuse payload
+  // Validate and prepare Tedi payload
   const validatedPayload = PromptWebhookOutboundSchema.safeParse({
     id: input.executionId,
     timestamp: new Date(),
@@ -556,7 +556,7 @@ async function executeSlackAction({
       client,
       channelId: slackConfig.channelId,
       blocks,
-      text: "Langfuse Notification",
+      text: "Tedi Notification",
     });
 
     // Update execution status to completed

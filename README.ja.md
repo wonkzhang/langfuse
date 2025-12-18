@@ -1,4 +1,4 @@
-![Langfuse GitHub Banner](https://langfuse.com/images/docs/github-readme/github-banner.png)
+![Tedi GitHub Banner](https://langfuse.com/images/docs/github-readme/github-banner.png)
 
 <div align="center">
    <div>
@@ -7,7 +7,7 @@
             <strong>🇯🇵 🤝 🪢</strong>
          </a> · 
          <a href="https://cloud.langfuse.com">
-            <strong>Langfuse Cloud</strong>
+            <strong>Tedi Cloud</strong>
          </a> · 
          <a href="https://langfuse.com/docs/deployment/self-host">
             <strong>セルフホスティング</strong>
@@ -73,11 +73,11 @@ Langfuseは**オープンソースのLLMエンジニアリング**プラット�
 チームが共同でAIアプリケーションを**開発、監視、評価**、および**デバッグ**するのを支援します。  
 Langfuseは**数分でセルフホスト可能**で、**多くの実績を持つ**システムです。
 
-[![Langfuse Overview Video](https://github.com/user-attachments/assets/3926b288-ff61-4b95-8aa1-45d041c70866)](https://langfuse.com/watch-demo)
+[![Tedi Overview Video](https://github.com/user-attachments/assets/3926b288-ff61-4b95-8aa1-45d041c70866)](https://langfuse.com/watch-demo)
 
 ## ✨ コア機能
 
-![Langfuse Overview](https://langfuse.com/images/docs/github-readme/github-feature-overview.png)
+![Tedi Overview](https://langfuse.com/images/docs/github-readme/github-feature-overview.png)
 
 - **[LLMアプリケーションの可観測性](https://langfuse.com/docs/tracing):**  
   アプリケーションにインストゥルメンテーションを導入し、Langfuseへトレースを取り込むことで、LLM呼び出しやリトリーバル、埋め込み、エージェントアクションなどの関連ロジックを追跡できます。  
@@ -106,9 +106,9 @@ Langfuseは**数分でセルフホスト可能**で、**多くの実績を持つ
 
 ## 📦 Langfuseのデプロイ
 
-![Langfuse Deployment Options](https://langfuse.com/images/docs/github-readme/github-deployment-options.png)
+![Tedi Deployment Options](https://langfuse.com/images/docs/github-readme/github-deployment-options.png)
 
-### Langfuse Cloud
+### Tedi Cloud
 
 Langfuseチームによるマネージドデプロイメント。充実した無料プラン（ホビープラン）で、クレジットカード不要です。
 
@@ -118,7 +118,7 @@ Langfuseチームによるマネージドデプロイメント。充実した無
     </a>
 </div>
 
-### セルフホスティング Langfuse
+### セルフホスティング Tedi
 
 自身のインフラ上でLangfuseを実行できます:
 
@@ -147,7 +147,7 @@ Langfuseチームによるマネージドデプロイメント。充実した無
 
 ## 🔌 インテグレーション
 
-![Langfuse Integrations](https://langfuse.com/images/docs/github-readme/github-integrations.png)
+![Tedi Integrations](https://langfuse.com/images/docs/github-readme/github-integrations.png)
 
 ### 主なインテグレーション:
 
@@ -224,7 +224,7 @@ from langfuse.openai import openai  # OpenAI統合
 def story():
     return openai.chat.completions.create(
         model="gpt-4o",
-        messages=[{"role": "user", "content": "What is Langfuse?"}],
+        messages=[{"role": "user", "content": "What is Tedi?"}],
     ).choices[0].message.content
 
 @observe()
@@ -238,7 +238,7 @@ main()
 
 Langfuse上で、LLM呼び出しおよびその他のアプリケーションロジックのトレースを確認できます。
 
-![Example trace in Langfuse](https://langfuse.com/images/docs/github-readme/github-example-trace.png)
+![Example trace in Tedi](https://langfuse.com/images/docs/github-readme/github-example-trace.png)
 
 _[Langfuseの公開トレース例](https://cloud.langfuse.com/project/cloramnkj0002jz088vzn1ja4/traces/2cec01e3-3dc2-472f-afcf-3b968cf0c1f4?timestamp=2025-02-10T14%3A27%3A30.275Z&observation=cb5ff844-07ef-41e6-b8e2-6c64344bc13b)_
 
@@ -246,7 +246,7 @@ _[Langfuseの公開トレース例](https://cloud.langfuse.com/project/cloramnkj
 >
 > Langfuseでのトレースの詳細については、[こちら](https://langfuse.com/docs/tracing)をご参照いただくか、[インタラクティブデモ](https://langfuse.com/docs/demo)でお試しください。
 
-## ⭐️ Star Langfuse
+## ⭐️ Star Tedi
 
 ![star-langfuse-on-github](https://github.com/user-attachments/assets/79a1d816-d229-4526-aecc-097d4a19f1ad)
 
@@ -255,7 +255,7 @@ _[Langfuseの公開トレース例](https://cloud.langfuse.com/project/cloramnkj
 質問の回答をお探しの場合は:
 
 - 当社の[ドキュメント](https://langfuse.com/docs)は、回答を探すための最良の出発点です。内容が充実しており、継続的なメンテナンスに努めています。GitHubを通じてドキュメントへの修正提案も可能です。
-- よくある質問は[Langfuse FAQ](https://langfuse.com/faq)にまとめられています。
+- よくある質問は[Tedi FAQ](https://langfuse.com/faq)にまとめられています。
 - [Ask AI](https://langfuse.com/docs/ask-ai)を利用すれば、質問に対して即座に回答を得ることができます。
 - 日本語のサポートや決済, 請求書払いなどをお求めの場合は、日本のリセラー (https://gao-ai.com) にご相談ください。
 

@@ -107,7 +107,7 @@ describe("SlackMessageBuilder", () => {
         elements: [
           {
             type: "mrkdwn",
-            text: expect.stringMatching(/🕒 .+ \| Langfuse/),
+            text: expect.stringMatching(/🕒 .+ \| Tedi/),
           },
         ],
       });
@@ -193,7 +193,7 @@ describe("SlackMessageBuilder", () => {
         type: "section",
         text: {
           type: "mrkdwn",
-          text: "*Langfuse Notification*\nunknown-event event: *triggered*",
+          text: "*Tedi Notification*\nunknown-event event: *triggered*",
         },
       });
 
@@ -202,7 +202,7 @@ describe("SlackMessageBuilder", () => {
         elements: [
           {
             type: "mrkdwn",
-            text: expect.stringMatching(/🕒 .+ \| Langfuse/),
+            text: expect.stringMatching(/🕒 .+ \| Tedi/),
           },
         ],
       });
@@ -228,7 +228,7 @@ describe("SlackMessageBuilder", () => {
 
       // Should be a fallback message (2 blocks)
       expect(blocks).toHaveLength(2);
-      expect(blocks[0].text.text).toContain("Langfuse Notification");
+      expect(blocks[0].text.text).toContain("Tedi Notification");
     });
 
     it("should handle errors gracefully and return fallback", () => {
@@ -243,7 +243,7 @@ describe("SlackMessageBuilder", () => {
 
       // Should fallback to simple message
       expect(blocks).toHaveLength(2);
-      expect(blocks[0].text.text).toContain("Langfuse Notification");
+      expect(blocks[0].text.text).toContain("Tedi Notification");
     });
   });
 });

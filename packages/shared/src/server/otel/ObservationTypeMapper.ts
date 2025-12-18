@@ -25,7 +25,7 @@ class SimpleAttributeMapper implements ObservationTypeMapper {
     public readonly priority: number,
     private readonly attributeKey: string,
     private readonly mappings: Record<string, string>,
-  ) {}
+  ) { }
 
   canMap(
     attributes: Record<string, unknown>,
@@ -74,7 +74,7 @@ class CustomAttributeMapper implements ObservationTypeMapper {
       resourceAttributes?: Record<string, unknown>,
       scopeData?: Record<string, unknown>,
     ) => LangfuseObservationType | null,
-  ) {}
+  ) { }
 
   canMap(
     attributes: Record<string, unknown>,
@@ -222,7 +222,7 @@ export class ObservationTypeMapperRegistry {
 
     new SimpleAttributeMapper("OpenInference", 2, "openinference.span.kind", {
       // Format:
-      // OpenInference Value: Langfuse ObservationType
+      // OpenInference Value: Tedi ObservationType
       CHAIN: "CHAIN",
       RETRIEVER: "RETRIEVER",
       LLM: "GENERATION",
@@ -239,7 +239,7 @@ export class ObservationTypeMapperRegistry {
       "gen_ai.operation.name",
       {
         // Format:
-        // GenAI Value: Langfuse ObservationType
+        // GenAI Value: Tedi ObservationType
         chat: "GENERATION",
         // completion was used historically (keeping it for backward compatibility), text_completion is per spec as of 2025-12-04
         completion: "GENERATION",

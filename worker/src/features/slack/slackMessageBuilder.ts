@@ -3,7 +3,7 @@ import type { WebhookInput } from "@langfuse/shared/src/server";
 import { env } from "../../env";
 
 /**
- * Builds Slack Block Kit messages for different Langfuse event types
+ * Builds Slack Block Kit messages for different Tedi event types
  */
 export class SlackMessageBuilder {
   /**
@@ -59,34 +59,34 @@ export class SlackMessageBuilder {
       // Commit message if available
       ...(prompt.commitMessage
         ? [
-            {
-              type: "section",
-              text: {
-                type: "mrkdwn",
-                text: `*Commit Message:*\n> ${prompt.commitMessage}`,
-              },
+          {
+            type: "section",
+            text: {
+              type: "mrkdwn",
+              text: `*Commit Message:*\n> ${prompt.commitMessage}`,
             },
-          ]
+          },
+        ]
         : []),
       // Action buttons
       ...(env.NEXTAUTH_URL
         ? [
-            {
-              type: "actions",
-              elements: [
-                {
-                  type: "button",
-                  text: {
-                    type: "plain_text",
-                    text: "View Prompt",
-                    emoji: true,
-                  },
-                  url: `${env.NEXTAUTH_URL}/project/${prompt.projectId}/prompts/${encodeURIComponent(prompt.name)}?version=${prompt.version}`,
-                  style: "primary",
+          {
+            type: "actions",
+            elements: [
+              {
+                type: "button",
+                text: {
+                  type: "plain_text",
+                  text: "View Prompt",
+                  emoji: true,
                 },
-              ],
-            },
-          ]
+                url: `${env.NEXTAUTH_URL}/project/${prompt.projectId}/prompts/${encodeURIComponent(prompt.name)}?version=${prompt.version}`,
+                style: "primary",
+              },
+            ],
+          },
+        ]
         : []),
       // Footer with timestamp
       {
@@ -94,7 +94,7 @@ export class SlackMessageBuilder {
         elements: [
           {
             type: "mrkdwn",
-            text: `🕒 ${new Date().toLocaleString()} | Langfuse`,
+            text: `🕒 ${new Date().toLocaleString()} | Tedi`,
           },
         ],
       },
@@ -112,7 +112,7 @@ export class SlackMessageBuilder {
         type: "section",
         text: {
           type: "mrkdwn",
-          text: `*Langfuse Notification*\n${payload.type} event: *${payload.action}*`,
+          text: `*Tedi Notification*\n${payload.type} event: *${payload.action}*`,
         },
       },
       {
@@ -120,7 +120,7 @@ export class SlackMessageBuilder {
         elements: [
           {
             type: "mrkdwn",
-            text: `🕒 ${new Date().toLocaleString()} | Langfuse`,
+            text: `🕒 ${new Date().toLocaleString()} | Tedi`,
           },
         ],
       },

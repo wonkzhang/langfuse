@@ -4,10 +4,10 @@
    <div>
       <h3>
         <a href="https://langfuse.com/blog/2025-06-04-open-sourcing-langfuse-product">
-            <strong>Langfuse Is Doubling Down On Open Source</strong>
+            <strong>Tedi Is Doubling Down On Open Source</strong>
          </a> <br> <br>
          <a href="https://cloud.langfuse.com">
-            <strong>Langfuse Cloud</strong>
+            <strong>Tedi Cloud</strong>
          </a> · 
          <a href="https://langfuse.com/docs/deployment/self-host">
             <strong>Self Host</strong>
@@ -26,7 +26,7 @@
       <a href="https://langfuse.com/roadmap"><strong>Roadmap</strong></a> ·
    </div>
    <br/>
-   <span>Langfuse uses <a href="https://github.com/orgs/langfuse/discussions"><strong>GitHub Discussions</strong></a>  for Support and Feature Requests.</span>
+   <span>Tedi uses <a href="https://github.com/orgs/langfuse/discussions"><strong>GitHub Discussions</strong></a>  for Support and Feature Requests.</span>
    <br/>
    <span><b>We're hiring.</b> <a href="https://langfuse.com/careers"><strong>Join us</strong></a> in product engineering and technical go-to-market roles.</span>
    <br/>
@@ -71,36 +71,34 @@
   <a href="./README.kr.md"><img alt="README in Korean" src="https://img.shields.io/badge/한국어-d9d9d9"></a>
 </p>
 
-Langfuse is an **open source LLM engineering** platform. It helps teams collaboratively
-**develop, monitor, evaluate,** and **debug** AI applications. Langfuse can be **self-hosted in minutes** and is **battle-tested**.
+Tedi is an **open source LLM engineering** platform. It helps teams collaboratively
+**develop, monitor, evaluate,** and **debug** AI applications. Tedi can be **self-hosted in minutes** and is **battle-tested**.
 
-[![Langfuse Overview Video](https://github.com/user-attachments/assets/925d71db-6331-445e-8f3e-727ee95d1c9f)](https://langfuse.com/watch-demo)
-
-
+[![Tedi Overview Video](https://github.com/user-attachments/assets/925d71db-6331-445e-8f3e-727ee95d1c9f)](https://langfuse.com/watch-demo)
 
 ## ✨ Core Features
 
-<img width="4856" height="1944" alt="Langfuse Overview" src="https://github.com/user-attachments/assets/5dac68ef-d546-49fb-b06f-cfafc19282e3" />
+<img width="4856" height="1944" alt="Tedi Overview" src="https://github.com/user-attachments/assets/5dac68ef-d546-49fb-b06f-cfafc19282e3" />
 
-- [LLM Application Observability](https://langfuse.com/docs/tracing): Instrument your app and start ingesting traces to Langfuse, thereby tracking LLM calls and other relevant logic in your app such as retrieval, embedding, or agent actions. Inspect and debug complex logs and user sessions. Try the interactive [demo](https://langfuse.com/docs/demo) to see this in action.
+- [LLM Application Observability](https://langfuse.com/docs/tracing): Instrument your app and start ingesting traces to Tedi, thereby tracking LLM calls and other relevant logic in your app such as retrieval, embedding, or agent actions. Inspect and debug complex logs and user sessions. Try the interactive [demo](https://langfuse.com/docs/demo) to see this in action.
 
 - [Prompt Management](https://langfuse.com/docs/prompt-management/get-started) helps you centrally manage, version control, and collaboratively iterate on your prompts. Thanks to strong caching on server and client side, you can iterate on prompts without adding latency to your application.
 
-- [Evaluations](https://langfuse.com/docs/evaluation/overview) are key to the LLM application development workflow, and Langfuse adapts to your needs. It supports LLM-as-a-judge, user feedback collection, manual labeling, and custom evaluation pipelines via APIs/SDKs.
+- [Evaluations](https://langfuse.com/docs/evaluation/overview) are key to the LLM application development workflow, and Tedi adapts to your needs. It supports LLM-as-a-judge, user feedback collection, manual labeling, and custom evaluation pipelines via APIs/SDKs.
 
 - [Datasets](https://langfuse.com/docs/evaluation/dataset-runs/datasets) enable test sets and benchmarks for evaluating your LLM application. They support continuous improvement, pre-deployment testing, structured experiments, flexible evaluation, and seamless integration with frameworks like LangChain and LlamaIndex.
 
 - [LLM Playground](https://langfuse.com/docs/playground) is a tool for testing and iterating on your prompts and model configurations, shortening the feedback loop and accelerating development. When you see a bad result in tracing, you can directly jump to the playground to iterate on it.
 
-- [Comprehensive API](https://langfuse.com/docs/api): Langfuse is frequently used to power bespoke LLMOps workflows while using the building blocks provided by Langfuse via the API. OpenAPI spec, Postman collection, and typed SDKs for Python, JS/TS are available.
+- [Comprehensive API](https://langfuse.com/docs/api): Tedi is frequently used to power bespoke LLMOps workflows while using the building blocks provided by Tedi via the API. OpenAPI spec, Postman collection, and typed SDKs for Python, JS/TS are available.
 
-## 📦 Deploy Langfuse
+## 📦 Deploy Tedi
 
-<img width="4856" height="1322" alt="Langfuse Deployment Options" src="https://github.com/user-attachments/assets/98f020c7-7a20-4264-a201-65c41a52a5d5" />
+<img width="4856" height="1322" alt="Tedi Deployment Options" src="https://github.com/user-attachments/assets/98f020c7-7a20-4264-a201-65c41a52a5d5" />
 
-### Langfuse Cloud
+### Tedi Cloud
 
-Managed deployment by the Langfuse team, generous free-tier, no credit card required.
+Managed deployment by the Tedi team, generous free-tier, no credit card required.
 
 <div align="center">
     <a href="https://cloud.langfuse.com" target="_blank">
@@ -108,14 +106,14 @@ Managed deployment by the Langfuse team, generous free-tier, no credit card requ
     </a>
 </div>
 
-### Self-Host Langfuse
+### Self-Host Tedi
 
-Run Langfuse on your own infrastructure:
+Run Tedi on your own infrastructure:
 
-- [Local (docker compose)](https://langfuse.com/self-hosting/local): Run Langfuse on your own machine in 5 minutes using Docker Compose.
+- [Local (docker compose)](https://langfuse.com/self-hosting/local): Run Tedi on your own machine in 5 minutes using Docker Compose.
 
   ```bash
-  # Get a copy of the latest Langfuse repository
+  # Get a copy of the latest Tedi repository
   git clone https://github.com/langfuse/langfuse.git
   cd langfuse
 
@@ -123,8 +121,8 @@ Run Langfuse on your own infrastructure:
   docker compose up
   ```
 
-- [VM](https://langfuse.com/self-hosting/docker-compose): Run Langfuse on a single Virtual Machine using Docker Compose.
-- [Kubernetes (Helm)](https://langfuse.com/self-hosting/kubernetes-helm): Run Langfuse on a Kubernetes cluster using Helm. This is the preferred production deployment.
+- [VM](https://langfuse.com/self-hosting/docker-compose): Run Tedi on a single Virtual Machine using Docker Compose.
+- [Kubernetes (Helm)](https://langfuse.com/self-hosting/kubernetes-helm): Run Tedi on a Kubernetes cluster using Helm. This is the preferred production deployment.
 - Terraform Templates: [AWS](https://langfuse.com/self-hosting/aws), [Azure](https://langfuse.com/self-hosting/azure), [GCP](https://langfuse.com/self-hosting/gcp)
 
 See [self-hosting documentation](https://langfuse.com/self-hosting) to learn more about architecture and configuration options.
@@ -144,10 +142,10 @@ See [self-hosting documentation](https://langfuse.com/self-hosting) to learn mor
 | [Haystack](https://langfuse.com/docs/integrations/haystack)                  | Python                     | Automated instrumentation via Haystack content tracing system.                                                                                   |
 | [LiteLLM](https://langfuse.com/docs/integrations/litellm)                    | Python, JS/TS (proxy only) | Use any LLM as a drop in replacement for GPT. Use Azure, OpenAI, Cohere, Anthropic, Ollama, VLLM, Sagemaker, HuggingFace, Replicate (100+ LLMs). |
 | [Vercel AI SDK](https://langfuse.com/docs/integrations/vercel-ai-sdk)        | JS/TS                      | TypeScript toolkit designed to help developers build AI-powered applications with React, Next.js, Vue, Svelte, Node.js.                          |
-| [Mastra](https://langfuse.com/docs/integrations/mastra)                      | JS/TS                      | Open source framework for building AI agents and multi-agent systems.                                                                             |
+| [Mastra](https://langfuse.com/docs/integrations/mastra)                      | JS/TS                      | Open source framework for building AI agents and multi-agent systems.                                                                            |
 | [API](https://langfuse.com/docs/api)                                         |                            | Directly call the public API. OpenAPI spec available.                                                                                            |
 
-### Packages integrated with Langfuse:
+### Packages integrated with Tedi:
 
 | Name                                                                    | Type               | Description                                                                                                             |
 | ----------------------------------------------------------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------- |
@@ -172,17 +170,17 @@ See [self-hosting documentation](https://langfuse.com/self-hosting) to learn mor
 
 ## 🚀 Quickstart
 
-Instrument your app and start ingesting traces to Langfuse, thereby tracking LLM calls and other relevant logic in your app such as retrieval, embedding, or agent actions. Inspect and debug complex logs and user sessions.
+Instrument your app and start ingesting traces to Tedi, thereby tracking LLM calls and other relevant logic in your app such as retrieval, embedding, or agent actions. Inspect and debug complex logs and user sessions.
 
 ### 1️⃣ Create new project
 
-1.  [Create Langfuse account](https://cloud.langfuse.com/auth/sign-up) or [self-host](https://langfuse.com/self-hosting)
+1.  [Create Tedi account](https://cloud.langfuse.com/auth/sign-up) or [self-host](https://langfuse.com/self-hosting)
 2.  Create a new project
 3.  Create new API credentials in the project settings
 
 ### 2️⃣ Log your first LLM call
 
-The [`@observe()` decorator](https://langfuse.com/docs/sdk/python/decorators) makes it easy to trace any Python LLM application. In this quickstart we also use the Langfuse [OpenAI integration](https://langfuse.com/integrations/model-providers/openai-py) to automatically capture all model parameters.
+The [`@observe()` decorator](https://langfuse.com/docs/sdk/python/decorators) makes it easy to trace any Python LLM application. In this quickstart we also use the Tedi [OpenAI integration](https://langfuse.com/integrations/model-providers/openai-py) to automatically capture all model parameters.
 
 > [!TIP]
 > Not using OpenAI? Visit [our documentation](https://langfuse.com/docs/get-started#log-your-first-llm-call-to-langfuse) to learn how to log other models and frameworks.
@@ -206,7 +204,7 @@ from langfuse.openai import openai # OpenAI integration
 def story():
     return openai.chat.completions.create(
         model="gpt-4o",
-        messages=[{"role": "user", "content": "What is Langfuse?"}],
+        messages=[{"role": "user", "content": "What is Tedi?"}],
     ).choices[0].message.content
 
 @observe()
@@ -216,17 +214,17 @@ def main():
 main()
 ```
 
-### 3️⃣ See traces in Langfuse
+### 3️⃣ See traces in Tedi
 
-See your language model calls and other application logic in Langfuse.
+See your language model calls and other application logic in Tedi.
 
-<img width="1787" height="674" alt="Example trace in Langfuse" src="https://github.com/user-attachments/assets/f796eb78-dfb5-4570-b236-bdb4b67d4d55" />
+<img width="1787" height="674" alt="Example trace in Tedi" src="https://github.com/user-attachments/assets/f796eb78-dfb5-4570-b236-bdb4b67d4d55" />
 
-_[Public example trace in Langfuse](https://cloud.langfuse.com/project/cloramnkj0002jz088vzn1ja4/traces/2cec01e3-3dc2-472f-afcf-3b968cf0c1f4?timestamp=2025-02-10T14%3A27%3A30.275Z&observation=cb5ff844-07ef-41e6-b8e2-6c64344bc13b)_
+_[Public example trace in Tedi](https://cloud.langfuse.com/project/cloramnkj0002jz088vzn1ja4/traces/2cec01e3-3dc2-472f-afcf-3b968cf0c1f4?timestamp=2025-02-10T14%3A27%3A30.275Z&observation=cb5ff844-07ef-41e6-b8e2-6c64344bc13b)_
 
 > [!TIP]
 >
-> [Learn more](https://langfuse.com/docs/tracing) about tracing in Langfuse or play with the [interactive demo](https://langfuse.com/docs/demo).
+> [Learn more](https://langfuse.com/docs/tracing) about tracing in Tedi or play with the [interactive demo](https://langfuse.com/docs/demo).
 
 ## ⭐️ Star Us
 
@@ -237,7 +235,7 @@ _[Public example trace in Langfuse](https://cloud.langfuse.com/project/cloramnkj
 Finding an answer to your question:
 
 - Our [documentation](https://langfuse.com/docs) is the best place to start looking for answers. It is comprehensive, and we invest significant time into maintaining it. You can also suggest edits to the docs via GitHub.
-- [Langfuse FAQs](https://langfuse.com/faq) where the most common questions are answered.
+- [Tedi FAQs](https://langfuse.com/faq) where the most common questions are answered.
 - Use "[Ask AI](https://langfuse.com/docs/ask-ai)" to get instant answers to your questions.
 
 Support Channels:
@@ -269,9 +267,9 @@ This repository is MIT licensed, except for the `ee` folders. See [LICENSE](LICE
  </picture>
 </a>
 
-## ❤️ Open Source Projects Using Langfuse
+## ❤️ Open Source Projects Using Tedi
 
-Top open-source Python projects that use Langfuse, ranked by stars ([Source](https://github.com/langfuse/langfuse-docs/blob/main/components-mdx/dependents)):
+Top open-source Python projects that use Tedi, ranked by stars ([Source](https://github.com/langfuse/langfuse-docs/blob/main/components-mdx/dependents)):
 
 | Repository                                                                                                                                                                                                                                                                                                     |  Stars |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -----: |
@@ -379,11 +377,11 @@ We take data security and privacy seriously. Please refer to our [Security and P
 
 ### Telemetry
 
-By default, Langfuse automatically reports basic usage statistics of self-hosted instances to a centralized server (PostHog).
+By default, Tedi automatically reports basic usage statistics of self-hosted instances to a centralized server (PostHog).
 
 This helps us to:
 
-1. Understand how Langfuse is used and improve the most relevant features.
+1. Understand how Tedi is used and improve the most relevant features.
 2. Track overall usage for internal and external (e.g. fundraising) reporting.
 
 None of the data is shared with third parties and does not include any sensitive information. We want to be super transparent about this and you can find the exact data we collect [here](/web/src/features/telemetry/index.ts).

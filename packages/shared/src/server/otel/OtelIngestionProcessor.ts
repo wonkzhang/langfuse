@@ -96,10 +96,10 @@ const observationTypeMapper = new ObservationTypeMapperRegistry();
 
 /**
  * Processor class that encapsulates all logic for converting OpenTelemetry
- * resource spans into Langfuse ingestion events.
+ * resource spans into Tedi ingestion events.
  *
  * Manages trace deduplication internally and provides a clean interface
- * for converting OTEL spans to Langfuse events.
+ * for converting OTEL spans to Tedi events.
  */
 export class OtelIngestionProcessor {
   private seenTraces: Set<string> = new Set();
@@ -141,23 +141,23 @@ export class OtelIngestionProcessor {
     const queue = OtelIngestionQueue.getInstance({});
     return queue
       ? queue.add(QueueJobs.OtelIngestionJob, {
-          id: randomUUID(),
-          timestamp: new Date(),
-          name: QueueJobs.OtelIngestionJob as const,
-          payload: {
-            data: {
-              fileKey,
-              publicKey: this.publicKey,
-            },
-            authCheck: {
-              validKey: true,
-              scope: {
-                projectId: this.projectId,
-                accessLevel: "project" as const,
-              },
+        id: randomUUID(),
+        timestamp: new Date(),
+        name: QueueJobs.OtelIngestionJob as const,
+        payload: {
+          data: {
+            fileKey,
+            publicKey: this.publicKey,
+          },
+          authCheck: {
+            validKey: true,
+            scope: {
+              projectId: this.projectId,
+              accessLevel: "project" as const,
             },
           },
-        })
+        },
+      })
       : Promise.reject("Failed to instantiate otel ingestion queue");
   }
 
@@ -308,28 +308,28 @@ export class OtelIngestionProcessor {
 
                   level:
                     spanAttributes[
-                      LangfuseOtelSpanAttributes.OBSERVATION_LEVEL
+                    LangfuseOtelSpanAttributes.OBSERVATION_LEVEL
                     ] ??
                     (span.status?.code === 2
                       ? ObservationLevel.ERROR
                       : ObservationLevel.DEFAULT),
                   statusMessage:
                     spanAttributes[
-                      LangfuseOtelSpanAttributes.OBSERVATION_STATUS_MESSAGE
+                    LangfuseOtelSpanAttributes.OBSERVATION_STATUS_MESSAGE
                     ] ??
                     span.status?.message ??
                     null,
 
                   promptName:
                     spanAttributes?.[
-                      LangfuseOtelSpanAttributes.OBSERVATION_PROMPT_NAME
+                    LangfuseOtelSpanAttributes.OBSERVATION_PROMPT_NAME
                     ] ??
                     spanAttributes["langfuse.prompt.name"] ??
                     this.parseLangfusePromptFromAISDK(spanAttributes)?.name ??
                     null,
                   promptVersion:
                     spanAttributes?.[
-                      LangfuseOtelSpanAttributes.OBSERVATION_PROMPT_VERSION
+                    LangfuseOtelSpanAttributes.OBSERVATION_PROMPT_VERSION
                     ] ??
                     spanAttributes["langfuse.prompt.version"] ??
                     this.parseLangfusePromptFromAISDK(spanAttributes)
@@ -395,7 +395,7 @@ export class OtelIngestionProcessor {
   }
 
   /**
-   * Process resource spans and convert them to Langfuse ingestion events.
+   * Process resource spans and convert them to Tedi ingestion events.
    * Handles trace deduplication automatically using internal state.
    * Initializes seen traces from Redis automatically on first call.
    * Filters out shallow trace events if full trace events exist for the same traceId.
@@ -442,7 +442,7 @@ export class OtelIngestionProcessor {
 
           this.traceEventCounts.shallow = Math.max(
             this.traceEventCounts.shallow -
-              (allEvents.length - finalEvents.length),
+            (allEvents.length - finalEvents.length),
             0,
           );
 
@@ -1113,7 +1113,7 @@ export class OtelIngestionProcessor {
     // Pre-delete all potential input/output attribute keys to avoid duplicates
     // This ensures that if multiple frameworks' attributes are present, they're all filtered
     const potentialInputOutputKeys = [
-      // Langfuse SDK
+      // Tedi SDK
       LangfuseOtelSpanAttributes.TRACE_INPUT,
       LangfuseOtelSpanAttributes.TRACE_OUTPUT,
       LangfuseOtelSpanAttributes.OBSERVATION_INPUT,
@@ -1187,7 +1187,7 @@ export class OtelIngestionProcessor {
       ]),
     );
 
-    // Langfuse
+    // Tedi
     input =
       domain === "trace" && attributes[LangfuseOtelSpanAttributes.TRACE_INPUT]
         ? attributes[LangfuseOtelSpanAttributes.TRACE_INPUT]
@@ -1224,7 +1224,7 @@ export class OtelIngestionProcessor {
       } else {
         output =
           "ai.response.text" in attributes &&
-          Boolean(attributes["ai.response.text"])
+            Boolean(attributes["ai.response.text"])
             ? attributes["ai.response.text"]
             : "ai.result.text" in attributes // Legacy support for ai SDK versions < 4.0.0
               ? attributes["ai.result.text"]
@@ -1260,34 +1260,34 @@ export class OtelIngestionProcessor {
       const processedInput =
         inputEvents.length > 0
           ? inputEvents.map((event: any) => {
-              const eventAttributes =
-                event.attributes?.reduce((acc: any, attr: any) => {
-                  acc[attr.key] = this.convertValueToPlainJavascript(
-                    attr.value,
-                  );
-                  return acc;
-                }, {}) ?? {};
+            const eventAttributes =
+              event.attributes?.reduce((acc: any, attr: any) => {
+                acc[attr.key] = this.convertValueToPlainJavascript(
+                  attr.value,
+                );
+                return acc;
+              }, {}) ?? {};
 
-              return {
-                role: event.name.replace("gen_ai.", "").replace(".message", ""),
-                ...eventAttributes,
-              };
-            })
+            return {
+              role: event.name.replace("gen_ai.", "").replace(".message", ""),
+              ...eventAttributes,
+            };
+          })
           : null;
 
       const processedOutput =
         outputEvents.length > 0
           ? outputEvents.map((event: any) => {
-              const eventAttributes =
-                event.attributes?.reduce((acc: any, attr: any) => {
-                  acc[attr.key] = this.convertValueToPlainJavascript(
-                    attr.value,
-                  );
-                  return acc;
-                }, {}) ?? {};
+            const eventAttributes =
+              event.attributes?.reduce((acc: any, attr: any) => {
+                acc[attr.key] = this.convertValueToPlainJavascript(
+                  attr.value,
+                );
+                return acc;
+              }, {}) ?? {};
 
-              return eventAttributes;
-            })
+            return eventAttributes;
+          })
           : null;
 
       return {
@@ -1684,7 +1684,7 @@ export class OtelIngestionProcessor {
         return this.sanitizeModelParams(
           JSON.parse(
             attributes[
-              LangfuseOtelSpanAttributes.OBSERVATION_MODEL_PARAMETERS
+            LangfuseOtelSpanAttributes.OBSERVATION_MODEL_PARAMETERS
             ] as string,
           ),
         );
@@ -1771,7 +1771,7 @@ export class OtelIngestionProcessor {
   }
 
   private sanitizeModelParams<T>(params: T): Record<string, string> | T {
-    // Model params in Langfuse must be key value pairs where value is string
+    // Model params in Tedi must be key value pairs where value is string
     if (typeof params === "object" && params != null)
       return Object.fromEntries(
         Object.entries(params).map((e) => [
@@ -1814,7 +1814,7 @@ export class OtelIngestionProcessor {
       try {
         return JSON.parse(
           attributes[
-            LangfuseOtelSpanAttributes.OBSERVATION_USAGE_DETAILS
+          LangfuseOtelSpanAttributes.OBSERVATION_USAGE_DETAILS
           ] as string,
         );
       } catch {
@@ -1828,24 +1828,24 @@ export class OtelIngestionProcessor {
           input:
             "gen_ai.usage.prompt_tokens" in attributes // Backward compat, input_tokens used in latest ai SDK versions
               ? parseInt(
-                  attributes["gen_ai.usage.prompt_tokens"]?.toString() ?? "0",
-                )
+                attributes["gen_ai.usage.prompt_tokens"]?.toString() ?? "0",
+              )
               : "gen_ai.usage.input_tokens" in attributes
                 ? parseInt(
-                    attributes["gen_ai.usage.input_tokens"]?.toString() ?? "0",
-                  )
+                  attributes["gen_ai.usage.input_tokens"]?.toString() ?? "0",
+                )
                 : undefined,
 
           output:
             "gen_ai.usage.completion_tokens" in attributes // Backward compat, output_tokens used in latest ai SDK versions
               ? parseInt(
-                  attributes["gen_ai.usage.completion_tokens"]?.toString() ??
-                    "0",
-                )
+                attributes["gen_ai.usage.completion_tokens"]?.toString() ??
+                "0",
+              )
               : "gen_ai.usage.output_tokens" in attributes
                 ? parseInt(
-                    attributes["gen_ai.usage.output_tokens"]?.toString() ?? "0",
-                  )
+                  attributes["gen_ai.usage.output_tokens"]?.toString() ?? "0",
+                )
                 : undefined,
           total:
             "ai.usage.tokens" in attributes
@@ -1930,9 +1930,9 @@ export class OtelIngestionProcessor {
         // Subtract cached token count from total input
         usageDetails["input"] = Math.max(
           (usageDetails["input"] ?? 0) -
-            (usageDetails["input_cached_tokens"] ?? 0) -
-            (usageDetails["input_cache_creation"] ?? 0) -
-            (usageDetails["input_cache_read"] ?? 0),
+          (usageDetails["input_cached_tokens"] ?? 0) -
+          (usageDetails["input_cache_creation"] ?? 0) -
+          (usageDetails["input_cache_read"] ?? 0),
           0,
         );
 
@@ -1997,7 +1997,7 @@ export class OtelIngestionProcessor {
       try {
         return JSON.parse(
           attributes[
-            LangfuseOtelSpanAttributes.OBSERVATION_COST_DETAILS
+          LangfuseOtelSpanAttributes.OBSERVATION_COST_DETAILS
           ] as string,
         );
       } catch {
@@ -2054,10 +2054,10 @@ export class OtelIngestionProcessor {
       attributes[LangfuseOtelSpanAttributes.TRACE_TAGS] ||
       attributes["langfuse.tags"] ||
       attributes[
-        `${LangfuseOtelSpanAttributes.OBSERVATION_METADATA}.langfuse_tags`
+      `${LangfuseOtelSpanAttributes.OBSERVATION_METADATA}.langfuse_tags`
       ] ||
       attributes[
-        `${LangfuseOtelSpanAttributes.TRACE_METADATA}.langfuse_tags`
+      `${LangfuseOtelSpanAttributes.TRACE_METADATA}.langfuse_tags`
       ] ||
       attributes["ai.telemetry.metadata.tags"] ||
       attributes["tag.tags"];
@@ -2121,7 +2121,7 @@ export class OtelIngestionProcessor {
       attributes[LangfuseOtelSpanAttributes.EXPERIMENT_ITEM_ID];
     const experimentItemRootSpanId =
       attributes[
-        LangfuseOtelSpanAttributes.EXPERIMENT_ITEM_ROOT_OBSERVATION_ID
+      LangfuseOtelSpanAttributes.EXPERIMENT_ITEM_ROOT_OBSERVATION_ID
       ];
     const experimentItemExpectedOutput =
       attributes[LangfuseOtelSpanAttributes.EXPERIMENT_ITEM_EXPECTED_OUTPUT];
@@ -2280,9 +2280,9 @@ export class OtelIngestionProcessor {
       | number
       | string
       | {
-          high: number;
-          low: number;
-        },
+        high: number;
+        low: number;
+      },
   ): string {
     try {
       if (typeof timestamp === "string") {

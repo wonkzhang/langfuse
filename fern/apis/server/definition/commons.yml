@@ -46,7 +46,7 @@ types:
     properties:
       htmlPath:
         type: string
-        docs: Path of trace in Langfuse UI
+        docs: Path of trace in Tedi UI
       latency:
         type: double
         docs: Latency of trace in seconds
@@ -64,7 +64,7 @@ types:
     properties:
       htmlPath:
         type: string
-        docs: Path of trace in Langfuse UI
+        docs: Path of trace in Tedi UI
       latency:
         type: double
         docs: Latency of trace in seconds
@@ -694,7 +694,7 @@ types:
 
   # Utilities
   ModelUsageUnit:
-    docs: Unit of usage in Langfuse
+    docs: Unit of usage in Tedi
     enum:
       - CHARACTERS
       - TOKENS

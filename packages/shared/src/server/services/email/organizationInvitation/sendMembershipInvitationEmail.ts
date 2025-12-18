@@ -48,9 +48,9 @@ export const sendMembershipInvitationEmail = async ({
 
   const getAuthURL = () =>
     env.NEXT_PUBLIC_LANGFUSE_CLOUD_REGION === "US" ||
-    env.NEXT_PUBLIC_LANGFUSE_CLOUD_REGION === "EU" ||
-    env.NEXT_PUBLIC_LANGFUSE_CLOUD_REGION === "HIPAA" ||
-    env.NEXT_PUBLIC_LANGFUSE_CLOUD_REGION === "STAGING"
+      env.NEXT_PUBLIC_LANGFUSE_CLOUD_REGION === "EU" ||
+      env.NEXT_PUBLIC_LANGFUSE_CLOUD_REGION === "HIPAA" ||
+      env.NEXT_PUBLIC_LANGFUSE_CLOUD_REGION === "STAGING"
       ? langfuseUrls[env.NEXT_PUBLIC_LANGFUSE_CLOUD_REGION]
       : env.NEXTAUTH_URL;
 
@@ -85,8 +85,8 @@ export const sendMembershipInvitationEmail = async ({
 
     await mailer.sendMail({
       to,
-      from: `Langfuse <${env.EMAIL_FROM_ADDRESS}>`,
-      subject: `${inviterName} invited you to join the "${orgName}" organization on Langfuse`,
+      from: `Tedi <${env.EMAIL_FROM_ADDRESS}>`,
+      subject: `${inviterName} invited you to join the "${orgName}" organization on Tedi`,
       html: htmlTemplate,
     });
   } catch (error) {

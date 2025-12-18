@@ -34,18 +34,20 @@ import { isCloudPlan, planLabels } from "@langfuse/shared";
 import Link from "next/link";
 import { Badge } from "@/src/components/ui/badge";
 
-const LoadingMenuItem = () => (
+const LoadingMenuItem = ({ messages }: { messages?: Record<string, string> | null }) => (
   <DropdownMenuItem>
-    <LoaderCircle className="mr-1.5 h-4 w-4 animate-spin" /> Loading...
+    <LoaderCircle className="mr-1.5 h-4 w-4 animate-spin" /> {messages?.["Breadcrumb.Loading"] ?? ""}
   </DropdownMenuItem>
 );
 
 const BreadcrumbComponent = ({
   items,
   className,
+  messages,
 }: {
   items?: { name: string; href?: string }[];
   className?: string;
+  messages?: Record<string, string> | null;
 }) => {
   const router = useRouter();
   const session = useSession();
@@ -79,17 +81,17 @@ const BreadcrumbComponent = ({
   const getProjectPath = (projectId: string) =>
     router.query.projectId
       ? truncatePathBeforeDynamicSegments(router.asPath).replace(
-          router.query.projectId as string,
-          projectId,
-        )
+        router.query.projectId as string,
+        projectId,
+      )
       : `/project/${projectId}`;
 
   const getOrgPath = (orgId: string) =>
     router.query.organizationId
       ? truncatePathBeforeDynamicSegments(router.asPath).replace(
-          router.query.organizationId as string,
-          orgId,
-        )
+        router.query.organizationId as string,
+        orgId,
+      )
       : `/organization/${orgId}`;
 
   return (
@@ -98,7 +100,7 @@ const BreadcrumbComponent = ({
         {organization && (
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-1 text-sm text-primary">
-              {organization?.name ?? "Organization"}
+              {organization?.name ?? messages?.["Breadcrumb.Organization"] ?? ""}
               {isCloudPlan(organization?.plan) &&
                 organization.id !== env.NEXT_PUBLIC_DEMO_ORG_ID && (
                   <Badge
@@ -113,7 +115,7 @@ const BreadcrumbComponent = ({
             <DropdownMenuContent align="start">
               <DropdownMenuItem className="font-semibold" asChild>
                 <Link href="/" className="cursor-pointer">
-                  Organizations
+                  {messages?.["Breadcrumb.Organizations"] ?? ""}
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
@@ -167,7 +169,7 @@ const BreadcrumbComponent = ({
                       </Fragment>
                     ))
                 ) : (
-                  <LoadingMenuItem />
+                  <LoadingMenuItem messages={messages} />
                 )}
               </div>
 
@@ -186,7 +188,7 @@ const BreadcrumbComponent = ({
                           className="mr-1.5 h-4 w-4"
                           aria-hidden="true"
                         />
-                        New Organization
+                        {messages?.["Breadcrumb.NewOrganization"] ?? ""}
                       </Link>
                     </Button>
                   </DropdownMenuItem>
@@ -201,8 +203,8 @@ const BreadcrumbComponent = ({
               <Slash />
             </BreadcrumbSeparator>
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1 text-primary">
-                {project?.name ?? "Project"}
+                <DropdownMenuTrigger className="flex items-center gap-1 text-primary">
+                {project?.name ?? messages?.["Breadcrumb.Project"] ?? ""}
                 <ChevronDownIcon className="h-4 w-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start">
@@ -211,7 +213,7 @@ const BreadcrumbComponent = ({
                     href={`/organization/${organization.id}`}
                     className="cursor-pointer"
                   >
-                    Projects
+                    {messages?.["Breadcrumb.Projects"] ?? ""}
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
@@ -253,7 +255,7 @@ const BreadcrumbComponent = ({
                         </DropdownMenuItem>
                       ))
                   ) : (
-                    <LoadingMenuItem />
+                    <LoadingMenuItem messages={messages} />
                   )}
                 </div>
 
@@ -272,7 +274,7 @@ const BreadcrumbComponent = ({
                             className="mr-1.5 h-4 w-4"
                             aria-hidden="true"
                           />
-                          New Project
+                          {messages?.["Breadcrumb.NewProject"] ?? ""}
                         </Link>
                       </Button>
                     </DropdownMenuItem>

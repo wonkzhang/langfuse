@@ -99,12 +99,11 @@ export const upsertManagedEvaluators = async (force = false) => {
 
     await Promise.all(upsertPromises);
     logger.info(
-      `Finished upserting Langfuse dashboards and widgets in ${Date.now() - startTime}ms`,
+      `Finished upserting Tedi dashboards and widgets in ${Date.now() - startTime}ms`,
     );
   } catch (error) {
     logger.error(
-      `Error upserting managed evaluators after ${Date.now() - startTime}ms: ${
-        error instanceof Error ? error.message : ""
+      `Error upserting managed evaluators after ${Date.now() - startTime}ms: ${error instanceof Error ? error.message : ""
       }`,
     );
   }

@@ -3,6 +3,7 @@ description: How we build new full-stack features including frontend APIs, file 
 globs: web/**
 alwaysApply: true
 ---
+
 ## Framework
 
 - Next.js
@@ -15,7 +16,7 @@ alwaysApply: true
 
 ## API for frontend features
 
-- We use TRPC.io to power full-stack features of the Langfuse Frontend
+- We use TRPC.io to power full-stack features of the Tedi Frontend
   - Entry point for all trpc routes: [root.ts](mdc:web/src/server/api/root.ts)
 - Authentication, see [authorization-and-rbac.mdc](mdc:.cursor/rules/authorization-and-rbac.mdc)
 - Entitlements, see [entitlements.mdc](mdc:.cursor/rules/entitlements.mdc)

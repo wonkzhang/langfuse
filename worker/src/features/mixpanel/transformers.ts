@@ -34,7 +34,7 @@ export const transformTraceForMixpanel = (
   const { posthog_session_id, mixpanel_session_id, ...otherProps } = trace;
 
   return {
-    event: "[Langfuse] Trace",
+    event: "[Tedi] Trace",
     properties: {
       time: new Date(trace.timestamp as Date).getTime(),
       distinct_id: trace.langfuse_user_id
@@ -47,7 +47,7 @@ export const transformTraceForMixpanel = (
       session_id:
         mixpanel_session_id || trace.langfuse_session_id
           ? (mixpanel_session_id as string) ||
-            (trace.langfuse_session_id as string)
+          (trace.langfuse_session_id as string)
           : undefined,
       ...otherProps,
     },
@@ -68,7 +68,7 @@ export const transformGenerationForMixpanel = (
   const { posthog_session_id, mixpanel_session_id, ...otherProps } = generation;
 
   return {
-    event: "[Langfuse] Generation",
+    event: "[Tedi] Generation",
     properties: {
       time: new Date(generation.timestamp as Date).getTime(),
       distinct_id: generation.langfuse_user_id
@@ -81,7 +81,7 @@ export const transformGenerationForMixpanel = (
       session_id:
         mixpanel_session_id || generation.langfuse_session_id
           ? (mixpanel_session_id as string) ||
-            (generation.langfuse_session_id as string)
+          (generation.langfuse_session_id as string)
           : undefined,
       ...otherProps,
     },
@@ -102,7 +102,7 @@ export const transformScoreForMixpanel = (
   const { posthog_session_id, mixpanel_session_id, ...otherProps } = score;
 
   return {
-    event: "[Langfuse] Score",
+    event: "[Tedi] Score",
     properties: {
       time: new Date(score.timestamp as Date).getTime(),
       distinct_id: score.langfuse_user_id
@@ -115,7 +115,7 @@ export const transformScoreForMixpanel = (
       session_id:
         mixpanel_session_id || score.langfuse_session_id
           ? (mixpanel_session_id as string) ||
-            (score.langfuse_session_id as string)
+          (score.langfuse_session_id as string)
           : undefined,
       ...otherProps,
     },

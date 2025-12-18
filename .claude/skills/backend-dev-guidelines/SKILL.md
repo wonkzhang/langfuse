@@ -1,13 +1,13 @@
 ---
 name: backend-dev-guidelines
-description: Comprehensive backend development guide for Langfuse's Next.js 14/tRPC/Express/TypeScript monorepo. Use when creating tRPC routers, public API endpoints, BullMQ queue processors, services, or working with tRPC procedures, Next.js API routes, Prisma database access, ClickHouse analytics queries, Redis queues, OpenTelemetry instrumentation, Zod v4 validation, env.mjs configuration, tenant isolation patterns, or async patterns. Covers layered architecture (tRPC procedures → services, queue processors → services), dual database system (PostgreSQL + ClickHouse), projectId filtering for multi-tenant isolation, traceException error handling, observability patterns, and testing strategies (Jest for web, vitest for worker).
+description: Comprehensive backend development guide for Tedi's Next.js 14/tRPC/Express/TypeScript monorepo. Use when creating tRPC routers, public API endpoints, BullMQ queue processors, services, or working with tRPC procedures, Next.js API routes, Prisma database access, ClickHouse analytics queries, Redis queues, OpenTelemetry instrumentation, Zod v4 validation, env.mjs configuration, tenant isolation patterns, or async patterns. Covers layered architecture (tRPC procedures → services, queue processors → services), dual database system (PostgreSQL + ClickHouse), projectId filtering for multi-tenant isolation, traceException error handling, observability patterns, and testing strategies (Jest for web, vitest for worker).
 ---
 
 # Backend Development Guidelines
 
 ## Purpose
 
-Establish consistency and best practices across Langfuse's backend packages (web, worker, packages/shared) using Next.js 14, tRPC, BullMQ, and TypeScript patterns.
+Establish consistency and best practices across Tedi's backend packages (web, worker, packages/shared) using Next.js 14, tRPC, BullMQ, and TypeScript patterns.
 
 ## When to Use This Skill
 
@@ -321,13 +321,13 @@ const traces = await getTracesTable({
 
 ### 6. Observability: OpenTelemetry + DataDog (Not Sentry for Backend)
 
-**Langfuse uses OpenTelemetry for backend observability, with traces and logs sent to DataDog.**
+**Tedi uses OpenTelemetry for backend observability, with traces and logs sent to DataDog.**
 
 ```typescript
 // Import observability utilities
 import {
-  logger,          // Winston logger with OpenTelemetry/DataDog context
-  traceException,  // Record exceptions to OpenTelemetry spans
+  logger, // Winston logger with OpenTelemetry/DataDog context
+  traceException, // Record exceptions to OpenTelemetry spans
   instrumentAsync, // Create instrumented spans
 } from "@langfuse/shared/src/server";
 
@@ -449,8 +449,8 @@ import {
 
 // Observability - OpenTelemetry + DataDog (NOT Sentry for backend)
 import {
-  logger,          // Winston logger with OTEL/DataDog trace context
-  traceException,  // Record exceptions to OpenTelemetry spans
+  logger, // Winston logger with OTEL/DataDog trace context
+  traceException, // Record exceptions to OpenTelemetry spans
   instrumentAsync, // Create instrumented spans for operations
 } from "@langfuse/shared/src/server";
 
@@ -486,7 +486,8 @@ import { QueueName, TQueueJobTypes } from "@langfuse/shared/src/server";
 
 ### Example Features to Reference
 
-Reference existing Langfuse features for implementation patterns:
+Reference existing Tedi features for implementation patterns:
+
 - **Datasets** (`web/src/features/datasets/`) - Complete feature with tRPC router, public API, and service
 - **Prompts** (`web/src/features/prompts/`) - Feature with versioning and templates
 - **Evaluations** (`web/src/features/evals/`) - Complex feature with worker integration
@@ -507,8 +508,8 @@ Reference existing Langfuse features for implementation patterns:
 
 ## Navigation Guide
 
-| Need to...                | Read this                                                    |
-| ------------------------- | ------------------------------------------------------------ |
+| Need to...                | Read this                                                              |
+| ------------------------- | ---------------------------------------------------------------------- |
 | Understand architecture   | [architecture-overview.md](resources/architecture-overview.md)         |
 | Create routes/controllers | [routing-and-controllers.md](resources/routing-and-controllers.md)     |
 | Organize business logic   | [services-and-repositories.md](resources/services-and-repositories.md) |

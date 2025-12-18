@@ -1,6 +1,6 @@
-# Langfuse Seeder System
+# Tedi Seeder System
 
-System for generating test data in ClickHouse and PostgreSQL for Langfuse development and testing.
+System for generating test data in ClickHouse and PostgreSQL for Tedi development and testing.
 
 ## Architecture Overview
 

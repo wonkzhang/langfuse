@@ -644,8 +644,8 @@ const createAllIngestionSchemas = ({
 
   const datasetRunItemCreateEvent = isPublic
     ? baseDatasetRunItemCreateEvent.refine(() => false, {
-        message: "Dataset run item creation is only allowed for internal usage",
-      })
+      message: "Dataset run item creation is only allowed for internal usage",
+    })
     : baseDatasetRunItemCreateEvent;
 
   const sdkLogEvent = base.extend({
@@ -780,7 +780,7 @@ export type DatasetRunItemEventType = z.infer<typeof datasetRunItemCreateEvent>;
 
 /**
  * Creates an ingestion event schema with appropriate environment validation.
- * @param isLangfuseInternal - Whether the events are being ingested by Langfuse internally (e.g. traces created for prompt experiments).
+ * @param isLangfuseInternal - Whether the events are being ingested by Tedi internally (e.g. traces created for prompt experiments).
  * @returns The ingestion event schema.
  */
 export const createIngestionEventSchema = (isLangfuseInternal = false) => {

@@ -33,9 +33,9 @@ export async function instrumentAsync<T>(
     ? opentelemetry.ROOT_CONTEXT
     : ctx.traceContext
       ? opentelemetry.propagation.extract(
-          opentelemetry.context.active(),
-          ctx.traceContext,
-        )
+        opentelemetry.context.active(),
+        ctx.traceContext,
+      )
       : opentelemetry.context.active();
 
   return getTracer(ctx.traceScope ?? callback.name).startActiveSpan(
@@ -77,9 +77,9 @@ export function instrumentSync<T>(
     ? opentelemetry.ROOT_CONTEXT
     : ctx.traceContext
       ? opentelemetry.propagation.extract(
-          opentelemetry.context.active(),
-          ctx.traceContext,
-        )
+        opentelemetry.context.active(),
+        ctx.traceContext,
+      )
       : opentelemetry.context.active();
 
   return getTracer(ctx.traceScope ?? callback.name).startActiveSpan(
@@ -254,7 +254,7 @@ const flushMetricsToCloudWatch = () => {
   cloudWatchClient
     .send(
       new PutMetricDataCommand({
-        Namespace: "Langfuse",
+        Namespace: "Tedi",
         MetricData: metricData,
       }),
     )
@@ -268,8 +268,8 @@ export const recordGauge = (
   value?: number | undefined,
   tags?:
     | {
-        [tag: string]: string | number;
-      }
+      [tag: string]: string | number;
+    }
     | undefined,
 ) => {
   if (env.ENABLE_AWS_CLOUDWATCH_METRIC_PUBLISHING === "true") {

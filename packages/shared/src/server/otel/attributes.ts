@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 export enum LangfuseOtelSpanAttributes {
-  // Langfuse-Trace attributes
+  // Tedi-Trace attributes
   TRACE_NAME = "langfuse.trace.name",
   TRACE_USER_ID = "user.id",
   TRACE_SESSION_ID = "session.id",
@@ -10,7 +10,7 @@ export enum LangfuseOtelSpanAttributes {
   TRACE_INPUT = "langfuse.trace.input",
   TRACE_OUTPUT = "langfuse.trace.output",
 
-  // Langfuse-observation attributes
+  // Tedi-observation attributes
   OBSERVATION_TYPE = "langfuse.observation.type",
   OBSERVATION_METADATA = "langfuse.observation.metadata",
   OBSERVATION_LEVEL = "langfuse.observation.level",
@@ -18,7 +18,7 @@ export enum LangfuseOtelSpanAttributes {
   OBSERVATION_INPUT = "langfuse.observation.input",
   OBSERVATION_OUTPUT = "langfuse.observation.output",
 
-  // Langfuse-observation of type Generation attributes
+  // Tedi-observation of type Generation attributes
   OBSERVATION_COMPLETION_START_TIME = "langfuse.observation.completion_start_time",
   OBSERVATION_MODEL = "langfuse.observation.model.name",
   OBSERVATION_MODEL_PARAMETERS = "langfuse.observation.model.parameters",

@@ -85,7 +85,7 @@ const getDelay = (delay: number | null, source: "api" | "otel") => {
  * Options for event batch processing.
  * @property delay - Delay in ms to wait before processing events in the batch.
  * @property source - Source of the events for metrics tracking (e.g., "otel", "api").
- * @property isLangfuseInternal - Whether the events are being ingested by Langfuse internally (e.g. traces created for prompt experiments).
+ * @property isLangfuseInternal - Whether the events are being ingested by Tedi internally (e.g. traces created for prompt experiments).
  * @property forwardToEventsTable - Whether to forward events to the staging events table for batch propagation. If undefined, falls back to environment flags.
  */
 type ProcessEventBatchOptions = {
@@ -254,7 +254,7 @@ export const processEventBatch = async (
             },
           );
           // Fire and forget - don't await, don't block the error flow
-          markProjectS3Slowdown(authCheck.scope.projectId!).catch(() => {});
+          markProjectS3Slowdown(authCheck.scope.projectId!).catch(() => { });
         }
 
         logger.error("Failed to upload event to S3", {
@@ -320,30 +320,30 @@ export const processEventBatch = async (
 
       return queue
         ? queue.add(
-            QueueJobs.IngestionJob,
-            {
-              id: randomUUID(),
-              timestamp: new Date(),
-              name: QueueJobs.IngestionJob as const,
-              payload: {
-                data: {
-                  type: eventData.type,
-                  eventBodyId: eventData.eventBodyId,
-                  fileKey: eventData.key,
-                  skipS3List: shouldSkipS3List,
-                  forwardToEventsTable,
-                },
-                authCheck: authCheck as {
-                  validKey: true;
-                  scope: {
-                    projectId: string;
-                    accessLevel: "project" | "scores";
-                  };
-                },
+          QueueJobs.IngestionJob,
+          {
+            id: randomUUID(),
+            timestamp: new Date(),
+            name: QueueJobs.IngestionJob as const,
+            payload: {
+              data: {
+                type: eventData.type,
+                eventBodyId: eventData.eventBodyId,
+                fileKey: eventData.key,
+                skipS3List: shouldSkipS3List,
+                forwardToEventsTable,
+              },
+              authCheck: authCheck as {
+                validKey: true;
+                scope: {
+                  projectId: string;
+                  accessLevel: "project" | "scores";
+                };
               },
             },
-            { delay: getDelay(delay, source) },
-          )
+          },
+          { delay: getDelay(delay, source) },
+        )
         : Promise.reject("Failed to instantiate ingestion queue");
     }),
   );

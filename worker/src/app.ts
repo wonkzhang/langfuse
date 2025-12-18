@@ -81,7 +81,7 @@ app.use(cors());
 app.use(express.json());
 app.get<{}, MessageResponse>("/", (req, res) => {
   res.json({
-    message: "Langfuse Worker API 🚀",
+    message: "Tedi Worker API 🚀",
   });
 });
 
