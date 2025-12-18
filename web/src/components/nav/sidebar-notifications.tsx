@@ -27,16 +27,16 @@ type SidebarNotification = {
 
 const notifications: SidebarNotification[] = [
   {
-    id: "github-star",
-    title: "Star Langfuse",
+    id: "tedi-star",
+    title: "TEDi",
     description:
-      "See the latest releases and help grow the community on GitHub",
-    link: "https://github.com/langfuse/langfuse",
+      "研效全链路数字化平台",
+    link: "https://tedi.woa.com/",
     linkContent: (
       // eslint-disable-next-line @next/next/no-img-element
       <img
-        alt="Langfuse GitHub stars"
-        src="https://img.shields.io/github/stars/langfuse/langfuse?label=langfuse&amp;style=social"
+        alt="TEDi 研效全链路数字化平台"
+        src="https://ep-portal-1258344701.cos.ap-guangzhou.myqcloud.com/icon/home/favicon.svg"
       />
     ),
   },
