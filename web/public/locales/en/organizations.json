@@ -1,0 +1,14 @@
+{
+  "Organizations.Loading": "Loading organizations...",
+  "Organizations.Title": "Organizations",
+  "Organizations.HelpDescription": "Organizations help you manage access to projects. Each organization can have multiple projects and team members with different roles.",
+  "Organizations.SearchPlaceholder": "Search projects",
+  "Organizations.NewOrganization": "New Organization",
+  "Organizations.Demo.Title": "Try Demo Organization",
+  "Organizations.Demo.Description": "We have built a Q&A chatbot that answers questions based on the docs. Interact with it to see traces.",
+  "Organizations.Demo.ViewDemoProject": "View Demo Project",
+  "Organization.Title": "Organization",
+  "Projects.GoToProject": "Go to project",
+  "Projects.Deleting": "Project is being deleted",
+  "Projects.New": "New project"
+}

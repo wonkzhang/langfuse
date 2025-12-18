@@ -1,0 +1,14 @@
+{
+  "Organizations.Loading": "加载组织中...",
+  "Organizations.Title": "组织",
+  "Organizations.HelpDescription": "组织有助于您管理对项目的访问。每个组织可以有多个项目和具有不同角色的团队成员。",
+  "Organizations.SearchPlaceholder": "搜索项目",
+  "Organizations.NewOrganization": "新建组织",
+  "Organizations.Demo.Title": "试用演示组织",
+  "Organizations.Demo.Description": "我们构建了一个基于文档的问答聊天机器人。与它互动以查看追踪结果。",
+  "Organizations.Demo.ViewDemoProject": "查看演示项目",
+  "Organization.Title": "组织",
+  "Projects.GoToProject": "前往项目",
+  "Projects.Deleting": "项目正在被删除",
+  "Projects.New": "新建项目"
+}

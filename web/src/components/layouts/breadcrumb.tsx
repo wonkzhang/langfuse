@@ -203,7 +203,7 @@ const BreadcrumbComponent = ({
               <Slash />
             </BreadcrumbSeparator>
             <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center gap-1 text-primary">
+              <DropdownMenuTrigger className="flex items-center gap-1 text-primary">
                 {project?.name ?? messages?.["Breadcrumb.Project"] ?? ""}
                 <ChevronDownIcon className="h-4 w-4" />
               </DropdownMenuTrigger>

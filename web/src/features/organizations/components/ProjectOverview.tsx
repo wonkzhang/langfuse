@@ -36,9 +36,11 @@ import { type User } from "next-auth";
 const OrganizationProjectTiles = ({
   org,
   search,
+  messages,
 }: {
   org: User["organizations"][number];
   search?: string;
+  messages?: Record<string, string> | null;
 }) => {
   return (
     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -56,7 +58,7 @@ const OrganizationProjectTiles = ({
             {!project.deletedAt ? (
               <CardFooter className="gap-2">
                 <Button asChild variant="secondary">
-                  <Link href={`/project/${project.id}`}>Go to project</Link>
+                  <Link href={`/project/${project.id}`}>{messages?.["Projects.GoToProject"] ?? ""}</Link>
                 </Button>
                 <Button asChild variant="ghost">
                   <Link href={`/project/${project.id}/settings`}>
@@ -66,7 +68,7 @@ const OrganizationProjectTiles = ({
               </CardFooter>
             ) : (
               <CardContent>
-                <CardDescription>Project is being deleted</CardDescription>
+                <CardDescription>{messages?.["Projects.Deleting"] ?? ""}</CardDescription>
               </CardContent>
             )}
           </Card>
@@ -75,20 +77,19 @@ const OrganizationProjectTiles = ({
   );
 };
 
-const DemoOrganizationTile = () => {
+const DemoOrganizationTile = ({ messages }: { messages?: Record<string, string> | null }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Try Tedi Demo</CardTitle>
+        <CardTitle>{messages?.["Organizations.Demo.Title"] ?? ""}</CardTitle>
       </CardHeader>
       <CardContent>
-        We have built a Q&A chatbot that answers questions based on the Tedi
-        Docs. Interact with it to see traces in Tedi.
+        {messages?.["Organizations.Demo.Description"] ?? ""}
       </CardContent>
       <CardFooter>
         <Button asChild variant="secondary">
           <Link href={`/project/${env.NEXT_PUBLIC_DEMO_PROJECT_ID}/traces`}>
-            View Demo Project
+            {messages?.["Organizations.Demo.ViewDemoProject"] ?? ""}
           </Link>
         </Button>
       </CardFooter>
@@ -99,9 +100,11 @@ const DemoOrganizationTile = () => {
 const OrganizationActionButtons = ({
   orgId,
   primaryButtonVariant = "default",
+  messages,
 }: {
   orgId: string;
   primaryButtonVariant?: "default" | "secondary";
+  messages?: Record<string, string> | null;
 }) => {
   const membersViewAccess = useHasOrganizationAccess({
     organizationId: orgId,
@@ -130,13 +133,13 @@ const OrganizationActionButtons = ({
         <Button asChild variant={primaryButtonVariant}>
           <Link href={createProjectRoute(orgId)}>
             <PlusIcon className="mr-2 h-4 w-4" aria-hidden="true" />
-            New project
+            {messages?.["Projects.New"] ?? ""}
           </Link>
         </Button>
       ) : (
         <Button disabled variant={primaryButtonVariant}>
           <LockIcon className="mr-2 h-4 w-4" aria-hidden="true" />
-          New project
+          {messages?.["Projects.New"] ?? ""}
         </Button>
       )}
     </>
@@ -146,9 +149,11 @@ const OrganizationActionButtons = ({
 const SingleOrganizationPage = ({
   orgId,
   search,
+  messages,
 }: {
   orgId: string;
   search?: string;
+  messages?: Record<string, string> | null;
 }) => {
   const session = useSession();
   const org = session.data?.user?.organizations.find((o) => o.id === orgId);
@@ -165,10 +170,10 @@ const SingleOrganizationPage = ({
     return (
       <ContainerPage
         headerProps={{
-          title: "Demo Organization",
+          title: messages?.["Organizations.Demo.Title"] ?? "",
         }}
       >
-        <DemoOrganizationTile />
+        <DemoOrganizationTile messages={messages} />
       </ContainerPage>
     );
   }
@@ -176,11 +181,11 @@ const SingleOrganizationPage = ({
   return (
     <ContainerPage
       headerProps={{
-        title: org?.name ?? "Organization",
-        actionButtonsRight: <OrganizationActionButtons orgId={orgId} />,
+        title: org?.name ?? (messages?.["Organization.Title"] ?? ""),
+        actionButtonsRight: <OrganizationActionButtons orgId={orgId} messages={messages} />,
       }}
     >
-      <OrganizationProjectTiles org={org} search={search} />
+      <OrganizationProjectTiles org={org} search={search} messages={messages} />
     </ContainerPage>
   );
 };
@@ -188,9 +193,11 @@ const SingleOrganizationPage = ({
 const SingleOrganizationProjectOverviewTile = ({
   orgId,
   search,
+  messages,
 }: {
   orgId: string;
   search?: string;
+  messages?: Record<string, string> | null;
 }) => {
   const session = useSession();
   const org = session.data?.user?.organizations.find((o) => o.id === orgId);
@@ -206,7 +213,7 @@ const SingleOrganizationProjectOverviewTile = ({
   if (isDemoOrg) {
     return (
       <div key={orgId}>
-        <DemoOrganizationTile />
+        <DemoOrganizationTile messages={messages} />
       </div>
     );
   }
@@ -229,15 +236,16 @@ const SingleOrganizationProjectOverviewTile = ({
           <OrganizationActionButtons
             orgId={orgId}
             primaryButtonVariant="secondary"
+            messages={messages}
           />
         }
       />
-      <OrganizationProjectTiles org={org} search={search} />
+      <OrganizationProjectTiles org={org} search={search} messages={messages} />
     </div>
   );
 };
 
-export const OrganizationProjectOverview = () => {
+export const OrganizationProjectOverview = ({ messages }: { messages: Record<string, string> | null }) => {
   const router = useRouter();
   const queryOrgId = router.query.organizationId;
   const session = useSession();
@@ -246,7 +254,7 @@ export const OrganizationProjectOverview = () => {
   const [{ search }, setQueryParams] = useQueryParams({ search: StringParam });
 
   if (organizations === undefined) {
-    return "loading...";
+    return messages?.["Organizations.Loading"] ?? "";
   }
 
   const showOnboarding =
@@ -261,22 +269,21 @@ export const OrganizationProjectOverview = () => {
     }
 
     return (
-      <SingleOrganizationPage orgId={org.id} search={search ?? undefined} />
+      <SingleOrganizationPage orgId={org.id} search={search ?? undefined} messages={messages} />
     );
   }
 
   return (
     <ContainerPage
       headerProps={{
-        title: "Organizations",
+        title: messages?.["Organizations.Title"] ?? "",
         help: {
-          description:
-            "Organizations help you manage access to projects. Each organization can have multiple projects and team members with different roles.",
+          description: messages?.["Organizations.HelpDescription"] ?? "",
           href: "https://langfuse.com/docs/rbac",
         },
         breadcrumb: [
           {
-            name: "Organizations",
+            name: messages?.["Organizations.Title"] ?? "",
             href: "/",
           },
         ],
@@ -284,14 +291,14 @@ export const OrganizationProjectOverview = () => {
           <>
             <Input
               className="mr-1 w-36 lg:w-56"
-              placeholder="Search projects"
+              placeholder={messages?.["Organizations.SearchPlaceholder"] ?? ""}
               onChange={(e) => setQueryParams({ search: e.target.value })}
             />
             {canCreateOrg && (
               <Button data-testid="create-organization-btn" asChild>
                 <Link href={createOrganizationRoute}>
                   <PlusIcon className="mr-1.5 h-4 w-4" aria-hidden="true" />
-                  New Organization
+                  {messages?.["Organizations.NewOrganization"] ?? ""}
                 </Link>
               </Button>
             )}
@@ -299,7 +306,7 @@ export const OrganizationProjectOverview = () => {
         ),
       }}
     >
-      {showOnboarding && <Onboarding />}
+      {showOnboarding && <Onboarding messages={messages} />}
       {organizations
         .sort((a, b) => {
           // sort demo org to the bottom
@@ -317,6 +324,7 @@ export const OrganizationProjectOverview = () => {
             <SingleOrganizationProjectOverviewTile
               orgId={org.id}
               search={search ?? undefined}
+              messages={messages}
             />
           </Fragment>
         ))}
