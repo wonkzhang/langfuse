@@ -7,15 +7,15 @@ export async function createProjectMembershipsOnSignup(user: {
   email: string | null;
 }) {
   try {
-    // Langfuse Cloud: provide view-only access to the demo project, none access to the demo org
+    // Tedi Cloud: provide view-only access to the demo project, none access to the demo org
     const demoProject =
       env.NEXT_PUBLIC_DEMO_ORG_ID && env.NEXT_PUBLIC_DEMO_PROJECT_ID
         ? ((await prisma.project.findUnique({
-            where: {
-              orgId: env.NEXT_PUBLIC_DEMO_ORG_ID,
-              id: env.NEXT_PUBLIC_DEMO_PROJECT_ID,
-            },
-          })) ?? undefined)
+          where: {
+            orgId: env.NEXT_PUBLIC_DEMO_ORG_ID,
+            id: env.NEXT_PUBLIC_DEMO_PROJECT_ID,
+          },
+        })) ?? undefined)
         : undefined;
     if (demoProject !== undefined) {
       await prisma.organizationMembership.create({
@@ -30,29 +30,29 @@ export async function createProjectMembershipsOnSignup(user: {
     // self-hosted: LANGFUSE_DEFAULT_ORG_ID
     const defaultOrg = env.LANGFUSE_DEFAULT_ORG_ID
       ? ((await prisma.organization.findUnique({
-          where: {
-            id: env.LANGFUSE_DEFAULT_ORG_ID,
-          },
-        })) ?? undefined)
+        where: {
+          id: env.LANGFUSE_DEFAULT_ORG_ID,
+        },
+      })) ?? undefined)
       : undefined;
     const defaultOrgMembership =
       defaultOrg !== undefined
         ? await prisma.organizationMembership.create({
-            data: {
-              orgId: defaultOrg.id,
-              userId: user.id,
-              role: env.LANGFUSE_DEFAULT_ORG_ROLE ?? "VIEWER",
-            },
-          })
+          data: {
+            orgId: defaultOrg.id,
+            userId: user.id,
+            role: env.LANGFUSE_DEFAULT_ORG_ROLE ?? "VIEWER",
+          },
+        })
         : undefined;
 
     // self-hosted: LANGFUSE_DEFAULT_PROJECT_ID
     const defaultProject = env.LANGFUSE_DEFAULT_PROJECT_ID
       ? ((await prisma.project.findUnique({
-          where: {
-            id: env.LANGFUSE_DEFAULT_PROJECT_ID,
-          },
-        })) ?? undefined)
+        where: {
+          id: env.LANGFUSE_DEFAULT_PROJECT_ID,
+        },
+      })) ?? undefined)
       : undefined;
     if (defaultProject !== undefined) {
       if (defaultOrgMembership) {
@@ -101,14 +101,14 @@ async function processMembershipInvitations(email: string, userId: string) {
     role: invitation.orgRole,
     ...(invitation.projectId && invitation.projectRole
       ? {
-          ProjectMemberships: {
-            create: {
-              userId: userId,
-              projectId: invitation.projectId,
-              role: invitation.projectRole,
-            },
+        ProjectMemberships: {
+          create: {
+            userId: userId,
+            projectId: invitation.projectId,
+            role: invitation.projectRole,
           },
-        }
+        },
+      }
       : {}),
   }));
 

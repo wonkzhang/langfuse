@@ -21,7 +21,7 @@ export async function telemetry() {
   try {
     // Only run in prod
     if (process.env.NODE_ENV !== "production") return;
-    // Do not run in Langfuse cloud, separate telemetry is used
+    // Do not run in Tedi cloud, separate telemetry is used
     if (env.NEXT_PUBLIC_LANGFUSE_CLOUD_REGION !== undefined) return;
     // Check if telemetry is not disabled, except for EE
     if (
@@ -68,11 +68,11 @@ export async function telemetry() {
 async function jobScheduler(): Promise<
   | { shouldRunJob: false }
   | {
-      shouldRunJob: true;
-      jobStartedAt: Date;
-      lastRun: Date | null;
-      clientId: string;
-    }
+    shouldRunJob: true;
+    jobStartedAt: Date;
+    lastRun: Date | null;
+    clientId: string;
+  }
 > {
   // Check if job should run, without a lock to not impact performance
   // "not exists" triggers when this is run for the very first time in a container

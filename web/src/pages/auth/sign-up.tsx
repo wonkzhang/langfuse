@@ -189,7 +189,7 @@ export default function SignIn({
   return (
     <>
       <Head>
-        <title>Sign up | Langfuse</title>
+        <title>Sign up | Tedi</title>
         <meta
           name="description"
           content="Create an account, no credit card required."
@@ -220,9 +220,9 @@ export default function SignIn({
                 showPasswordStep
                   ? form.handleSubmit(onSubmit)
                   : (e) => {
-                      e.preventDefault();
-                      void handleContinue();
-                    }
+                    e.preventDefault();
+                    void handleContinue();
+                  }
               }
             >
               {showPasswordStep && (

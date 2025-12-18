@@ -44,8 +44,7 @@ type HeaderPair = {
 };
 
 export class WebhookActionHandler
-  implements BaseActionHandler<WebhookActionFormData>
-{
+  implements BaseActionHandler<WebhookActionFormData> {
   actionType = "WEBHOOK" as const;
 
   // Parse existing headers if available
@@ -135,7 +134,7 @@ export class WebhookActionHandler
             defaultHeaderKeys.includes(header.name.trim().toLowerCase())
           ) {
             errors.push(
-              `Header ${index + 1}: "${header.name}" is automatically added by Langfuse and cannot be customized`,
+              `Header ${index + 1}: "${header.name}" is automatically added by Tedi and cannot be customized`,
             );
           }
         }

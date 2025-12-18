@@ -16,7 +16,7 @@ export function CloudStatusMenu() {
     enabled: !!isLangfuseCloud,
   });
 
-  // Skip component rendering if not running on Langfuse Cloud
+  // Skip component rendering if not running on Tedi Cloud
   if (!isLangfuseCloud) {
     return null;
   }

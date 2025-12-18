@@ -152,22 +152,22 @@ export default function ObservationsTable({
     // If the user loads saved table view presets, we should not apply the default type filter
     !viewId
       ? [
-          {
-            column: "type",
-            type: "stringOptions",
-            operator: "any of",
-            value: [
-              "GENERATION",
-              "AGENT",
-              "TOOL",
-              "CHAIN",
-              "RETRIEVER",
-              "EVALUATOR",
-              "EMBEDDING",
-              "GUARDRAIL",
-            ],
-          },
-        ]
+        {
+          column: "type",
+          type: "stringOptions",
+          operator: "any of",
+          value: [
+            "GENERATION",
+            "AGENT",
+            "TOOL",
+            "CHAIN",
+            "RETRIEVER",
+            "EVALUATOR",
+            "EMBEDDING",
+            "GUARDRAIL",
+          ],
+        },
+      ]
       : [],
     "generations",
     projectId,
@@ -187,56 +187,56 @@ export default function ObservationsTable({
 
   const promptNameFilter: FilterState = promptName
     ? [
-        {
-          column: "Prompt Name",
-          type: "string",
-          operator: "=",
-          value: promptName,
-        },
-      ]
+      {
+        column: "Prompt Name",
+        type: "string",
+        operator: "=",
+        value: promptName,
+      },
+    ]
     : [];
 
   const promptVersionFilter: FilterState = promptVersion
     ? [
-        {
-          column: "Prompt Version",
-          type: "number",
-          operator: "=",
-          value: promptVersion,
-        },
-      ]
+      {
+        column: "Prompt Version",
+        type: "number",
+        operator: "=",
+        value: promptVersion,
+      },
+    ]
     : [];
 
   const modelIdFilter: FilterState = modelId
     ? [
-        {
-          column: "Model ID",
-          type: "string",
-          operator: "=",
-          value: modelId,
-        },
-      ]
+      {
+        column: "Model ID",
+        type: "string",
+        operator: "=",
+        value: modelId,
+      },
+    ]
     : [];
 
   const dateRangeFilter: FilterState = dateRange
     ? [
-        {
-          column: "startTime",
-          type: "datetime",
-          operator: ">=",
-          value: dateRange.from,
-        },
-        ...(dateRange.to
-          ? [
-              {
-                column: "startTime",
-                type: "datetime",
-                operator: "<=",
-                value: dateRange.to,
-              } as const,
-            ]
-          : []),
-      ]
+      {
+        column: "startTime",
+        type: "datetime",
+        operator: ">=",
+        value: dateRange.from,
+      },
+      ...(dateRange.to
+        ? [
+          {
+            column: "startTime",
+            type: "datetime",
+            operator: "<=",
+            value: dateRange.to,
+          } as const,
+        ]
+        : []),
+    ]
     : [];
 
   const environmentFilterOptions =
@@ -427,9 +427,9 @@ export default function ObservationsTable({
           id: g.id,
           params: g.traceTimestamp
             ? {
-                timestamp: g.traceTimestamp.toISOString(),
-                traceId: g.traceId || "",
-              }
+              timestamp: g.traceTimestamp.toISOString(),
+              traceId: g.traceId || "",
+            }
             : undefined,
         })),
       );
@@ -732,14 +732,14 @@ export default function ObservationsTable({
               prices:
                 Object.keys(row.original.usageDetails).length > 0
                   ? Object.keys(row.original.usageDetails)
-                      .filter((key) => key != "total")
-                      .reduce(
-                        (acc, key) => {
-                          acc[key] = 0.000001;
-                          return acc;
-                        },
-                        {} as Record<string, number>,
-                      )
+                    .filter((key) => key != "total")
+                    .reduce(
+                      (acc, key) => {
+                        acc[key] = 0.000001;
+                        return acc;
+                      },
+                      {} as Record<string, number>,
+                    )
                   : undefined,
             }}
             className="cursor-pointer"
@@ -757,7 +757,7 @@ export default function ObservationsTable({
       id: "promptName",
       header: "Prompt",
       headerTooltip: {
-        description: "Link to prompt version in Langfuse prompt management.",
+        description: "Link to prompt version in Tedi prompt management.",
         href: "https://langfuse.com/docs/prompt-management/get-started",
       },
       size: 200,
@@ -1121,43 +1121,43 @@ export default function ObservationsTable({
   const rows: ObservationsTableRow[] = useMemo(() => {
     return generations.isSuccess
       ? generations.data.generations.map((generation) => {
-          return {
-            id: generation.id,
-            traceId: generation.traceId ?? undefined,
-            type: generation.type ?? undefined,
-            traceName: generation.traceName ?? "",
-            startTime: generation.startTime,
-            endTime: generation.endTime ?? undefined,
-            timeToFirstToken: generation.timeToFirstToken ?? undefined,
-            scores: generation.scores,
-            latency: generation.latency ?? undefined,
-            totalCost: generation.totalCost ?? undefined,
-            cost: {
-              inputCost: generation.inputCost ?? undefined,
-              outputCost: generation.outputCost ?? undefined,
-            },
-            name: generation.name ?? undefined,
-            version: generation.version ?? "",
-            model: generation.model ?? "",
-            modelId: generation.internalModelId ?? undefined,
-            level: generation.level,
-            statusMessage: generation.statusMessage ?? undefined,
-            usage: {
-              inputUsage: generation.inputUsage,
-              outputUsage: generation.outputUsage,
-              totalUsage: generation.totalUsage,
-            },
-            promptId: generation.promptId ?? undefined,
-            promptName: generation.promptName ?? undefined,
-            promptVersion: generation.promptVersion?.toString() ?? undefined,
-            traceTags: generation.traceTags ?? undefined,
-            timestamp: generation.traceTimestamp ?? undefined,
-            usageDetails: generation.usageDetails ?? {},
-            costDetails: generation.costDetails ?? {},
-            usagePricingTierName: generation.usagePricingTierName ?? undefined,
-            environment: generation.environment ?? undefined,
-          };
-        })
+        return {
+          id: generation.id,
+          traceId: generation.traceId ?? undefined,
+          type: generation.type ?? undefined,
+          traceName: generation.traceName ?? "",
+          startTime: generation.startTime,
+          endTime: generation.endTime ?? undefined,
+          timeToFirstToken: generation.timeToFirstToken ?? undefined,
+          scores: generation.scores,
+          latency: generation.latency ?? undefined,
+          totalCost: generation.totalCost ?? undefined,
+          cost: {
+            inputCost: generation.inputCost ?? undefined,
+            outputCost: generation.outputCost ?? undefined,
+          },
+          name: generation.name ?? undefined,
+          version: generation.version ?? "",
+          model: generation.model ?? "",
+          modelId: generation.internalModelId ?? undefined,
+          level: generation.level,
+          statusMessage: generation.statusMessage ?? undefined,
+          usage: {
+            inputUsage: generation.inputUsage,
+            outputUsage: generation.outputUsage,
+            totalUsage: generation.totalUsage,
+          },
+          promptId: generation.promptId ?? undefined,
+          promptName: generation.promptName ?? undefined,
+          promptVersion: generation.promptVersion?.toString() ?? undefined,
+          traceTags: generation.traceTags ?? undefined,
+          timestamp: generation.traceTimestamp ?? undefined,
+          usageDetails: generation.usageDetails ?? {},
+          costDetails: generation.costDetails ?? {},
+          usagePricingTierName: generation.usagePricingTierName ?? undefined,
+          environment: generation.environment ?? undefined,
+        };
+      })
       : [];
   }, [generations]);
 
@@ -1249,15 +1249,15 @@ export default function ObservationsTable({
                   ? { isLoading: true, isError: false }
                   : generations.error
                     ? {
-                        isLoading: false,
-                        isError: true,
-                        error: generations.error.message,
-                      }
+                      isLoading: false,
+                      isError: true,
+                      error: generations.error.message,
+                    }
                     : {
-                        isLoading: false,
-                        isError: false,
-                        data: rows,
-                      }
+                      isLoading: false,
+                      isError: false,
+                      data: rows,
+                    }
               }
               pagination={{
                 totalCount,

@@ -56,7 +56,7 @@ export const NewPrompt = ({ messages }: { messages?: PromptMessages }) => {
           ? `${initialPrompt.name} \u2014 ${messages?.["Prompts.New.NewVersionSuffix"] ?? "新版本"}`
           : messages?.["Prompts.New.Title"] ?? "新建提示词",
         help: {
-          description: messages?.["Prompts.New.HelpDescription"] ?? "在 Langfuse 中管理和版本化您的提示词。您可以通过 UI 或 SDK 编辑并更新提示词，通过 SDK 获取生产版本。更多信息请参见文档。",
+          description: messages?.["Prompts.New.HelpDescription"] ?? "在 Tedi 中管理和版本化您的提示词。您可以通过 UI 或 SDK 编辑并更新提示词，通过 SDK 获取生产版本。更多信息请参见文档。",
           href: "https://langfuse.com/docs/prompts",
         },
         breadcrumb: breadcrumb,
@@ -64,7 +64,7 @@ export const NewPrompt = ({ messages }: { messages?: PromptMessages }) => {
     >
       {initialPrompt ? (
         <p className="text-sm text-muted-foreground">
-          {messages?.["Prompts.New.ImmutableNote"] ?? "提示词在 Langfuse 中为不可变。要更新提示词，请创建新版本。"}
+          {messages?.["Prompts.New.ImmutableNote"] ?? "提示词在 Tedi 中为不可变。要更新提示词，请创建新版本。"}
         </p>
       ) : null}
       <div className="my-8">

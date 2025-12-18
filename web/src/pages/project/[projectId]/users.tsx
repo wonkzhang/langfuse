@@ -66,7 +66,7 @@ export default function UsersPage() {
         title: "Users",
         help: {
           description:
-            "Attribute data in Langfuse to a user by adding a userId to your traces. See docs to learn more.",
+            "Attribute data in Tedi to a user by adding a userId to your traces. See docs to learn more.",
           href: "https://langfuse.com/docs/user-explorer",
         },
       }}
@@ -104,19 +104,19 @@ const UsersTable = () => {
 
   const dateRangeFilter: FilterState = dateRange
     ? [
-        {
-          column: "Timestamp",
-          type: "datetime",
-          operator: ">=",
-          value: dateRange.from,
-        },
-        {
-          column: "Timestamp",
-          type: "datetime",
-          operator: "<=",
-          value: dateRange.to,
-        },
-      ]
+      {
+        column: "Timestamp",
+        type: "datetime",
+        operator: ">=",
+        value: dateRange.from,
+      },
+      {
+        column: "Timestamp",
+        type: "datetime",
+        operator: "<=",
+        value: dateRange.to,
+      },
+    ]
     : [];
 
   const environmentFilterOptions =
@@ -219,7 +219,7 @@ const UsersTable = () => {
       header: "User ID",
       headerTooltip: {
         description:
-          "The unique identifier for the user that was logged in Langfuse. See docs for more details on how to set this up.",
+          "The unique identifier for the user that was logged in Tedi. See docs for more details on how to set this up.",
         href: "https://langfuse.com/docs/observability/features/users",
       },
       size: 150,
@@ -366,34 +366,34 @@ const UsersTable = () => {
             ? { isLoading: true, isError: false }
             : users.isError
               ? {
-                  isLoading: false,
-                  isError: true,
-                  error: users.error.message,
-                }
+                isLoading: false,
+                isError: true,
+                error: users.error.message,
+              }
               : {
-                  isLoading: false,
-                  isError: false,
-                  data: userRowData.rows?.map((t) => {
-                    return {
-                      userId: t.id,
-                      environment: t.environment ?? undefined,
-                      firstEvent:
-                        t.firstTrace?.toLocaleString() ?? "No event yet",
-                      lastEvent:
-                        t.lastTrace?.toLocaleString() ?? "No event yet",
-                      totalEvents: compactNumberFormatter(
-                        Number(t.totalTraces ?? 0) +
-                          Number(t.totalObservations ?? 0),
-                      ),
-                      totalTokens: compactNumberFormatter(t.totalTokens ?? 0),
-                      totalCost: usdFormatter(
-                        t.sumCalculatedTotalCost ?? 0,
-                        2,
-                        2,
-                      ),
-                    };
-                  }),
-                }
+                isLoading: false,
+                isError: false,
+                data: userRowData.rows?.map((t) => {
+                  return {
+                    userId: t.id,
+                    environment: t.environment ?? undefined,
+                    firstEvent:
+                      t.firstTrace?.toLocaleString() ?? "No event yet",
+                    lastEvent:
+                      t.lastTrace?.toLocaleString() ?? "No event yet",
+                    totalEvents: compactNumberFormatter(
+                      Number(t.totalTraces ?? 0) +
+                      Number(t.totalObservations ?? 0),
+                    ),
+                    totalTokens: compactNumberFormatter(t.totalTokens ?? 0),
+                    totalCost: usdFormatter(
+                      t.sumCalculatedTotalCost ?? 0,
+                      2,
+                      2,
+                    ),
+                  };
+                }),
+              }
         }
         pagination={{
           totalCount,

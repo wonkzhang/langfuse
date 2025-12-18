@@ -1,4 +1,4 @@
-// Langfuse Cloud only
+// Tedi Cloud only
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -107,18 +107,18 @@ export const BillingSwitchPlanDialog = ({
                         {isCurrentPlan && <span>Current Plan</span>}
                         {scheduledPlanSwitch &&
                           scheduledPlanSwitch.newPlanId ===
-                            product.stripeProductId && (
+                          product.stripeProductId && (
                             <span className="ml-1">Starts next period</span>
                           )}
                         {scheduledPlanSwitch &&
                           organization?.cloudConfig?.stripe?.activeProductId ===
-                            product.stripeProductId && (
+                          product.stripeProductId && (
                             <span className="ml-1">(Until next period)</span>
                           )}
                         {!scheduledPlanSwitch &&
                           cancellation?.isCancelled &&
                           organization?.cloudConfig?.stripe?.activeProductId ===
-                            product.stripeProductId && (
+                          product.stripeProductId && (
                             <span className="ml-1">(Until next period)</span>
                           )}
                       </div>
@@ -201,7 +201,7 @@ export const BillingSwitchPlanDialog = ({
                         {!isCurrentPlan &&
                           scheduledPlanSwitch &&
                           scheduledPlanSwitch.newPlanId ===
-                            product.stripeProductId && (
+                          product.stripeProductId && (
                             <Button className="w-full" disabled>
                               Scheduled
                             </Button>
@@ -211,7 +211,7 @@ export const BillingSwitchPlanDialog = ({
                         {!isCurrentPlan &&
                           scheduledPlanSwitch &&
                           scheduledPlanSwitch.newPlanId !==
-                            product.stripeProductId &&
+                          product.stripeProductId &&
                           (hasValidPaymentMethod ? (
                             <StripeSwitchPlanButton
                               orgId={organization?.id}

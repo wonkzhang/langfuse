@@ -159,8 +159,8 @@ export default function DashboardDetail() {
       const maxY =
         localDashboardDefinition.widgets.length > 0
           ? Math.max(
-              ...localDashboardDefinition.widgets.map((w) => w.y + w.y_size),
-            )
+            ...localDashboardDefinition.widgets.map((w) => w.y + w.y_size),
+          )
           : 0;
 
       // Create a new widget placement
@@ -402,7 +402,7 @@ export default function DashboardDetail() {
         title:
           (dashboard.data?.name || "Dashboard") +
           (dashboard.data?.owner === "LANGFUSE"
-            ? " (Langfuse Maintained)"
+            ? " (Tedi Maintained)"
             : ""),
         help: {
           description:
@@ -467,11 +467,11 @@ export default function DashboardDetail() {
                 disabled={
                   lookbackLimit
                     ? {
-                        before: new Date(
-                          new Date().getTime() -
-                            lookbackLimit * 24 * 60 * 60 * 1000,
-                        ),
-                      }
+                      before: new Date(
+                        new Date().getTime() -
+                        lookbackLimit * 24 * 60 * 60 * 1000,
+                      ),
+                    }
                     : undefined
                 }
               />

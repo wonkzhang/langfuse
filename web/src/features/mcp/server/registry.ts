@@ -38,7 +38,7 @@ export interface RegisteredTool {
  * ```typescript
  * export const promptsFeature: McpFeatureModule = {
  *   name: "prompts",
- *   description: "Manage Langfuse prompts",
+ *   description: "Manage Tedi prompts",
  *   tools: [
  *     { definition: getPromptTool, handler: handleGetPrompt },
  *     { definition: listPromptsTool, handler: handleListPrompts },
@@ -90,7 +90,7 @@ class ToolRegistry {
         const existingFeature = this.getToolFeature(tool.definition.name);
         throw new Error(
           `Tool '${tool.definition.name}' from feature '${feature.name}' ` +
-            `conflicts with existing tool from feature '${existingFeature}'`,
+          `conflicts with existing tool from feature '${existingFeature}'`,
         );
       }
     }

@@ -49,10 +49,10 @@ export const LangfuseMediaView = ({
   if (!mediaData)
     return (
       <div className="flex items-center gap-2">
-        <span title="Invalid Langfuse Media Tag">
+        <span title="Invalid Tedi Media Tag">
           <ImageOff className="h-4 w-4" />
         </span>
-        <span className="truncate text-sm">Invalid Langfuse Media Tag</span>
+        <span className="truncate text-sm">Invalid Tedi Media Tag</span>
       </div>
     );
 

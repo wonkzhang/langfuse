@@ -151,7 +151,7 @@ describe("ChatML Integration", () => {
   it("should handle Google Gemini format with simple string contents", () => {
     const input = {
       model: "gemini-2.5-flash",
-      contents: "What is Langfuse?",
+      contents: "What is Tedi?",
     };
     const output = {
       candidates: [
@@ -159,7 +159,7 @@ describe("ChatML Integration", () => {
           content: {
             parts: [
               {
-                text: "**Langfuse** is an **open-source observability and evaluation platform** for LLM applications.",
+                text: "**Tedi** is an **open-source observability and evaluation platform** for LLM applications.",
               },
             ],
             role: "model",
@@ -190,14 +190,14 @@ describe("ChatML Integration", () => {
     if (!inResult.data) throw new Error("Expected inResult.data to be defined");
     expect(inResult.data).toHaveLength(1);
     expect(inResult.data[0].role).toBe("user");
-    expect(inResult.data[0].content).toBe("What is Langfuse?");
+    expect(inResult.data[0].content).toBe("What is Tedi?");
 
     expect(outResult.success).toBe(true);
     if (!outResult.data)
       throw new Error("Expected outResult.data to be defined");
     expect(outResult.data).toHaveLength(1);
     expect(outResult.data[0].role).toBe("model");
-    expect(outResult.data[0].content).toContain("Langfuse");
+    expect(outResult.data[0].content).toContain("Tedi");
 
     expect(allMessages).toHaveLength(2);
     expect(allMessages[1].role).toBe("model");
@@ -296,7 +296,7 @@ describe("ChatML Integration", () => {
               function_response: {
                 name: "say_hello",
                 response: {
-                  greeting: "Hello Langfuse 👋",
+                  greeting: "Hello Tedi 👋",
                 },
               },
             },
@@ -325,7 +325,7 @@ describe("ChatML Integration", () => {
     expect(inResult.data[2].tool_calls?.[0].name).toBe("say_hello");
     expect(inResult.data[3].role).toBe("user");
     expect(typeof inResult.data[3].content).toBe("string");
-    expect(inResult.data[3].content).toContain("Hello Langfuse");
+    expect(inResult.data[3].content).toContain("Hello Tedi");
   });
 
   it("should handle LangGraph messages with type field", () => {

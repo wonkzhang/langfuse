@@ -53,7 +53,7 @@ export function formatErrorForUser(error: unknown): McpError {
     );
   }
 
-  // Langfuse standard errors
+  // Tedi standard errors
   if (error instanceof UnauthorizedError) {
     return new McpError(
       ErrorCode.InvalidRequest,

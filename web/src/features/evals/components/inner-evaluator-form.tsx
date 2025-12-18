@@ -185,17 +185,17 @@ export const InnerEvaluatorForm = (props: {
         : [],
       mapping: props.existingEvaluator?.variableMapping
         ? z
-            .array(variableMapping)
-            .parse(props.existingEvaluator.variableMapping)
+          .array(variableMapping)
+          .parse(props.existingEvaluator.variableMapping)
         : z.array(variableMapping).parse(
-            props.evalTemplate
-              ? props.evalTemplate.vars.map((v) => ({
-                  templateVariable: v,
-                  langfuseObject: "trace" as const,
-                  selectedColumnId: "input",
-                }))
-              : [],
-          ),
+          props.evalTemplate
+            ? props.evalTemplate.vars.map((v) => ({
+              templateVariable: v,
+              langfuseObject: "trace" as const,
+              selectedColumnId: "input",
+            }))
+            : [],
+        ),
       sampling: props.existingEvaluator?.sampling
         ? props.existingEvaluator.sampling.toNumber()
         : 1,
@@ -238,16 +238,16 @@ export const InnerEvaluatorForm = (props: {
     // Normalize API response to match TraceOptions type (count should be number, not string)
     const normalized = traceFilterOptionsResponse.data
       ? {
-          name: traceFilterOptionsResponse.data.name?.map((n) => ({
-            value: n.value,
-            count: Number(n.count),
-          })),
-          scores_avg: traceFilterOptionsResponse.data.scores_avg,
-          score_categories: traceFilterOptionsResponse.data.score_categories,
-          tags: traceFilterOptionsResponse.data.tags?.map((t) => ({
-            value: t.value,
-          })),
-        }
+        name: traceFilterOptionsResponse.data.name?.map((n) => ({
+          value: n.value,
+          count: Number(n.count),
+        })),
+        scores_avg: traceFilterOptionsResponse.data.scores_avg,
+        score_categories: traceFilterOptionsResponse.data.score_categories,
+        tags: traceFilterOptionsResponse.data.tags?.map((t) => ({
+          value: t.value,
+        })),
+      }
       : {};
 
     return {
@@ -395,28 +395,28 @@ export const InnerEvaluatorForm = (props: {
 
     (props.mode === "edit" && props.existingEvaluator?.id
       ? updateJobMutation.mutateAsync({
-          projectId: props.projectId,
-          evalConfigId: props.existingEvaluator.id,
-          config: {
-            delay,
-            filter,
-            variableMapping: mapping,
-            sampling,
-            scoreName,
-            timeScope: values.timeScope,
-          },
-        })
-      : createJobMutation.mutateAsync({
-          projectId: props.projectId,
-          target: values.target,
-          evalTemplateId: props.evalTemplate.id,
-          scoreName,
-          filter,
-          mapping,
-          sampling,
+        projectId: props.projectId,
+        evalConfigId: props.existingEvaluator.id,
+        config: {
           delay,
+          filter,
+          variableMapping: mapping,
+          sampling,
+          scoreName,
           timeScope: values.timeScope,
-        })
+        },
+      })
+      : createJobMutation.mutateAsync({
+        projectId: props.projectId,
+        target: values.target,
+        evalTemplateId: props.evalTemplate.id,
+        scoreName,
+        filter,
+        mapping,
+        sampling,
+        delay,
+        timeScope: values.timeScope,
+      })
     )
       .then(() => {
         props.onFormSuccess?.();
@@ -877,7 +877,7 @@ export const InnerEvaluatorForm = (props: {
                               <VariableMappingDescription
                                 title="Object"
                                 description={
-                                  "Langfuse object to retrieve the data from."
+                                  "Tedi object to retrieve the data from."
                                 }
                                 href={
                                   "https://langfuse.com/docs/evaluation/evaluation-methods/llm-as-a-judge"
@@ -940,7 +940,7 @@ export const InnerEvaluatorForm = (props: {
                                   <VariableMappingDescription
                                     title={"Object Name"}
                                     description={
-                                      "Name of the Langfuse object to retrieve the data from."
+                                      "Name of the Tedi object to retrieve the data from."
                                     }
                                     href={
                                       "https://langfuse.com/docs/evaluation/evaluation-methods/llm-as-a-judge"
@@ -1040,7 +1040,7 @@ export const InnerEvaluatorForm = (props: {
                               <VariableMappingDescription
                                 title={"Object Variable"}
                                 description={
-                                  "Variable on the Langfuse object to insert into the template."
+                                  "Variable on the Tedi object to insert into the template."
                                 }
                                 href={
                                   "https://langfuse.com/docs/evaluation/evaluation-methods/llm-as-a-judge"

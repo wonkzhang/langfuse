@@ -66,10 +66,10 @@ const getPythonCode = (
   name: string,
   version: number,
   labels: string[],
-) => `from langfuse import Langfuse
+) => `from langfuse import Tedi
 
-# Initialize Langfuse client
-langfuse = Langfuse()
+# Initialize Tedi client
+langfuse = Tedi()
 
 # Get production prompt
 prompt = langfuse.get_prompt("${name}")
@@ -88,7 +88,7 @@ const getJsCode = (
   labels: string[],
 ) => `import { LangfuseClient } from "@langfuse/client";
 
-// Initialize the Langfuse client
+// Initialize the Tedi client
 const langfuse = new LangfuseClient();
 
 // Get production prompt
@@ -150,12 +150,12 @@ export const PromptDetail = ({
   );
   const prompt = currentPromptVersion
     ? promptHistory.data?.promptVersions.find(
-        (prompt) => prompt.version === currentPromptVersion,
-      )
+      (prompt) => prompt.version === currentPromptVersion,
+    )
     : currentPromptLabel
       ? promptHistory.data?.promptVersions.find((prompt) =>
-          prompt.labels.includes(currentPromptLabel),
-        )
+        prompt.labels.includes(currentPromptLabel),
+      )
       : promptHistory.data?.promptVersions[0];
 
   const promptGraph = api.prompts.resolvePromptGraph.useQuery(
@@ -269,10 +269,10 @@ export const PromptDetail = ({
 
   const extractedVariables = prompt
     ? extractVariables(
-        prompt?.type === PromptType.Text
-          ? (prompt.prompt?.toString() ?? "")
-          : JSON.stringify(prompt.prompt),
-      )
+      prompt?.type === PromptType.Text
+        ? (prompt.prompt?.toString() ?? "")
+        : JSON.stringify(prompt.prompt),
+    )
     : [];
 
   return (
@@ -284,7 +284,7 @@ export const PromptDetail = ({
         itemType: "PROMPT",
         help: {
           description:
-            "You can use this prompt within your application through the Langfuse SDKs and integrations. Refer to the documentation for more information.",
+            "You can use this prompt within your application through the Tedi SDKs and integrations. Refer to the documentation for more information.",
           href: "https://langfuse.com/docs/prompts",
         },
         breadcrumb: [
@@ -537,7 +537,7 @@ export const PromptDetail = ({
                   </div>
                 ) : typeof prompt.prompt === "string" ? (
                   resolutionMode === "resolved" &&
-                  promptGraph.data?.resolvedPrompt ? (
+                    promptGraph.data?.resolvedPrompt ? (
                     <CodeView
                       content={String(promptGraph.data.resolvedPrompt)}
                       title="Text Prompt (resolved)"

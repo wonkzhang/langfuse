@@ -121,7 +121,7 @@ export const CreateExperimentsForm = ({
                   via User Interface
                 </CardTitle>
                 <CardDescription>
-                  Test single prompts and model configurations via Langfuse UI
+                  Test single prompts and model configurations via Tedi UI
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -160,7 +160,7 @@ export const CreateExperimentsForm = ({
                   via SDK / API
                 </CardTitle>
                 <CardDescription>
-                  Start any dataset run via the Langfuse SDKs
+                  Start any dataset run via the Tedi SDKs
                 </CardDescription>
               </CardHeader>
               <CardContent>

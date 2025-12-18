@@ -355,28 +355,28 @@ export default function PromptVersionTable({
   const rows: PromptVersionTableRow[] =
     promptVersions.isSuccess && !!combinedData
       ? combinedData.map((prompt) => {
-          return {
-            version: prompt.version,
-            labels: prompt.labels,
-            medianLatency: prompt.medianLatency,
-            medianInputTokens: prompt.medianInputTokens,
-            medianOutputTokens: prompt.medianOutputTokens,
-            medianCost: prompt.medianTotalCost,
-            generationCount: prompt.observationCount,
-            traceScores: addPrefixToScoreKeys(
-              prompt.traceScores ?? {},
-              "Trace",
-            ),
-            generationScores: addPrefixToScoreKeys(
-              prompt.observationScores ?? {},
-              "Generation",
-            ),
-            lastUsed:
-              prompt.lastUsed?.toLocaleString() ?? "No linked generation yet",
-            firstUsed:
-              prompt.firstUsed?.toLocaleString() ?? "No linked generation yet",
-          };
-        })
+        return {
+          version: prompt.version,
+          labels: prompt.labels,
+          medianLatency: prompt.medianLatency,
+          medianInputTokens: prompt.medianInputTokens,
+          medianOutputTokens: prompt.medianOutputTokens,
+          medianCost: prompt.medianTotalCost,
+          generationCount: prompt.observationCount,
+          traceScores: addPrefixToScoreKeys(
+            prompt.traceScores ?? {},
+            "Trace",
+          ),
+          generationScores: addPrefixToScoreKeys(
+            prompt.observationScores ?? {},
+            "Generation",
+          ),
+          lastUsed:
+            prompt.lastUsed?.toLocaleString() ?? "No linked generation yet",
+          firstUsed:
+            prompt.firstUsed?.toLocaleString() ?? "No linked generation yet",
+        };
+      })
       : [];
 
   return (
@@ -386,7 +386,7 @@ export default function PromptVersionTable({
         itemType: "PROMPT",
         help: {
           description:
-            "You can use this prompt within your application through the Langfuse SDKs and integrations. Refer to the documentation for more information.",
+            "You can use this prompt within your application through the Tedi SDKs and integrations. Refer to the documentation for more information.",
           href: "https://langfuse.com/docs/prompt-management/get-started",
         },
         breadcrumb: [
@@ -433,15 +433,15 @@ export default function PromptVersionTable({
             ? { isLoading: true, isError: false }
             : promptVersions.error
               ? {
-                  isLoading: false,
-                  isError: true,
-                  error: promptVersions.error.message,
-                }
+                isLoading: false,
+                isError: true,
+                error: promptVersions.error.message,
+              }
               : {
-                  isLoading: false,
-                  isError: false,
-                  data: rows,
-                }
+                isLoading: false,
+                isError: false,
+                data: rows,
+              }
         }
         pagination={{
           totalCount,

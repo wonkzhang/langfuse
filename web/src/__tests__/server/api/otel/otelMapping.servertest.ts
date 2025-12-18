@@ -24,7 +24,7 @@ async function convertOtelSpanToIngestionEvent(
 }
 
 describe("OTel Resource Span Mapping", () => {
-  describe("Langfuse OTEL SDK spans", () => {
+  describe("Tedi OTEL SDK spans", () => {
     const publicKey = "pk-lf-1234567890";
 
     it("should convert LF-OTEL spans to LF-events", async () => {
@@ -495,7 +495,7 @@ describe("OTel Resource Span Mapping", () => {
   });
 
   describe("Vendor Spans", () => {
-    it("should convert an OpenLit OTel Span to Langfuse Events", async () => {
+    it("should convert an OpenLit OTel Span to Tedi Events", async () => {
       // Setup
       const resourceSpan = {
         resource: {
@@ -683,7 +683,7 @@ describe("OTel Resource Span Mapping", () => {
       expect(parsedEvents).toHaveLength(2);
     });
 
-    it("should convert a TraceLoop OTel Span to Langfuse Events", async () => {
+    it("should convert a TraceLoop OTel Span to Tedi Events", async () => {
       // Setup
       const resourceSpan = {
         resource: {
@@ -801,7 +801,7 @@ describe("OTel Resource Span Mapping", () => {
       expect(parsedEvents).toHaveLength(2);
     });
 
-    it("LFE-5171: should convert a Semantic Kernel 1.55+ OTel Span with new event-based semantic conventions to Langfuse Events", async () => {
+    it("LFE-5171: should convert a Semantic Kernel 1.55+ OTel Span with new event-based semantic conventions to Tedi Events", async () => {
       // Setup - Semantic Kernel 1.55+ uses new event names instead of deprecated gen_ai.content.prompt/completion
       const resourceSpan = {
         scopeSpans: [
@@ -946,7 +946,7 @@ describe("OTel Resource Span Mapping", () => {
       });
     });
 
-    it("should convert a Vercel AI SDK embedding span to Langfuse embedding-create event", async () => {
+    it("should convert a Vercel AI SDK embedding span to Tedi embedding-create event", async () => {
       const resourceSpan = {
         scopeSpans: [
           {
@@ -1464,7 +1464,7 @@ describe("OTel Resource Span Mapping", () => {
       ).toBe(false);
     });
 
-    it("should trust Langfuse type over OpenInference or model detection", async () => {
+    it("should trust Tedi type over OpenInference or model detection", async () => {
       const resourceSpan = {
         scopeSpans: [
           {
@@ -1472,7 +1472,7 @@ describe("OTel Resource Span Mapping", () => {
               {
                 ...defaultSpanProps,
                 attributes: [
-                  // Explicit Langfuse type (should always win)
+                  // Explicit Tedi type (should always win)
                   {
                     key: "langfuse.observation.type",
                     value: { stringValue: "span" },
@@ -1502,7 +1502,7 @@ describe("OTel Resource Span Mapping", () => {
 
       // Then
       expect(langfuseEvents).toHaveLength(2);
-      // Explicit Langfuse type should always win over inferred types
+      // Explicit Tedi type should always win over inferred types
       expect(langfuseEvents.some((event) => event.type === "span-create")).toBe(
         true,
       );
@@ -3067,32 +3067,32 @@ describe("OTel Resource Span Mapping", () => {
       // Verify llm.input_messages.* and llm.output_messages.* are NOT in metadata.attributes
       expect(
         observation?.body.metadata?.attributes?.[
-          "llm.input_messages.0.message.role"
+        "llm.input_messages.0.message.role"
         ],
       ).toBeUndefined();
       expect(
         observation?.body.metadata?.attributes?.[
-          "llm.input_messages.0.message.content"
+        "llm.input_messages.0.message.content"
         ],
       ).toBeUndefined();
       expect(
         observation?.body.metadata?.attributes?.[
-          "llm.input_messages.1.message.role"
+        "llm.input_messages.1.message.role"
         ],
       ).toBeUndefined();
       expect(
         observation?.body.metadata?.attributes?.[
-          "llm.input_messages.1.message.content"
+        "llm.input_messages.1.message.content"
         ],
       ).toBeUndefined();
       expect(
         observation?.body.metadata?.attributes?.[
-          "llm.output_messages.0.message.role"
+        "llm.output_messages.0.message.role"
         ],
       ).toBeUndefined();
       expect(
         observation?.body.metadata?.attributes?.[
-          "llm.output_messages.0.message.content"
+        "llm.output_messages.0.message.content"
         ],
       ).toBeUndefined();
 
@@ -3210,14 +3210,14 @@ describe("OTel Resource Span Mapping", () => {
       // Verify llm.input_messages.* attributes are filtered
       expect(
         observation?.body.metadata?.attributes?.[
-          "llm.input_messages.0.message.role"
+        "llm.input_messages.0.message.role"
         ],
       ).toBeUndefined();
 
       // Verify llm.output_messages.* attributes are filtered
       expect(
         observation?.body.metadata?.attributes?.[
-          "llm.output_messages.0.message.role"
+        "llm.output_messages.0.message.role"
         ],
       ).toBeUndefined();
 
@@ -5210,7 +5210,7 @@ describe("OTel Resource Span Mapping", () => {
   });
 
   describe("Input/Output attribute filtering from metadata", () => {
-    it("should filter Langfuse SDK trace input/output attributes from trace metadata", async () => {
+    it("should filter Tedi SDK trace input/output attributes from trace metadata", async () => {
       const traceId = "abcdef1234567890abcdef1234567890";
       const rootSpanId = "1234567890abcdef";
 
@@ -5479,12 +5479,12 @@ describe("OTel Resource Span Mapping", () => {
       // Verify TraceLoop gen_ai keys are NOT in metadata.attributes
       expect(
         traceLoopObservation?.body.metadata?.attributes?.[
-          "gen_ai.prompt.0.content"
+        "gen_ai.prompt.0.content"
         ],
       ).toBeUndefined();
       expect(
         traceLoopObservation?.body.metadata?.attributes?.[
-          "gen_ai.completion.0.content"
+        "gen_ai.completion.0.content"
         ],
       ).toBeUndefined();
 
@@ -5692,22 +5692,22 @@ describe("OTel Resource Span Mapping", () => {
       // Verify Google ADK attributes are NOT in metadata.attributes
       expect(
         toolObservation?.body.metadata?.attributes?.[
-          "gcp.vertex.agent.tool_call_args"
+        "gcp.vertex.agent.tool_call_args"
         ],
       ).toBeUndefined();
       expect(
         toolObservation?.body.metadata?.attributes?.[
-          "gcp.vertex.agent.tool_response"
+        "gcp.vertex.agent.tool_response"
         ],
       ).toBeUndefined();
       expect(
         toolObservation?.body.metadata?.attributes?.[
-          "gcp.vertex.agent.llm_request"
+        "gcp.vertex.agent.llm_request"
         ],
       ).toBeUndefined();
       expect(
         toolObservation?.body.metadata?.attributes?.[
-          "gcp.vertex.agent.llm_response"
+        "gcp.vertex.agent.llm_response"
         ],
       ).toBeUndefined();
 

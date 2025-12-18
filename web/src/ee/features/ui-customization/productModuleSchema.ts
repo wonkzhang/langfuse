@@ -1,7 +1,7 @@
 import { z } from "zod/v4";
 
 /**
- * All available product modules in Langfuse
+ * All available product modules in Tedi
  */
 export const PRODUCT_MODULES = [
   "dashboards",
@@ -40,7 +40,7 @@ export function getVisibleProductModules(
   if (visibleModulesEnv && hiddenModulesEnv) {
     console.warn(
       "Both LANGFUSE_UI_VISIBLE_PRODUCT_MODULES and LANGFUSE_UI_HIDDEN_PRODUCT_MODULES are set. " +
-        "Using LANGFUSE_UI_VISIBLE_PRODUCT_MODULES as the allow list.",
+      "Using LANGFUSE_UI_VISIBLE_PRODUCT_MODULES as the allow list.",
     );
     return parseModulesList(visibleModulesEnv);
   }

@@ -198,10 +198,10 @@ export function DashboardTable() {
       cell: (row) => {
         return row.row.original.owner === "LANGFUSE" ? (
           <span className="flex gap-1 px-2 py-0.5 text-xs">
-            <span role="img" aria-label="Langfuse">
+            <span role="img" aria-label="Tedi">
               🪢
             </span>
-            Langfuse
+            Tedi
           </span>
         ) : (
           <span className="flex gap-1 px-2 py-0.5 text-xs">
@@ -290,15 +290,15 @@ export function DashboardTable() {
           ? { isLoading: true, isError: false }
           : dashboards.isError
             ? {
-                isLoading: false,
-                isError: true,
-                error: dashboards.error.message,
-              }
+              isLoading: false,
+              isError: true,
+              error: dashboards.error.message,
+            }
             : {
-                isLoading: false,
-                isError: false,
-                data: safeExtract(dashboards.data, "dashboards", []),
-              }
+              isLoading: false,
+              isError: false,
+              data: safeExtract(dashboards.data, "dashboards", []),
+            }
       }
       orderBy={orderByState}
       setOrderBy={setOrderByState}

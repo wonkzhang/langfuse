@@ -1,4 +1,4 @@
-// Langfuse Cloud only
+// Tedi Cloud only
 
 import { api } from "@/src/utils/api";
 import { MarkerBar } from "@tremor/react";
@@ -30,7 +30,7 @@ export const BillingUsageChart = () => {
   const plan: Plan = organization?.plan ?? "cloud:hobby";
   const usageType = usage.data?.usageType
     ? usage.data.usageType.charAt(0).toUpperCase() +
-      usage.data.usageType.slice(1)
+    usage.data.usageType.slice(1)
     : "Events";
 
   if (usage.data === null) {

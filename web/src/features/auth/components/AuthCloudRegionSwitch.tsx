@@ -21,37 +21,37 @@ import { useLangfuseCloudRegion } from "@/src/features/organizations/hooks";
 const regions =
   env.NEXT_PUBLIC_LANGFUSE_CLOUD_REGION === "STAGING"
     ? [
-        {
-          name: "STAGING",
-          hostname: "staging.langfuse.com",
-          flag: "🇪🇺",
-        },
-      ]
+      {
+        name: "STAGING",
+        hostname: "staging.langfuse.com",
+        flag: "🇪🇺",
+      },
+    ]
     : env.NEXT_PUBLIC_LANGFUSE_CLOUD_REGION === "DEV"
       ? [
-          {
-            name: "DEV",
-            hostname: null,
-            flag: "🚧",
-          },
-        ]
+        {
+          name: "DEV",
+          hostname: null,
+          flag: "🚧",
+        },
+      ]
       : [
-          {
-            name: "US",
-            hostname: "us.cloud.langfuse.com",
-            flag: "🇺🇸",
-          },
-          {
-            name: "EU",
-            hostname: "cloud.langfuse.com",
-            flag: "🇪🇺",
-          },
-          {
-            name: "HIPAA",
-            hostname: "hipaa.cloud.langfuse.com",
-            flag: "⚕️",
-          },
-        ];
+        {
+          name: "US",
+          hostname: "us.cloud.langfuse.com",
+          flag: "🇺🇸",
+        },
+        {
+          name: "EU",
+          hostname: "cloud.langfuse.com",
+          flag: "🇪🇺",
+        },
+        {
+          name: "HIPAA",
+          hostname: "hipaa.cloud.langfuse.com",
+          flag: "⚕️",
+        },
+      ];
 
 export function CloudRegionSwitch({
   isSignUpPage,
@@ -150,7 +150,7 @@ const DataRegionInfo = () => (
       </DialogHeader>
       <DialogBody>
         <DialogDescription className="flex flex-col gap-2">
-          <p>Langfuse Cloud is available in three data regions:</p>
+          <p>Tedi Cloud is available in three data regions:</p>
           <ul className="list-disc pl-5">
             <li>US: Oregon (AWS us-west-2)</li>
             <li>EU: Ireland (AWS eu-west-1)</li>

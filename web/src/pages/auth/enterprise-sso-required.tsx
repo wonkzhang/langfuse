@@ -120,7 +120,7 @@ export default function EnterpriseSsoRequiredPage() {
       } | null;
       setError(
         data?.message ??
-          "Unable to start the Enterprise SSO sign-in flow. Please try again.",
+        "Unable to start the Enterprise SSO sign-in flow. Please try again.",
       );
     } catch (err) {
       captureException(err);
@@ -139,7 +139,7 @@ export default function EnterpriseSsoRequiredPage() {
   return (
     <>
       <Head>
-        <title>Enterprise SSO Required | Langfuse</title>
+        <title>Enterprise SSO Required | Tedi</title>
       </Head>
       <div className="flex min-h-screen-with-banner flex-col justify-center bg-background px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">

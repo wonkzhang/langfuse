@@ -49,9 +49,9 @@ export async function stripeWebhookHandler(req: NextRequest) {
     );
 
   if (!env.NEXT_PUBLIC_LANGFUSE_CLOUD_REGION || !stripeClient) {
-    logger.error("[Stripe Webhook] Endpoint only available in Langfuse Cloud");
+    logger.error("[Stripe Webhook] Endpoint only available in Tedi Cloud");
     return NextResponse.json(
-      { message: "Stripe webhook endpoint only available in Langfuse Cloud" },
+      { message: "Stripe webhook endpoint only available in Tedi Cloud" },
       { status: 500 },
     );
   }
@@ -118,7 +118,7 @@ export async function stripeWebhookHandler(req: NextRequest) {
 }
 
 /**
- * Retrieves an organization by its Langfuse organization ID.
+ * Retrieves an organization by its Tedi organization ID.
  */
 async function getOrgById(orgId: string): Promise<Organization | null> {
   const org = await prisma.organization.findUnique({
@@ -487,16 +487,16 @@ async function handleSubscriptionChanged(
     items.length == 1
       ? items[0]
       : items.find((it) => {
-          return it.price && it.price.recurring?.usage_type !== "metered";
-        });
+        return it.price && it.price.recurring?.usage_type !== "metered";
+      });
   const productId = planProductItem?.price.product;
 
   const usageProductItem =
     items.length == 1
       ? null // legacy setup; Set to null, so we can distinguish from the new setup
       : items.find((it) => {
-          return it.price && it.price.recurring?.usage_type === "metered";
-        });
+        return it.price && it.price.recurring?.usage_type === "metered";
+      });
   const usageProductId = usageProductItem?.price.product;
 
   if (!productId || typeof productId !== "string") {

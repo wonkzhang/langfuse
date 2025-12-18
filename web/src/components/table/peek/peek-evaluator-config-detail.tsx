@@ -94,7 +94,7 @@ export const PeekViewEvaluatorConfigDetail = ({
               )}
             </TooltipTrigger>
             <TooltipContent>
-              {evalConfig.evalTemplate.partner ?? "Langfuse"}
+              {evalConfig.evalTemplate.partner ?? "Tedi"}
             </TooltipContent>
           </Tooltip>
         )}
@@ -109,9 +109,9 @@ export const PeekViewEvaluatorConfigDetail = ({
           existingEvaluator={
             evalConfig.evalTemplate
               ? {
-                  ...evalConfig,
-                  evalTemplate: evalConfig.evalTemplate,
-                }
+                ...evalConfig,
+                evalTemplate: evalConfig.evalTemplate,
+              }
               : undefined
           }
           mode="edit"

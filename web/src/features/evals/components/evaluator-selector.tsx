@@ -47,7 +47,7 @@ export function EvaluatorSelector({
 }: EvaluatorSelectorProps) {
   const [search, setSearch] = useState("");
 
-  // Group templates by name and whether they are managed by Langfuse
+  // Group templates by name and whether they are managed by Tedi
   const groupedTemplates = evalTemplates.reduce(
     (acc, template) => {
       const group = template.projectId ? "custom" : "langfuse";
@@ -134,7 +134,7 @@ export function EvaluatorSelector({
                     className={cn(
                       "group",
                       templateData.some((t) => t.id === selectedTemplateId) &&
-                        "bg-secondary",
+                      "bg-secondary",
                     )}
                   >
                     {name}
@@ -193,7 +193,7 @@ export function EvaluatorSelector({
 
         {filteredTemplates.langfuse.length > 0 && (
           <>
-            <InputCommandGroup heading="Langfuse managed evaluators">
+            <InputCommandGroup heading="Tedi managed evaluators">
               {filteredTemplates.langfuse.map(([name, templateData]) => {
                 const latestVersion = templateData[templateData.length - 1];
                 const isInvalid = isTemplateInvalid(latestVersion);
@@ -212,7 +212,7 @@ export function EvaluatorSelector({
                     className={cn(
                       "group",
                       templateData.some((t) => t.id === selectedTemplateId) &&
-                        "bg-secondary",
+                      "bg-secondary",
                     )}
                   >
                     <div className="mr-1">{name}</div>

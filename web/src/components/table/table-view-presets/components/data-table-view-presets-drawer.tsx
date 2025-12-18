@@ -352,7 +352,7 @@ export function TableViewPresetsDrawer({
               <CommandList className="max-h-[calc(100vh-150px)]">
                 <CommandEmpty>No saved table views found</CommandEmpty>
                 <CommandGroup className="pb-0">
-                  {/* System Preset: Langfuse Default */}
+                  {/* System Preset: Tedi Default */}
                   <CommandItem
                     key={SYSTEM_PRESETS.DEFAULT.id}
                     onSelect={() => handleSelectView(SYSTEM_PRESETS.DEFAULT.id)}
@@ -537,7 +537,7 @@ export function TableViewPresetsDrawer({
                                     viewId: view.id,
                                   })
                                 }
-                                captureDeleteSuccess={() => {}}
+                                captureDeleteSuccess={() => { }}
                               />
                             </DropdownMenuItem>
                           </DropdownMenuContent>
@@ -551,10 +551,10 @@ export function TableViewPresetsDrawer({
                             <AvatarFallback className="bg-tertiary">
                               {view.createdByUser?.name
                                 ? view.createdByUser?.name
-                                    .split(" ")
-                                    .map((word) => word[0])
-                                    .slice(0, 2)
-                                    .concat("")
+                                  .split(" ")
+                                  .map((word) => word[0])
+                                  .slice(0, 2)
+                                  .concat("")
                                 : null}
                             </AvatarFallback>
                           </Avatar>

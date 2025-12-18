@@ -77,168 +77,168 @@ export const getProjectSettingsPages = ({
   showLLMConnectionsSettings: boolean;
   showProtectedLabelsSettings: boolean;
 }): ProjectSettingsPage[] => [
-  {
-    title: "General",
-    slug: "index",
-    cmdKKeywords: ["name", "id", "delete", "transfer", "ownership"],
-    content: (
-      <div className="flex flex-col gap-6">
-        <HostNameProject />
-        <RenameProject />
-        {showRetentionSettings && <ConfigureRetention />}
-        <div>
-          <Header title="Debug Information" />
-          <JSONView
-            title="Metadata"
-            json={{
-              project: {
-                name: project.name,
-                id: project.id,
-                ...project.metadata,
+    {
+      title: "General",
+      slug: "index",
+      cmdKKeywords: ["name", "id", "delete", "transfer", "ownership"],
+      content: (
+        <div className="flex flex-col gap-6">
+          <HostNameProject />
+          <RenameProject />
+          {showRetentionSettings && <ConfigureRetention />}
+          <div>
+            <Header title="Debug Information" />
+            <JSONView
+              title="Metadata"
+              json={{
+                project: {
+                  name: project.name,
+                  id: project.id,
+                  ...project.metadata,
+                },
+                org: {
+                  name: organization.name,
+                  id: organization.id,
+                  ...organization.metadata,
+                },
+                ...(env.NEXT_PUBLIC_LANGFUSE_CLOUD_REGION && {
+                  cloudRegion: env.NEXT_PUBLIC_LANGFUSE_CLOUD_REGION,
+                }),
+              }}
+            />
+          </div>
+          <SettingsDangerZone
+            items={[
+              {
+                title: "Transfer ownership",
+                description:
+                  "Transfer this project to another organization where you have the ability to create projects.",
+                button: <TransferProjectButton />,
               },
-              org: {
-                name: organization.name,
-                id: organization.id,
-                ...organization.metadata,
+              {
+                title: "Delete this project",
+                description:
+                  "Once you delete a project, there is no going back. Please be certain.",
+                button: <DeleteProjectButton />,
               },
-              ...(env.NEXT_PUBLIC_LANGFUSE_CLOUD_REGION && {
-                cloudRegion: env.NEXT_PUBLIC_LANGFUSE_CLOUD_REGION,
-              }),
-            }}
+            ]}
           />
         </div>
-        <SettingsDangerZone
-          items={[
-            {
-              title: "Transfer ownership",
-              description:
-                "Transfer this project to another organization where you have the ability to create projects.",
-              button: <TransferProjectButton />,
-            },
-            {
-              title: "Delete this project",
-              description:
-                "Once you delete a project, there is no going back. Please be certain.",
-              button: <DeleteProjectButton />,
-            },
-          ]}
-        />
-      </div>
-    ),
-  },
-  {
-    title: "API Keys",
-    slug: "api-keys",
-    cmdKKeywords: ["auth", "public key", "secret key"],
-    content: (
-      <div className="flex flex-col gap-6">
-        <ApiKeyList entityId={project.id} scope="project" />
-      </div>
-    ),
-  },
-  {
-    title: "LLM Connections",
-    slug: "llm-connections",
-    cmdKKeywords: [
-      "llm",
-      "provider",
-      "openai",
-      "anthropic",
-      "azure",
-      "playground",
-      "evaluation",
-      "endpoint",
-      "api",
-    ],
-    content: (
-      <div className="flex flex-col gap-6">
-        <LlmApiKeyList projectId={project.id} />
-      </div>
-    ),
-    show: showLLMConnectionsSettings,
-  },
-  {
-    title: "Models",
-    slug: "models",
-    cmdKKeywords: ["cost", "token"],
-    content: <ModelsSettings projectId={project.id} />,
-  },
-  {
-    title: "Protected Prompt Labels",
-    slug: "protected-prompt-labels",
-    cmdKKeywords: ["prompt", "label", "protect", "lock"],
-    content: <ProtectedLabelsSettings projectId={project.id} />,
-    show: showProtectedLabelsSettings,
-  },
-  {
-    title: "Scores Configs",
-    slug: "scores",
-    cmdKKeywords: ["config"],
-    content: <ScoreConfigSettings projectId={project.id} />,
-  },
-  {
-    title: "Members",
-    slug: "members",
-    cmdKKeywords: ["invite", "user"],
-    content: (
-      <div>
-        <Header title="Project Members" />
-        <MembersTable
-          orgId={organization.id}
-          project={{ id: project.id, name: project.name }}
-          showSettingsCard
-        />
+      ),
+    },
+    {
+      title: "API Keys",
+      slug: "api-keys",
+      cmdKKeywords: ["auth", "public key", "secret key"],
+      content: (
+        <div className="flex flex-col gap-6">
+          <ApiKeyList entityId={project.id} scope="project" />
+        </div>
+      ),
+    },
+    {
+      title: "LLM Connections",
+      slug: "llm-connections",
+      cmdKKeywords: [
+        "llm",
+        "provider",
+        "openai",
+        "anthropic",
+        "azure",
+        "playground",
+        "evaluation",
+        "endpoint",
+        "api",
+      ],
+      content: (
+        <div className="flex flex-col gap-6">
+          <LlmApiKeyList projectId={project.id} />
+        </div>
+      ),
+      show: showLLMConnectionsSettings,
+    },
+    {
+      title: "Models",
+      slug: "models",
+      cmdKKeywords: ["cost", "token"],
+      content: <ModelsSettings projectId={project.id} />,
+    },
+    {
+      title: "Protected Prompt Labels",
+      slug: "protected-prompt-labels",
+      cmdKKeywords: ["prompt", "label", "protect", "lock"],
+      content: <ProtectedLabelsSettings projectId={project.id} />,
+      show: showProtectedLabelsSettings,
+    },
+    {
+      title: "Scores Configs",
+      slug: "scores",
+      cmdKKeywords: ["config"],
+      content: <ScoreConfigSettings projectId={project.id} />,
+    },
+    {
+      title: "Members",
+      slug: "members",
+      cmdKKeywords: ["invite", "user"],
+      content: (
         <div>
-          <MembershipInvitesPage
+          <Header title="Project Members" />
+          <MembersTable
             orgId={organization.id}
-            projectId={project.id}
+            project={{ id: project.id, name: project.name }}
+            showSettingsCard
           />
+          <div>
+            <MembershipInvitesPage
+              orgId={organization.id}
+              projectId={project.id}
+            />
+          </div>
         </div>
-      </div>
-    ),
-  },
-  {
-    title: "Integrations",
-    slug: "integrations",
-    cmdKKeywords: ["posthog", "mixpanel", "analytics"],
-    content: <Integrations projectId={project.id} />,
-  },
-  {
-    title: "Exports",
-    slug: "exports",
-    cmdKKeywords: ["csv", "download", "json", "batch"],
-    content: <BatchExportsSettingsPage projectId={project.id} />,
-  },
-  {
-    title: "Batch Actions",
-    slug: "batch-actions",
-    cmdKKeywords: ["bulk", "batch", "action", "dataset", "delete"],
-    content: <BatchActionsSettingsPage projectId={project.id} />,
-  },
-  {
-    title: "Audit Logs",
-    slug: "audit-logs",
-    cmdKKeywords: ["trail"],
-    content: <AuditLogsSettingsPage projectId={project.id} />,
-  },
-  {
-    title: "Notifications",
-    slug: "notifications",
-    cmdKKeywords: ["inbox", "email", "mention", "alert"],
-    content: <NotificationSettings />,
-  },
-  {
-    title: "Billing",
-    slug: "billing",
-    href: `/organization/${organization.id}/settings/billing`,
-    show: showBillingSettings,
-  },
-  {
-    title: "Organization Settings",
-    slug: "organization",
-    href: `/organization/${organization.id}/settings`,
-  },
-];
+      ),
+    },
+    {
+      title: "Integrations",
+      slug: "integrations",
+      cmdKKeywords: ["posthog", "mixpanel", "analytics"],
+      content: <Integrations projectId={project.id} />,
+    },
+    {
+      title: "Exports",
+      slug: "exports",
+      cmdKKeywords: ["csv", "download", "json", "batch"],
+      content: <BatchExportsSettingsPage projectId={project.id} />,
+    },
+    {
+      title: "Batch Actions",
+      slug: "batch-actions",
+      cmdKKeywords: ["bulk", "batch", "action", "dataset", "delete"],
+      content: <BatchActionsSettingsPage projectId={project.id} />,
+    },
+    {
+      title: "Audit Logs",
+      slug: "audit-logs",
+      cmdKKeywords: ["trail"],
+      content: <AuditLogsSettingsPage projectId={project.id} />,
+    },
+    {
+      title: "Notifications",
+      slug: "notifications",
+      cmdKKeywords: ["inbox", "email", "mention", "alert"],
+      content: <NotificationSettings />,
+    },
+    {
+      title: "Billing",
+      slug: "billing",
+      href: `/organization/${organization.id}/settings/billing`,
+      show: showBillingSettings,
+    },
+    {
+      title: "Organization Settings",
+      slug: "organization",
+      href: `/organization/${organization.id}/settings`,
+    },
+  ];
 
 export default function SettingsPage() {
   const { project, organization } = useQueryProject();
@@ -280,7 +280,7 @@ const Integrations = (props: { projectId: string }) => {
           <PostHogLogo className="mb-4 w-40 text-foreground" />
           <p className="mb-4 text-sm text-primary">
             We have teamed up with PostHog (OSS product analytics) to make
-            Langfuse Events/Metrics available in your Posthog Dashboards.
+            Tedi Events/Metrics available in your Posthog Dashboards.
           </p>
           <div className="flex items-center gap-2">
             <ActionButton
@@ -304,7 +304,7 @@ const Integrations = (props: { projectId: string }) => {
         <Card className="p-3">
           <MixpanelLogo className="mb-4 w-20 text-foreground" />
           <p className="mb-4 text-sm text-primary">
-            Integrate with Mixpanel to sync your Langfuse traces, generations,
+            Integrate with Mixpanel to sync your Tedi traces, generations,
             and scores for advanced product analytics and insights.
           </p>
           <div className="flex items-center gap-2">
@@ -360,7 +360,7 @@ const Integrations = (props: { projectId: string }) => {
           </div>
           <p className="mb-4 text-sm text-primary">
             Connect a Slack workspace and create channel automations to receive
-            Langfuse alerts natively in Slack.
+            Tedi alerts natively in Slack.
           </p>
           <div className="flex items-center gap-2">
             <ActionButton

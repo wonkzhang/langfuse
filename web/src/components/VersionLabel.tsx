@@ -35,7 +35,7 @@ export const VersionLabel = ({ className }: { className?: string }) => {
       refetchOnMount: false,
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,
-      enabled: !isLangfuseCloud, // do not check for updates on Langfuse Cloud
+      enabled: !isLangfuseCloud, // do not check for updates on Tedi Cloud
       throwOnError: false, // do not render default error message
     },
   );
@@ -44,7 +44,7 @@ export const VersionLabel = ({ className }: { className?: string }) => {
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
-    enabled: !isLangfuseCloud, // do not check for updates on Langfuse Cloud
+    enabled: !isLangfuseCloud, // do not check for updates on Tedi Cloud
     throwOnError: false, // do not render default error message
   });
 
@@ -53,18 +53,18 @@ export const VersionLabel = ({ className }: { className?: string }) => {
   const selfHostedPlanLabel = !isLangfuseCloud
     ? plan && isSelfHostedPlan(plan)
       ? // self-host plan
-        // TODO: clean up to use planLabels in packages/shared/src/features/entitlements/plans.ts
-        {
-          short: plan === "self-hosted:pro" ? "Pro" : "EE",
-          long: planLabels[plan],
-        }
+      // TODO: clean up to use planLabels in packages/shared/src/features/entitlements/plans.ts
+      {
+        short: plan === "self-hosted:pro" ? "Pro" : "EE",
+        long: planLabels[plan],
+      }
       : // no plan, oss
-        {
-          short: "OSS",
-          long: "Open Source",
-        }
+      {
+        short: "OSS",
+        long: "Open Source",
+      }
     : // null on cloud
-      null;
+    null;
 
   const showBackgroundMigrationStatus =
     !isLangfuseCloud &&

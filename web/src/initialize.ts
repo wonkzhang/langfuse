@@ -24,9 +24,9 @@ if (!env.LANGFUSE_INIT_ORG_ID) {
 
   if (setInitVars.length > 0) {
     logger.warn(
-      `[Langfuse Init] LANGFUSE_INIT_ORG_ID is not set but other LANGFUSE_INIT_* variables are configured. ` +
-        `The following variables will be ignored: ${setInitVars.join(", ")}. ` +
-        `Set LANGFUSE_INIT_ORG_ID to enable initialization.`,
+      `[Tedi Init] LANGFUSE_INIT_ORG_ID is not set but other LANGFUSE_INIT_* variables are configured. ` +
+      `The following variables will be ignored: ${setInitVars.join(", ")}. ` +
+      `Set LANGFUSE_INIT_ORG_ID to enable initialization.`,
     );
   }
 }
@@ -35,8 +35,8 @@ if (!env.LANGFUSE_INIT_ORG_ID) {
 if (env.LANGFUSE_INIT_ORG_ID) {
   const cloudConfig = env.LANGFUSE_INIT_ORG_CLOUD_PLAN
     ? CloudConfigSchema.parse({
-        plan: env.LANGFUSE_INIT_ORG_CLOUD_PLAN,
-      })
+      plan: env.LANGFUSE_INIT_ORG_CLOUD_PLAN,
+    })
     : undefined;
 
   const org = await prisma.organization.upsert({
@@ -61,16 +61,16 @@ if (env.LANGFUSE_INIT_ORG_ID) {
       ? "LANGFUSE_INIT_PROJECT_SECRET_KEY"
       : "LANGFUSE_INIT_PROJECT_PUBLIC_KEY";
     logger.warn(
-      `[Langfuse Init] Partial API key configuration: ${missingKey} is not set. ` +
-        `Both LANGFUSE_INIT_PROJECT_PUBLIC_KEY and LANGFUSE_INIT_PROJECT_SECRET_KEY must be set to create API keys.`,
+      `[Tedi Init] Partial API key configuration: ${missingKey} is not set. ` +
+      `Both LANGFUSE_INIT_PROJECT_PUBLIC_KEY and LANGFUSE_INIT_PROJECT_SECRET_KEY must be set to create API keys.`,
     );
   }
 
   // API keys without project ID
   if ((hasPublicKey || hasSecretKey) && !env.LANGFUSE_INIT_PROJECT_ID) {
     logger.warn(
-      `[Langfuse Init] LANGFUSE_INIT_PROJECT_ID is not set but API key variables are configured. ` +
-        `API keys will not be created. Set LANGFUSE_INIT_PROJECT_ID to enable API key creation.`,
+      `[Tedi Init] LANGFUSE_INIT_PROJECT_ID is not set but API key variables are configured. ` +
+      `API keys will not be created. Set LANGFUSE_INIT_PROJECT_ID to enable API key creation.`,
     );
   }
 
@@ -80,8 +80,8 @@ if (env.LANGFUSE_INIT_ORG_ID) {
       ? "LANGFUSE_INIT_USER_PASSWORD"
       : "LANGFUSE_INIT_USER_EMAIL";
     logger.warn(
-      `[Langfuse Init] Partial user configuration: ${missingVar} is not set. ` +
-        `Both LANGFUSE_INIT_USER_EMAIL and LANGFUSE_INIT_USER_PASSWORD must be set to create a user.`,
+      `[Tedi Init] Partial user configuration: ${missingVar} is not set. ` +
+      `Both LANGFUSE_INIT_USER_EMAIL and LANGFUSE_INIT_USER_PASSWORD must be set to create a user.`,
     );
   }
 

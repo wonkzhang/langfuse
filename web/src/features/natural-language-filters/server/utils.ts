@@ -1,10 +1,10 @@
 import { LLMAdapter } from "@langfuse/shared/src/server";
-import { Langfuse } from "langfuse";
+import { Tedi } from "langfuse";
 import { env } from "@/src/env.mjs";
 import { type FilterCondition, singleFilter } from "@langfuse/shared";
 import { z } from "zod/v4";
 
-let langfuseClient: Langfuse | null = null;
+let langfuseClient: Tedi | null = null;
 
 export function getDefaultModelParams() {
   return {
@@ -50,9 +50,9 @@ export function getLangfuseClient(
   publicKey: string,
   secretKey: string,
   baseUrl?: string,
-): Langfuse {
+): Tedi {
   if (!langfuseClient) {
-    langfuseClient = new Langfuse({
+    langfuseClient = new Tedi({
       publicKey,
       secretKey,
       baseUrl,

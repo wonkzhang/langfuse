@@ -46,22 +46,22 @@ import { PricingSection } from "./pricing-tiers/PricingSection";
 
 type UpsertModelDialogProps =
   | {
-      action: "create";
-      children: React.ReactNode;
-      projectId: string;
-      prefilledModelData?: {
-        modelName?: string;
-        prices?: Record<string, number>;
-      };
-      className?: string;
-    }
-  | {
-      action: "edit" | "clone";
-      children: React.ReactNode;
-      projectId: string;
-      modelData: GetModelResult;
-      className?: string;
+    action: "create";
+    children: React.ReactNode;
+    projectId: string;
+    prefilledModelData?: {
+      modelName?: string;
+      prices?: Record<string, number>;
     };
+    className?: string;
+  }
+  | {
+    action: "edit" | "clone";
+    children: React.ReactNode;
+    projectId: string;
+    modelData: GetModelResult;
+    className?: string;
+  };
 
 export const UpsertModelFormDialog = (({
   children,
@@ -238,7 +238,7 @@ export const UpsertModelFormDialog = (({
         tokenizerId: values.tokenizerId,
         tokenizerConfig:
           values.tokenizerConfig &&
-          typeof JSON.parse(values.tokenizerConfig) === "object"
+            typeof JSON.parse(values.tokenizerConfig) === "object"
             ? (JSON.parse(values.tokenizerConfig) as Record<string, number>)
             : undefined,
       })
@@ -391,7 +391,7 @@ export const UpsertModelFormDialog = (({
                       </SelectContent>
                     </Select>
                     <FormDescription>
-                      Optionally, Langfuse can tokenize the input and output of
+                      Optionally, Tedi can tokenize the input and output of
                       a generation if no unit counts are ingested. This is
                       useful for e.g. streamed OpenAI completions. For details
                       on the supported tokenizers, see the{" "}

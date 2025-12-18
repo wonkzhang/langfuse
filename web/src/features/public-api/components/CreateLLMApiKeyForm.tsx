@@ -229,45 +229,45 @@ export function CreateLLMApiKeyForm({
     defaultValues:
       mode === "update" && existingKey
         ? {
-            adapter: existingKey.adapter as LLMAdapter,
-            provider: existingKey.provider,
-            secretKey:
-              existingKey.adapter === LLMAdapter.VertexAI &&
+          adapter: existingKey.adapter as LLMAdapter,
+          provider: existingKey.provider,
+          secretKey:
+            existingKey.adapter === LLMAdapter.VertexAI &&
               existingKey.displaySecretKey === "Default GCP credentials (ADC)"
-                ? VERTEXAI_USE_DEFAULT_CREDENTIALS
-                : "",
-            baseURL:
-              existingKey.baseURL ??
-              getCustomizedBaseURL(existingKey.adapter as LLMAdapter),
-            withDefaultModels: existingKey.withDefaultModels,
-            customModels: existingKey.customModels.map((value) => ({ value })),
-            extraHeaders:
-              existingKey.extraHeaderKeys?.map((key) => ({ key, value: "" })) ??
-              [],
-            vertexAILocation:
-              existingKey.adapter === LLMAdapter.VertexAI && existingKey.config
-                ? ((existingKey.config as VertexAIConfig).location ?? "")
-                : "",
-            awsRegion:
-              existingKey.adapter === LLMAdapter.Bedrock && existingKey.config
-                ? ((existingKey.config as BedrockConfig).region ?? "")
-                : "",
-            awsAccessKeyId: "",
-            awsSecretAccessKey: "",
-          }
+              ? VERTEXAI_USE_DEFAULT_CREDENTIALS
+              : "",
+          baseURL:
+            existingKey.baseURL ??
+            getCustomizedBaseURL(existingKey.adapter as LLMAdapter),
+          withDefaultModels: existingKey.withDefaultModels,
+          customModels: existingKey.customModels.map((value) => ({ value })),
+          extraHeaders:
+            existingKey.extraHeaderKeys?.map((key) => ({ key, value: "" })) ??
+            [],
+          vertexAILocation:
+            existingKey.adapter === LLMAdapter.VertexAI && existingKey.config
+              ? ((existingKey.config as VertexAIConfig).location ?? "")
+              : "",
+          awsRegion:
+            existingKey.adapter === LLMAdapter.Bedrock && existingKey.config
+              ? ((existingKey.config as BedrockConfig).region ?? "")
+              : "",
+          awsAccessKeyId: "",
+          awsSecretAccessKey: "",
+        }
         : {
-            adapter: defaultAdapter,
-            provider: "",
-            secretKey: "",
-            baseURL: getCustomizedBaseURL(defaultAdapter),
-            withDefaultModels: true,
-            customModels: [],
-            extraHeaders: [],
-            vertexAILocation: "",
-            awsRegion: "",
-            awsAccessKeyId: "",
-            awsSecretAccessKey: "",
-          },
+          adapter: defaultAdapter,
+          provider: "",
+          secretKey: "",
+          baseURL: getCustomizedBaseURL(defaultAdapter),
+          withDefaultModels: true,
+          customModels: [],
+          extraHeaders: [],
+          vertexAILocation: "",
+          awsRegion: "",
+          awsAccessKeyId: "",
+          awsSecretAccessKey: "",
+        },
   });
 
   const currentAdapter = form.watch("adapter");
@@ -370,8 +370,8 @@ export function CreateLLMApiKeyForm({
                 {...form.register(`extraHeaders.${index}.value`)}
                 placeholder={
                   mode === "update" &&
-                  existingKey?.extraHeaderKeys &&
-                  existingKey.extraHeaderKeys[index]
+                    existingKey?.extraHeaderKeys &&
+                    existingKey.extraHeaderKeys[index]
                     ? "***"
                     : "Header value"
                 }
@@ -494,12 +494,12 @@ export function CreateLLMApiKeyForm({
     const extraHeaders =
       values.extraHeaders.length > 0
         ? values.extraHeaders.reduce(
-            (acc, header) => {
-              acc[header.key] = header.value ?? "";
-              return acc;
-            },
-            {} as Record<string, string>,
-          )
+          (acc, header) => {
+            acc[header.key] = header.value ?? "";
+            return acc;
+          },
+          {} as Record<string, string>,
+        )
         : undefined;
 
     const newLlmApiKey = {
@@ -605,7 +605,7 @@ export function CreateLLMApiKeyForm({
               <FormItem>
                 <FormLabel>Provider name</FormLabel>
                 <FormDescription>
-                  Key to identify the connection within Langfuse. Cannot contain
+                  Key to identify the connection within Tedi. Cannot contain
                   colons.
                 </FormDescription>
                 <FormControl>
@@ -803,24 +803,24 @@ export function CreateLLMApiKeyForm({
               {/* Service Account Key - hidden when ADC is enabled */}
               {(isLangfuseCloud ||
                 form.watch("secretKey") !==
-                  VERTEXAI_USE_DEFAULT_CREDENTIALS) && (
-                <FormField
-                  control={form.control}
-                  name="secretKey"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>GCP Service Account Key (JSON)</FormLabel>
-                      <FormDescription>
-                        {isLangfuseCloud
-                          ? "Your API keys are stored encrypted on our servers."
-                          : "Your API keys are stored encrypted in your database."}
-                      </FormDescription>
-                      <FormDescription className="text-dark-yellow">
-                        Paste your GCP service account JSON key here. The
-                        service account must have `Vertex AI User` role
-                        permissions. Example JSON:
-                        <pre className="text-xs">
-                          {`{
+                VERTEXAI_USE_DEFAULT_CREDENTIALS) && (
+                  <FormField
+                    control={form.control}
+                    name="secretKey"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>GCP Service Account Key (JSON)</FormLabel>
+                        <FormDescription>
+                          {isLangfuseCloud
+                            ? "Your API keys are stored encrypted on our servers."
+                            : "Your API keys are stored encrypted in your database."}
+                        </FormDescription>
+                        <FormDescription className="text-dark-yellow">
+                          Paste your GCP service account JSON key here. The
+                          service account must have `Vertex AI User` role
+                          permissions. Example JSON:
+                          <pre className="text-xs">
+                            {`{
   "type": "service_account",
   "project_id": "<project_id>",
   "private_key_id": "<private_key_id>",
@@ -832,31 +832,31 @@ export function CreateLLMApiKeyForm({
   "auth_provider_x509_cert_url": "<auth_provider_x509_cert_url>",
   "client_x509_cert_url": "<client_x509_cert_url>",
 }`}
-                        </pre>
-                      </FormDescription>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          placeholder={
-                            mode === "update"
-                              ? existingKey?.displaySecretKey
-                              : '{"type": "service_account", ...}'
-                          }
-                          autoComplete="off"
-                          spellCheck="false"
-                          autoCapitalize="off"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              )}
+                          </pre>
+                        </FormDescription>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            placeholder={
+                              mode === "update"
+                                ? existingKey?.displaySecretKey
+                                : '{"type": "service_account", ...}'
+                            }
+                            autoComplete="off"
+                            spellCheck="false"
+                            autoCapitalize="off"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )}
 
               {/* ADC info box for self-hosted */}
               {!isLangfuseCloud &&
                 form.watch("secretKey") ===
-                  VERTEXAI_USE_DEFAULT_CREDENTIALS && (
+                VERTEXAI_USE_DEFAULT_CREDENTIALS && (
                   <div className="space-y-2 border-l-2 border-blue-200 pl-4 text-sm text-muted-foreground">
                     <p>
                       <strong>Application Default Credentials (ADC):</strong>{" "}
@@ -1041,7 +1041,7 @@ export function CreateLLMApiKeyForm({
                         <FormLabel>Enable default models</FormLabel>
                         <FormDescription>
                           Default models for the selected adapter will be
-                          available in Langfuse features.
+                          available in Tedi features.
                         </FormDescription>
                       </span>
 

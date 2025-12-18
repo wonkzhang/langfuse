@@ -347,17 +347,17 @@ export default function EvalsTemplateTable({
             ? { isLoading: true, isError: false }
             : templates.isError
               ? {
-                  isLoading: false,
-                  isError: true,
-                  error: templates.error.message,
-                }
+                isLoading: false,
+                isError: true,
+                error: templates.error.message,
+              }
               : {
-                  isLoading: false,
-                  isError: false,
-                  data: safeExtract(templates.data, "templates", []).map((t) =>
-                    convertToTableRow(t),
-                  ),
-                }
+                isLoading: false,
+                isError: false,
+                data: safeExtract(templates.data, "templates", []).map((t) =>
+                  convertToTableRow(t),
+                ),
+              }
         }
         pagination={{
           totalCount,
@@ -415,24 +415,24 @@ export default function EvalsTemplateTable({
             existingEvalTemplate={
               cloneTemplate.data
                 ? {
-                    name: `${cloneTemplate.data.name} (project-level)`,
-                    prompt: cloneTemplate.data.prompt,
-                    vars: cloneTemplate.data.vars,
-                    outputSchema: cloneTemplate.data.outputSchema as {
-                      score: string;
-                      reasoning: string;
-                    },
-                    provider: cloneTemplate.data.provider,
-                    model: cloneTemplate.data.model,
-                    modelParams: cloneTemplate.data.modelParams as any,
-                    partner: cloneTemplate.data.partner,
-                    projectId,
-                  }
+                  name: `${cloneTemplate.data.name} (project-level)`,
+                  prompt: cloneTemplate.data.prompt,
+                  vars: cloneTemplate.data.vars,
+                  outputSchema: cloneTemplate.data.outputSchema as {
+                    score: string;
+                    reasoning: string;
+                  },
+                  provider: cloneTemplate.data.provider,
+                  model: cloneTemplate.data.model,
+                  modelParams: cloneTemplate.data.modelParams as any,
+                  partner: cloneTemplate.data.partner,
+                  projectId,
+                }
                 : undefined
             }
             cloneSourceId={cloneTemplateId}
             onBeforeSubmit={(template) => {
-              // Only show reference dialog for Langfuse maintained templates
+              // Only show reference dialog for Tedi maintained templates
               if (
                 cloneTemplateId &&
                 cloneTemplate.data &&
@@ -478,7 +478,7 @@ export default function EvalsTemplateTable({
             <DialogTitle>Update running evaluators?</DialogTitle>
             <DialogDescription>
               Do you want all running evaluators attached to the original
-              Langfuse evaluator to reference your new project-level version?
+              Tedi evaluator to reference your new project-level version?
               <br />
               <br />
               <strong>Warning:</strong> This might break workflows if you have

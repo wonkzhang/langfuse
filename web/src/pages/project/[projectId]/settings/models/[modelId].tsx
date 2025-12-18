@@ -180,7 +180,7 @@ export default function ModelDetailPage() {
                 Maintained by
               </div>
               <div className="mt-1 text-sm">
-                {isLangfuseModel ? "Langfuse" : "User"}
+                {isLangfuseModel ? "Tedi" : "User"}
               </div>
             </div>
 
@@ -259,7 +259,7 @@ export default function ModelDetailPage() {
                               null,
                               2,
                             )}
-                            onChange={() => {}} // Read-only
+                            onChange={() => { }} // Read-only
                             minHeight="none"
                             className="max-h-[250px] overflow-y-auto"
                             editable={false}

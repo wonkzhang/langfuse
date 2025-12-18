@@ -158,22 +158,22 @@ export default function ObservationsEventsTable({
     // Default type filter - exclude SPAN and EVENT types
     !viewId
       ? [
-          {
-            column: "type",
-            type: "stringOptions",
-            operator: "any of",
-            value: [
-              "GENERATION",
-              "AGENT",
-              "TOOL",
-              "CHAIN",
-              "RETRIEVER",
-              "EVALUATOR",
-              "EMBEDDING",
-              "GUARDRAIL",
-            ],
-          },
-        ]
+        {
+          column: "type",
+          type: "stringOptions",
+          operator: "any of",
+          value: [
+            "GENERATION",
+            "AGENT",
+            "TOOL",
+            "CHAIN",
+            "RETRIEVER",
+            "EVALUATOR",
+            "EMBEDDING",
+            "GUARDRAIL",
+          ],
+        },
+      ]
       : [],
     "generations", // Use "generations" table name for compatibility
     projectId,
@@ -193,23 +193,23 @@ export default function ObservationsEventsTable({
 
   const dateRangeFilter: FilterState = dateRange
     ? [
-        {
-          column: "startTime",
-          type: "datetime",
-          operator: ">=",
-          value: dateRange.from,
-        },
-        ...(dateRange.to
-          ? [
-              {
-                column: "startTime",
-                type: "datetime",
-                operator: "<=",
-                value: dateRange.to,
-              } as const,
-            ]
-          : []),
-      ]
+      {
+        column: "startTime",
+        type: "datetime",
+        operator: ">=",
+        value: dateRange.from,
+      },
+      ...(dateRange.to
+        ? [
+          {
+            column: "startTime",
+            type: "datetime",
+            operator: "<=",
+            value: dateRange.to,
+          } as const,
+        ]
+        : []),
+    ]
     : [];
 
   const oldFilterState = inputFilterState.concat(dateRangeFilter);
@@ -260,9 +260,9 @@ export default function ObservationsEventsTable({
           id: o.id,
           params: o.traceTimestamp
             ? {
-                timestamp: o.traceTimestamp.toISOString(),
-                traceId: o.traceId || "",
-              }
+              timestamp: o.traceTimestamp.toISOString(),
+              traceId: o.traceId || "",
+            }
             : undefined,
         })),
       );
@@ -645,14 +645,14 @@ export default function ObservationsEventsTable({
               prices:
                 Object.keys(row.original.usageDetails).length > 0
                   ? Object.keys(row.original.usageDetails)
-                      .filter((key) => key != "total")
-                      .reduce(
-                        (acc, key) => {
-                          acc[key] = 0.000001;
-                          return acc;
-                        },
-                        {} as Record<string, number>,
-                      )
+                    .filter((key) => key != "total")
+                    .reduce(
+                      (acc, key) => {
+                        acc[key] = 0.000001;
+                        return acc;
+                      },
+                      {} as Record<string, number>,
+                    )
                   : undefined,
             }}
             className="cursor-pointer"
@@ -670,7 +670,7 @@ export default function ObservationsEventsTable({
       id: "promptName",
       header: getEventsColumnName("promptName"),
       headerTooltip: {
-        description: "Link to prompt version in Langfuse prompt management.",
+        description: "Link to prompt version in Tedi prompt management.",
         href: "https://langfuse.com/docs/prompt-management/get-started",
       },
       size: 200,
@@ -858,58 +858,58 @@ export default function ObservationsEventsTable({
   const rows: EventsTableRow[] = useMemo(() => {
     return observations.isSuccess
       ? observations.data.observations.map((observation) => {
-          return {
-            id: observation.id,
-            traceId: observation.traceId ?? undefined,
-            type: observation.type ?? undefined,
-            spanId: observation.id, // span_id maps to id
-            parentSpanId: observation.parentObservationId ?? undefined,
-            startTime: observation.startTime,
-            endTime: observation.endTime ?? undefined,
-            timeToFirstToken: observation.timeToFirstToken ?? undefined,
-            scores: {}, // TODO: scores not included in FullObservation type
-            latency: observation.latency ?? undefined,
-            totalCost: observation.totalCost ?? undefined,
-            cost: {
-              inputCost: observation.inputCost ?? undefined,
-              outputCost: observation.outputCost ?? undefined,
-            },
-            name: observation.name ?? undefined,
-            version: observation.version ?? "",
-            providedModelName: observation.model ?? "",
-            modelId: observation.internalModelId ?? undefined,
-            level: observation.level,
-            statusMessage: observation.statusMessage ?? undefined,
-            usage: {
-              inputUsage: observation.inputUsage,
-              outputUsage: observation.outputUsage,
-              totalUsage: observation.totalUsage,
-            },
-            promptId: observation.promptId ?? undefined,
-            promptName: observation.promptName ?? undefined,
-            promptVersion: observation.promptVersion?.toString() ?? undefined,
-            traceTags: observation.traceTags ?? undefined,
-            timestamp: observation.traceTimestamp ?? undefined,
-            usageDetails: observation.usageDetails ?? {},
-            costDetails: observation.costDetails ?? {},
-            usagePricingTierName: observation.usagePricingTierName ?? undefined,
-            environment: observation.environment ?? undefined,
-            input: observation.input
-              ? typeof observation.input === "string"
-                ? observation.input
-                : JSON.stringify(observation.input)
-              : undefined,
-            output: observation.output
-              ? typeof observation.output === "string"
-                ? observation.output
-                : JSON.stringify(observation.output)
-              : undefined,
-            metadata: observation.metadata,
-            userId: observation.userId ?? undefined,
-            sessionId: observation.sessionId ?? undefined,
-            completionStartTime: observation.completionStartTime ?? undefined,
-          };
-        })
+        return {
+          id: observation.id,
+          traceId: observation.traceId ?? undefined,
+          type: observation.type ?? undefined,
+          spanId: observation.id, // span_id maps to id
+          parentSpanId: observation.parentObservationId ?? undefined,
+          startTime: observation.startTime,
+          endTime: observation.endTime ?? undefined,
+          timeToFirstToken: observation.timeToFirstToken ?? undefined,
+          scores: {}, // TODO: scores not included in FullObservation type
+          latency: observation.latency ?? undefined,
+          totalCost: observation.totalCost ?? undefined,
+          cost: {
+            inputCost: observation.inputCost ?? undefined,
+            outputCost: observation.outputCost ?? undefined,
+          },
+          name: observation.name ?? undefined,
+          version: observation.version ?? "",
+          providedModelName: observation.model ?? "",
+          modelId: observation.internalModelId ?? undefined,
+          level: observation.level,
+          statusMessage: observation.statusMessage ?? undefined,
+          usage: {
+            inputUsage: observation.inputUsage,
+            outputUsage: observation.outputUsage,
+            totalUsage: observation.totalUsage,
+          },
+          promptId: observation.promptId ?? undefined,
+          promptName: observation.promptName ?? undefined,
+          promptVersion: observation.promptVersion?.toString() ?? undefined,
+          traceTags: observation.traceTags ?? undefined,
+          timestamp: observation.traceTimestamp ?? undefined,
+          usageDetails: observation.usageDetails ?? {},
+          costDetails: observation.costDetails ?? {},
+          usagePricingTierName: observation.usagePricingTierName ?? undefined,
+          environment: observation.environment ?? undefined,
+          input: observation.input
+            ? typeof observation.input === "string"
+              ? observation.input
+              : JSON.stringify(observation.input)
+            : undefined,
+          output: observation.output
+            ? typeof observation.output === "string"
+              ? observation.output
+              : JSON.stringify(observation.output)
+            : undefined,
+          metadata: observation.metadata,
+          userId: observation.userId ?? undefined,
+          sessionId: observation.sessionId ?? undefined,
+          completionStartTime: observation.completionStartTime ?? undefined,
+        };
+      })
       : [];
   }, [observations]);
 
@@ -997,15 +997,15 @@ export default function ObservationsEventsTable({
                   ? { isLoading: true, isError: false }
                   : observations.error
                     ? {
-                        isLoading: false,
-                        isError: true,
-                        error: observations.error.message,
-                      }
+                      isLoading: false,
+                      isError: true,
+                      error: observations.error.message,
+                    }
                     : {
-                        isLoading: false,
-                        isError: false,
-                        data: rows,
-                      }
+                      isLoading: false,
+                      isError: false,
+                      data: rows,
+                    }
               }
               pagination={{
                 totalCount,
@@ -1013,9 +1013,9 @@ export default function ObservationsEventsTable({
                   const newState =
                     typeof updater === "function"
                       ? updater({
-                          pageIndex: paginationState.page - 1,
-                          pageSize: paginationState.limit,
-                        })
+                        pageIndex: paginationState.page - 1,
+                        pageSize: paginationState.limit,
+                      })
                       : updater;
                   setPaginationState({
                     page: newState.pageIndex + 1,

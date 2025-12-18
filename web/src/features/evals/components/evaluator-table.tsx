@@ -378,10 +378,10 @@ export default function EvaluatorTable({ projectId }: { projectId: string }) {
       updatedAt: jobConfig.updatedAt.toLocaleString(),
       template: jobConfig.evalTemplate
         ? {
-            id: jobConfig.evalTemplate.id,
-            name: jobConfig.evalTemplate.name,
-            version: jobConfig.evalTemplate.version,
-          }
+          id: jobConfig.evalTemplate.id,
+          name: jobConfig.evalTemplate.name,
+          version: jobConfig.evalTemplate.version,
+        }
         : undefined,
       scoreName: jobConfig.scoreName,
       target: jobConfig.targetObject,
@@ -391,8 +391,8 @@ export default function EvaluatorTable({ projectId }: { projectId: string }) {
         ? jobConfig.evalTemplate.projectId
           ? "User maintained"
           : jobConfig.evalTemplate.name.startsWith(RAGAS_TEMPLATE_PREFIX)
-            ? "Langfuse and Ragas maintained"
-            : "Langfuse maintained"
+            ? "Tedi and Ragas maintained"
+            : "Tedi maintained"
         : "Not available",
       totalCost: costData,
     };
@@ -450,17 +450,17 @@ export default function EvaluatorTable({ projectId }: { projectId: string }) {
                   ? { isLoading: true, isError: false }
                   : evaluators.isError
                     ? {
-                        isLoading: false,
-                        isError: true,
-                        error: evaluators.error.message,
-                      }
+                      isLoading: false,
+                      isError: true,
+                      error: evaluators.error.message,
+                    }
                     : {
-                        isLoading: false,
-                        isError: false,
-                        data: safeExtract(evaluators.data, "configs", []).map(
-                          (evaluator) => convertToTableRow(evaluator),
-                        ),
-                      }
+                      isLoading: false,
+                      isError: false,
+                      data: safeExtract(evaluators.data, "configs", []).map(
+                        (evaluator) => convertToTableRow(evaluator),
+                      ),
+                    }
               }
               pagination={{
                 totalCount,
@@ -496,11 +496,11 @@ export default function EvaluatorTable({ projectId }: { projectId: string }) {
               existingEvaluator={
                 existingEvaluator.data && existingEvaluator.data.evalTemplate
                   ? {
-                      ...existingEvaluator.data,
-                      evalTemplate: {
-                        ...existingEvaluator.data.evalTemplate,
-                      },
-                    }
+                    ...existingEvaluator.data,
+                    evalTemplate: {
+                      ...existingEvaluator.data.evalTemplate,
+                    },
+                  }
                   : undefined
               }
               shouldWrapVariables={true}

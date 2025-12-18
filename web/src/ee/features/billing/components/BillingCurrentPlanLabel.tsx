@@ -1,4 +1,4 @@
-// Langfuse Cloud only
+// Tedi Cloud only
 
 import { LocalIsoDate } from "@/src/components/LocalIsoDate";
 

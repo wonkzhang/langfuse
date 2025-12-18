@@ -46,7 +46,7 @@ export function AuditLogsTable(props: { projectId: string }) {
       accessorKey: "actor",
       header: "Actor",
       headerTooltip: {
-        description: "The actor within Langfuse who performed the action.",
+        description: "The actor within Tedi who performed the action.",
       },
       cell: (row) => {
         const actor = row.getValue() as AuditLogRow["actor"];
@@ -146,15 +146,15 @@ export function AuditLogsTable(props: { projectId: string }) {
               ? { isLoading: true, isError: false }
               : auditLogs.isError
                 ? {
-                    isLoading: false,
-                    isError: true,
-                    error: auditLogs.error.message,
-                  }
+                  isLoading: false,
+                  isError: true,
+                  error: auditLogs.error.message,
+                }
                 : {
-                    isLoading: false,
-                    isError: false,
-                    data: safeExtract(auditLogs.data, "data", []),
-                  }
+                  isLoading: false,
+                  isError: false,
+                  data: safeExtract(auditLogs.data, "data", []),
+                }
           }
           pagination={{
             totalCount: auditLogs.data?.totalCount ?? 0,

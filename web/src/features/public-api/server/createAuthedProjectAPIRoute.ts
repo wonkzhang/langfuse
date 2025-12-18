@@ -113,8 +113,8 @@ async function verifyBasicAuth(authHeader: string | undefined): Promise<
  */
 async function verifyAdminApiKeyAuth(req: NextApiRequest): Promise<
   | (AuthHeaderValidVerificationResult & {
-      scope: { projectId: string; accessLevel: "project" };
-    })
+    scope: { projectId: string; accessLevel: "project" };
+  })
   | null
 > {
   const authHeader = req.headers.authorization;
@@ -124,11 +124,11 @@ async function verifyAdminApiKeyAuth(req: NextApiRequest): Promise<
   // If not attempting admin auth, return null to proceed with regular auth
   if (!authHeader?.startsWith("Bearer ") || !adminApiKeyHeader) return null;
 
-  // Verify this is a self-hosted instance (not Langfuse Cloud)
+  // Verify this is a self-hosted instance (not Tedi Cloud)
   if (env.NEXT_PUBLIC_LANGFUSE_CLOUD_REGION) {
     throw {
       status: 403,
-      message: "Admin API key auth is not available on Langfuse Cloud",
+      message: "Admin API key auth is not available on Tedi Cloud",
     };
   }
 
