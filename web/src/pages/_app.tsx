@@ -1,4 +1,5 @@
 import { type AppType } from "next/app";
+import App from "next/app";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { setUser } from "@sentry/nextjs";
@@ -123,6 +124,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const { messages } = pageProps as { messages?: Record<string, string> | null };
+
   return (
     <QueryParamProvider adapter={NextAdapterPages}>
       <TooltipProvider>
@@ -143,7 +146,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
                   >
                     <ScoreCacheProvider>
                       <SupportDrawerProvider defaultOpen={false}>
-                        <AppLayout>
+                        <AppLayout messages={messages ?? null}>
                           <Component {...pageProps} />
                           <UserTracking />
                         </AppLayout>
@@ -162,6 +165,53 @@ const MyApp: AppType<{ session: Session | null }> = ({
 };
 
 export default api.withTRPC(MyApp);
+
+// Server-side loader: read all JSON files under `web/public/locales/{locale}`
+// and merge them into a single `messages` object attached to pageProps.
+// This ensures `pageProps.messages` is populated for pages/layouts that
+// expect localization during SSR without requiring each page to implement
+// their own `getServerSideProps`.
+(MyApp as any).getInitialProps = async (appContext: any) => {
+  // Get default app props (calls page-level getInitialProps/getServerSideProps)
+  const appProps = await App.getInitialProps(appContext);
+
+  const locale = appContext.ctx?.locale || "zh-CN";
+  try {
+    const fs = await import("fs/promises");
+    const path = await import("path");
+    const localeDir = path.join(process.cwd(), "web", "public", "locales", locale);
+    const files = await fs.readdir(localeDir);
+    const messages: Record<string, string> = {};
+    for (const file of files) {
+      if (!file.endsWith(".json")) continue;
+      try {
+        const content = await fs.readFile(path.join(localeDir, file), "utf-8");
+        const parsed = JSON.parse(content) as Record<string, string>;
+        Object.assign(messages, parsed);
+      } catch (e) {
+        // Ignore malformed files but log for diagnostics
+        // eslint-disable-next-line no-console
+        console.error(`Failed to read/parse locale file ${file}:`, e);
+      }
+    }
+
+    return {
+      ...appProps,
+      pageProps: {
+        ...appProps.pageProps,
+        messages,
+      },
+    };
+  } catch (e: unknown) {
+    // If locale dir doesn't exist or reading fails, fall back to original appProps
+    if (e instanceof Error) {
+      console.error("Failed to load locale files for MyApp.getInitialProps:", e.message);
+    } else {
+      console.error("Failed to load locale files for MyApp.getInitialProps:", e);
+    }
+    return appProps;
+  }
+};
 
 function UserTracking() {
   const session = useSession();

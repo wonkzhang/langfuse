@@ -37,7 +37,8 @@ import { useLayoutMetadata } from "./hooks/useLayoutMetadata";
  * - Project access
  * - User permissions
  */
-export function AppLayout(props: PropsWithChildren) {
+export function AppLayout(props: PropsWithChildren<{ messages: Record<string, string> | null }>) {
+  const { messages } = props as PropsWithChildren<{ messages: Record<string, string> | null }>;
   const router = useRouter();
   const session = useAuthSession();
   const { organization } = useQueryProjectOrOrganization();
@@ -136,6 +137,7 @@ export function AppLayout(props: PropsWithChildren) {
       navigation={navigation}
       metadata={metadata}
       onSignOut={handleSignOut}
+      messages={messages}
     >
       {props.children}
     </AuthenticatedLayout>

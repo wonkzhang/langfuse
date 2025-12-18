@@ -41,7 +41,9 @@ type AuthenticatedLayoutProps = PropsWithChildren<{
     appleTouchIconPath: string;
   };
   onSignOut: () => void;
+  messages: Record<string, string> | null;
 }>;
+
 
 /**
  * Full authenticated layout with all features:
@@ -58,6 +60,7 @@ export function AuthenticatedLayout({
   navigation,
   metadata,
   onSignOut,
+  messages,
 }: AuthenticatedLayoutProps) {
   // Safe assertion: AuthenticatedLayout is only rendered after auth checks pass
   // in AppLayout, which guarantees session.user exists at this point
@@ -76,7 +79,7 @@ export function AuthenticatedLayout({
     },
     items: [
       { name: "Account Settings", href: "/account/settings" },
-      { name: "Theme", onClick: () => {}, content: <ThemeToggle /> },
+      { name: "Theme", onClick: () => { }, content: <ThemeToggle /> },
       { name: "Sign out", onClick: onSignOut },
     ],
   };
@@ -108,7 +111,7 @@ export function AuthenticatedLayout({
               <SidebarInset className="h-screen-with-banner max-w-full md:peer-data-[state=collapsed]:w-[calc(100vw-var(--sidebar-width-icon))] md:peer-data-[state=expanded]:w-[calc(100vw-var(--sidebar-width))]">
                 <ResizableContent>{children}</ResizableContent>
                 <Toaster visibleToasts={1} />
-                <CommandMenu mainNavigation={navigation.navigation} />
+                <CommandMenu mainNavigation={navigation.navigation} messages={messages} />
               </SidebarInset>
             </div>
           </div>

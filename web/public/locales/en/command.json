@@ -1,0 +1,14 @@
+{
+  "Command.InputPlaceholder": "Type a command or search...",
+  "Command.Empty": "No results found.",
+  "Command.Group.MainNavigation": "Main Navigation",
+  "Command.Group.Projects": "Projects",
+  "Command.Group.Dashboards": "Dashboards",
+  "Command.Group.ProjectSettings": "Project Settings",
+  "Command.Group.OrganizationSettings": "Organization Settings",
+  "Command.Group.AccountSettings": "Account Settings",
+  "Command.ProjectSettingsPrefix": "Project Settings",
+  "Command.OrganizationSettingsPrefix": "Organization Settings",
+  "Command.AccountSettingsPrefix": "Account Settings",
+  "Command.DashboardPrefix": "Dashboard"
+}

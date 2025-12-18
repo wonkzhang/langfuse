@@ -23,8 +23,10 @@ import { type NavigationItem } from "@/src/components/layouts/utilities/routes";
 
 export function CommandMenu({
   mainNavigation,
+  messages,
 }: {
   mainNavigation: NavigationItem[];
+  messages: Record<string, string> | null;
 }) {
   const { open, setOpen } = useCommandMenu();
   const router = useRouter();
@@ -37,7 +39,10 @@ export function CommandMenu({
   const projectSettingsItems = settingsPages
     .filter((page) => page.show !== false && !("href" in page))
     .map((page) => ({
-      title: `Project Settings > ${page.title}`,
+      title: (() => {
+        const prefix = messages?.["Command.ProjectSettingsPrefix"];
+        return prefix ? `${prefix} > ${page.title}` : `${page.title}`;
+      })(),
       url: `/project/${project?.id}/settings${page.slug === "index" ? "" : `/${page.slug}`}`,
       keywords: page.cmdKKeywords || [],
     }));
@@ -45,13 +50,19 @@ export function CommandMenu({
   const orgSettingsItems = orgSettingsPages
     .filter((page) => page.show !== false && !("href" in page))
     .map((page) => ({
-      title: `Organization Settings > ${page.title}`,
+      title: (() => {
+        const prefix = messages?.["Command.OrganizationSettingsPrefix"];
+        return prefix ? `${prefix} > ${page.title}` : `${page.title}`;
+      })(),
       url: `/organization/${organization?.id}/settings${page.slug === "index" ? "" : `/${page.slug}`}`,
       keywords: page.cmdKKeywords || [],
     }));
 
   const accountSettingsItems = accountSettingsPages.map((page) => ({
-    title: `Account Settings > ${page.title}`,
+    title: (() => {
+      const prefix = messages?.["Command.AccountSettingsPrefix"];
+      return prefix ? `${prefix} > ${page.title}` : `${page.title}`;
+    })(),
     url: `/account/settings${page.slug === "index" ? "" : `/${page.slug}`}`,
     keywords: page.cmdKKeywords || [],
   }));
@@ -107,7 +118,10 @@ export function CommandMenu({
 
   const dashboardItems =
     dashboardsQuery.data?.dashboards.map((d) => ({
-      title: `Dashboard > ${d.name}`,
+      title: (() => {
+        const prefix = messages?.["Command.DashboardPrefix"];
+        return prefix ? `${prefix} > ${d.name}` : `${d.name}`;
+      })(),
       url: `/project/${project?.id}/dashboards/${d.id}`,
       keywords: [
         "dashboard",
@@ -148,13 +162,13 @@ export function CommandMenu({
       }}
     >
       <CommandInput
-        placeholder="Type a command or search..."
+        placeholder={messages?.["Command.InputPlaceholder"] ?? ""}
         className="border-none focus:border-none focus:outline-none focus:ring-0 focus:ring-transparent"
         onValueChange={debouncedSearchChange}
       />
       <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
-        <CommandGroup heading="Main Navigation">
+        <CommandEmpty>{messages?.["Command.Empty"] ?? ""}</CommandEmpty>
+        <CommandGroup heading={messages?.["Command.Group.MainNavigation"] ?? ""}>
           {navItems.map((item) => (
             <CommandItem
               key={item.url}
@@ -177,7 +191,7 @@ export function CommandMenu({
         {allProjectItems.length > 0 && (
           <>
             <CommandSeparator />
-            <CommandGroup heading="Projects">
+            <CommandGroup heading={messages?.["Command.Group.Projects"] ?? ""}>
               {allProjectItems.map((item) => (
                 <CommandItem
                   key={item.url}
@@ -203,7 +217,7 @@ export function CommandMenu({
         {dashboardItems.length > 0 && (
           <>
             <CommandSeparator />
-            <CommandGroup heading="Dashboards">
+            <CommandGroup heading={messages?.["Command.Group.Dashboards"] ?? ""}>
               {dashboardItems.map((item) => (
                 <CommandItem
                   key={item.url}
@@ -229,7 +243,7 @@ export function CommandMenu({
         {projectSettingsItems.length > 0 && (
           <>
             <CommandSeparator />
-            <CommandGroup heading="Project Settings">
+            <CommandGroup heading={messages?.["Command.Group.ProjectSettings"] ?? ""}>
               {projectSettingsItems.map((item) => (
                 <CommandItem
                   key={item.url}
@@ -254,7 +268,7 @@ export function CommandMenu({
         {orgSettingsItems.length > 0 && (
           <>
             <CommandSeparator />
-            <CommandGroup heading="Organization Settings">
+            <CommandGroup heading={messages?.["Command.Group.OrganizationSettings"] ?? ""}>
               {orgSettingsItems.map((item) => (
                 <CommandItem
                   key={item.url}
@@ -279,7 +293,7 @@ export function CommandMenu({
         {accountSettingsItems.length > 0 && (
           <>
             <CommandSeparator />
-            <CommandGroup heading="Account Settings">
+            <CommandGroup heading={messages?.["Command.Group.AccountSettings"] ?? ""}>
               {accountSettingsItems.map((item) => (
                 <CommandItem
                   key={item.url}
@@ -328,33 +342,33 @@ export const useNavigationItems = () => {
   const getProjectPath = (projectId: string) =>
     router.query.projectId
       ? truncatePathBeforeDynamicSegments(router.asPath).replace(
-          router.query.projectId as string,
-          projectId,
-        )
+        router.query.projectId as string,
+        projectId,
+      )
       : `/project/${projectId}`;
 
   const allProjectItems = organizations
     ? organizations
-        .sort((a, b) => {
-          // sort demo org to the bottom
-          const isDemoA = env.NEXT_PUBLIC_DEMO_ORG_ID === a.id;
-          const isDemoB = env.NEXT_PUBLIC_DEMO_ORG_ID === b.id;
-          if (isDemoA) return 1;
-          if (isDemoB) return -1;
-          return a.name.localeCompare(b.name);
-        })
-        .flatMap((org) =>
-          org.projects.map((proj) => ({
-            title: `${org.name} > ${proj.name}`,
-            url: getProjectPath(proj.id),
-            active: router.query.projectId === proj.id,
-            keywords: [
-              "project",
-              org.name.toLowerCase(),
-              proj.name.toLowerCase(),
-            ],
-          })),
-        )
+      .sort((a, b) => {
+        // sort demo org to the bottom
+        const isDemoA = env.NEXT_PUBLIC_DEMO_ORG_ID === a.id;
+        const isDemoB = env.NEXT_PUBLIC_DEMO_ORG_ID === b.id;
+        if (isDemoA) return 1;
+        if (isDemoB) return -1;
+        return a.name.localeCompare(b.name);
+      })
+      .flatMap((org) =>
+        org.projects.map((proj) => ({
+          title: `${org.name} > ${proj.name}`,
+          url: getProjectPath(proj.id),
+          active: router.query.projectId === proj.id,
+          keywords: [
+            "project",
+            org.name.toLowerCase(),
+            proj.name.toLowerCase(),
+          ],
+        })),
+      )
     : [];
 
   return {

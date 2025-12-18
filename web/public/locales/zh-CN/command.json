@@ -1,0 +1,14 @@
+{
+  "Command.InputPlaceholder": "输入命令或搜索...",
+  "Command.Empty": "未找到结果。",
+  "Command.Group.MainNavigation": "主导航",
+  "Command.Group.Projects": "项目",
+  "Command.Group.Dashboards": "仪表盘",
+  "Command.Group.ProjectSettings": "项目设置",
+  "Command.Group.OrganizationSettings": "组织设置",
+  "Command.Group.AccountSettings": "账户设置",
+  "Command.ProjectSettingsPrefix": "项目设置",
+  "Command.OrganizationSettingsPrefix": "组织设置",
+  "Command.AccountSettingsPrefix": "账户设置",
+  "Command.DashboardPrefix": "仪表盘"
+}
