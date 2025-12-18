@@ -14,5 +14,12 @@
   "PromptsOnboardingVP3Description": "客户端缓存可防止延迟或可用性问题，提升应用稳定性",
 
   "PromptsOnboardingVP4Title": "比较指标",
-  "PromptsOnboardingVP4Description": "跟踪不同提示词版本的延迟、成本和评估指标"
+  "PromptsOnboardingVP4Description": "跟踪不同提示词版本的延迟、成本和评估指标",
+
+  "Prompts.Breadcrumb.Prompts": "提示词",
+  "Prompts.New.Title": "创建提示词",
+  "Prompts.New.NewVersionSuffix": "新版本",
+  "Prompts.New.HelpDescription": "在 Langfuse 中管理和版本化您的提示词。您可以通过 UI 或 SDK 编辑并更新提示词，通过 SDK 获取生产版本。更多信息请参见文档。",
+  "Prompts.New.ImmutableNote": "提示词在 Langfuse 中为不可变。要更新提示词，请创建新版本。",
+  "Prompts.Loading": "加载中..."
 }

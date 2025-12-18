@@ -4,7 +4,9 @@ import useProjectIdFromURL from "@/src/hooks/useProjectIdFromURL";
 import { api } from "@/src/utils/api";
 import Page from "@/src/components/layouts/page";
 
-export const NewPrompt = () => {
+export type PromptMessages = Record<string, string> | null;
+
+export const NewPrompt = ({ messages }: { messages?: PromptMessages }) => {
   const projectId = useProjectIdFromURL();
   const [initialPromptId] = useQueryParam("promptId", StringParam);
 
@@ -21,16 +23,16 @@ export const NewPrompt = () => {
   );
 
   if (isInitialLoading) {
-    return <div className="p-3">Loading...</div>;
+    return <div className="p-3">{messages?.["Prompts.Loading"] ?? "加载中..."}</div>;
   }
 
   const breadcrumb: { name: string; href?: string }[] = [
     {
-      name: "Prompts",
+      name: messages?.["Prompts.Breadcrumb.Prompts"] ?? "提示词",
       href: `/project/${projectId}/prompts/`,
     },
     {
-      name: "New prompt",
+      name: messages?.["Prompts.New.Title"] ?? "新建提示词",
     },
   ];
 
@@ -41,7 +43,7 @@ export const NewPrompt = () => {
         name: initialPrompt.name,
         href: `/project/${projectId}/prompts/${encodeURIComponent(initialPrompt.name)}`,
       },
-      { name: "New version" },
+      { name: messages?.["Prompts.New.NewVersionSuffix"] ?? "新版本" },
     );
   }
 
@@ -51,11 +53,10 @@ export const NewPrompt = () => {
       scrollable
       headerProps={{
         title: initialPrompt
-          ? `${initialPrompt.name} \u2014 New version`
-          : "Create new prompt",
+          ? `${initialPrompt.name} \u2014 ${messages?.["Prompts.New.NewVersionSuffix"] ?? "新版本"}`
+          : messages?.["Prompts.New.Title"] ?? "新建提示词",
         help: {
-          description:
-            "Manage and version your prompts in Langfuse. Edit and update them via the UI and SDK. Retrieve the production version via the SDKs. Learn more in the docs.",
+          description: messages?.["Prompts.New.HelpDescription"] ?? "在 Langfuse 中管理和版本化您的提示词。您可以通过 UI 或 SDK 编辑并更新提示词，通过 SDK 获取生产版本。更多信息请参见文档。",
           href: "https://langfuse.com/docs/prompts",
         },
         breadcrumb: breadcrumb,
@@ -63,8 +64,7 @@ export const NewPrompt = () => {
     >
       {initialPrompt ? (
         <p className="text-sm text-muted-foreground">
-          Prompts are immutable in Langfuse. To update a prompt, create a new
-          version.
+          {messages?.["Prompts.New.ImmutableNote"] ?? "提示词在 Langfuse 中为不可变。要更新提示词，请创建新版本。"}
         </p>
       ) : null}
       <div className="my-8">
