@@ -1,3 +1,6 @@
 {
-  "PromptsOnboardingPageTitle": "热烈欢迎"
+  "PromptsOnboardingPageTitle": "开始进行提示管理",
+  "PromptsOnboardingPageDescription": "提示管理功能可让您集中管理、进行版本控制，并协同迭代您的提示内容。现在就开始使用提示管理功能，以提升您的语言模型应用程序的性能和可维护性。",
+  "PromptsOnboardingPageCreateButtonText": "创建提示词",
+  "PromptsOnboardingPageLearnMoreButtonText": "了解更多"
 }

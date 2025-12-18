@@ -1,3 +1,6 @@
 {
-  "PromptsOnboardingPageTitle": "Get Started with Prompt Management"
+  "PromptsOnboardingPageTitle": "Get Started with Prompt Management",
+  "PromptsOnboardingPageDescription": "Prompt Management helps you centrally manage, version control, and collaboratively iterate on your prompts. Start using prompt management to improve your LLM application's performance and maintainability.",
+  "PromptsOnboardingPageCreateButtonText": "Create Prompt",
+  "PromptsOnboardingPagLearnMoreButtonText": "Learn More"
 }

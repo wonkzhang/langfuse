@@ -36,14 +36,14 @@ export function PromptsOnboarding({ projectId, messages }: { projectId: string; 
   return (
     <SplashScreen
       title={messages?.PromptsOnboardingPageTitle}
-      description="Langfuse Prompt Management helps you centrally manage, version control, and collaboratively iterate on your prompts. Start using prompt management to improve your LLM application's performance and maintainability."
+      description={messages?.PromptsOnboardingPageDescription}
       valuePropositions={valuePropositions}
       primaryAction={{
-        label: "Create Prompt",
+        label: messages?.PromptsOnboardingPageCreateButtonText,
         href: `/project/${projectId}/prompts/new`,
       }}
       secondaryAction={{
-        label: "Learn More",
+        label: messages?.PromptsOnboardingPageLearnMoreButtonText,
         href: "https://langfuse.com/docs/prompt-management/get-started",
       }}
     />
