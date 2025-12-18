@@ -1,0 +1,17 @@
+{
+  "Datasets.Form.Name": "名称",
+  "Datasets.Form.NameDescription": "使用斜杠 '/' 将数据集名称组织为文件夹。",
+  "Datasets.Form.Description": "描述（可选）",
+  "Datasets.Form.Metadata": "元数据（可选）",
+  "Datasets.Form.InputSchema.Label": "输入 Schema",
+  "Datasets.Form.InputSchema.Description": "使用 JSON Schema 验证数据集项的输入。所有新建与现有项都必须符合此 schema。",
+  "Datasets.Form.ExpectedOutputSchema.Label": "预期输出 Schema",
+  "Datasets.Form.ExpectedOutputSchema.Description": "使用 JSON Schema 验证数据集项的预期输出。所有新建与现有项都必须符合此 schema。",
+  "Datasets.Delete.ConfirmLabel": "输入 \"{name}\" 以确认删除",
+  "Datasets.Button.Create": "创建数据集",
+  "Datasets.Button.Delete": "删除数据集",
+  "Datasets.Button.Update": "更新数据集",
+  "Datasets.Validation.NameExists": "数据集名称已存在。",
+  "Datasets.Error.ConfirmDelete": "请输入正确的数据集名称以确认删除",
+  "Datasets.Error.Label": "错误："
+}

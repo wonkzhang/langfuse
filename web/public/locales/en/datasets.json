@@ -1,0 +1,17 @@
+{
+  "Datasets.Form.Name": "Name",
+  "Datasets.Form.NameDescription": "Use slashes '/' in dataset names to organize them into folders.",
+  "Datasets.Form.Description": "Description (optional)",
+  "Datasets.Form.Metadata": "Metadata (optional)",
+  "Datasets.Form.InputSchema.Label": "Input schema",
+  "Datasets.Form.InputSchema.Description": "Validate dataset item inputs against a JSON Schema. All new and existing items must conform to this schema.",
+  "Datasets.Form.ExpectedOutputSchema.Label": "Expected output schema",
+  "Datasets.Form.ExpectedOutputSchema.Description": "Validate dataset item expected outputs against a JSON Schema. All new and existing items must conform to this schema.",
+  "Datasets.Delete.ConfirmLabel": "Type \"{name}\" to confirm deletion",
+  "Datasets.Button.Create": "Create dataset",
+  "Datasets.Button.Delete": "Delete dataset",
+  "Datasets.Button.Update": "Update dataset",
+  "Datasets.Validation.NameExists": "Dataset name already exists.",
+  "Datasets.Error.ConfirmDelete": "Please type the correct dataset name to confirm deletion",
+  "Datasets.Error.Label": "Error:"
+}

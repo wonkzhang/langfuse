@@ -64,7 +64,25 @@ interface BaseDatasetFormProps {
   redirectOnSuccess?: boolean;
   showFooter?: boolean;
   onValidationChange?: (isValid: boolean, isSubmitting: boolean) => void;
+  /**
+   * 可选的国际化文本映射，键来自 `public/locales/{locale}/datasets.json`。
+   * 例：`messages["Datasets.Form.Name"]` => 表单中 `Name` 标签文本。
+   */
+  messages?: Record<string, string> | null;
 }
+/**
+ * DatasetForm 国际化支持
+ *
+ * 说明：该组件接受一个可选的 `messages` 属性，用于传入页面/容器级别加载的
+ * 本地化文本（来自 `public/locales/{locale}/datasets.json`）。
+ *
+ * - `messages` 的键名在本文件注释中列出（例如 `Datasets.Form.Name`）。
+ * - 组件在使用 `messages` 时优先读取其值；若未提供对应键，则回退到中文默认文本（便于开发与本地测试）。
+ * - 设计理由：避免在此处引入第三方 i18n 库，且允许页面层通过服务器端注入翻译以避免闪烁。
+ *
+ * 作者：wonkzhang
+ * 日期：2025-12-18
+ */
 
 interface CreateDatasetFormProps extends BaseDatasetFormProps {
   mode: "create";
@@ -157,24 +175,24 @@ export const DatasetForm = forwardRef<DatasetFormRef, DatasetFormProps>(
       defaultValues:
         props.mode === "update"
           ? {
-              name: props.datasetName,
-              description: props.datasetDescription ?? "",
-              metadata: props.datasetMetadata
-                ? JSON.stringify(props.datasetMetadata, null, 2)
-                : "",
-              inputSchema: inputSchemaString,
-              expectedOutputSchema: expectedOutputSchemaString,
-            }
+            name: props.datasetName,
+            description: props.datasetDescription ?? "",
+            metadata: props.datasetMetadata
+              ? JSON.stringify(props.datasetMetadata, null, 2)
+              : "",
+            inputSchema: inputSchemaString,
+            expectedOutputSchema: expectedOutputSchemaString,
+          }
           : {
-              name:
-                props.mode === "create" && props.folderPrefix
-                  ? `${props.folderPrefix}/`
-                  : "",
-              description: "",
-              metadata: "",
-              inputSchema: "",
-              expectedOutputSchema: "",
-            },
+            name:
+              props.mode === "create" && props.folderPrefix
+                ? `${props.folderPrefix}/`
+                : "",
+            description: "",
+            metadata: "",
+            inputSchema: "",
+            expectedOutputSchema: "",
+          },
     });
 
     const utils = api.useUtils();
@@ -200,7 +218,7 @@ export const DatasetForm = forwardRef<DatasetFormRef, DatasetFormProps>(
       currentName: form.watch("name"),
       allNames: allDatasetNames,
       form,
-      errorMessage: "Dataset name already exists.",
+      errorMessage: props.messages?.["Datasets.Validation.NameExists"] ?? "数据集名称已存在。",
       whitelistedName: props.mode === "update" ? props.datasetName : undefined,
     });
 
@@ -341,7 +359,7 @@ export const DatasetForm = forwardRef<DatasetFormRef, DatasetFormProps>(
 
       if (deleteConfirmationInput !== props.datasetName) {
         setFormError(
-          "Please type the correct dataset name to confirm deletion",
+          props.messages?.["Datasets.Error.ConfirmDelete"] ?? "请输入正确的数据集名称以确认删除",
         );
         return;
       }
@@ -376,7 +394,7 @@ export const DatasetForm = forwardRef<DatasetFormRef, DatasetFormProps>(
             {props.mode === "delete" ? (
               <div className="mb-8 grid w-full gap-1.5">
                 <Label htmlFor="delete-confirmation">
-                  Type &quot;{props.datasetName}&quot; to confirm deletion
+                  {props.messages?.["Datasets.Delete.ConfirmLabel"] ?? `输入 "${props.datasetName}" 以确认删除`}
                 </Label>
                 <Input
                   id="delete-confirmation"
@@ -391,10 +409,11 @@ export const DatasetForm = forwardRef<DatasetFormRef, DatasetFormProps>(
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Name</FormLabel>
+                      <FormLabel>{props.messages?.["Datasets.Form.Name"] ?? "名称"}</FormLabel>
                       <FormDescription>
-                        Use slashes &apos;/&apos; in dataset names to organize
-                        them into <em>folders</em>.
+                        {props.messages?.["Datasets.Form.NameDescription"] ?? (
+                          <>使用斜杠 '/' 将数据集名称组织为 <em>文件夹</em>。</>
+                        )}
                       </FormDescription>
                       <FormControl>
                         <Input {...field} />
@@ -408,7 +427,7 @@ export const DatasetForm = forwardRef<DatasetFormRef, DatasetFormProps>(
                   name="description"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Description (optional)</FormLabel>
+                      <FormLabel>{props.messages?.["Datasets.Form.Description"] ?? "描述（可选）"}</FormLabel>
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
@@ -421,7 +440,7 @@ export const DatasetForm = forwardRef<DatasetFormRef, DatasetFormProps>(
                   name="metadata"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Metadata (optional)</FormLabel>
+                      <FormLabel>{props.messages?.["Datasets.Form.Metadata"] ?? "元数据（可选）"}</FormLabel>
                       <FormControl>
                         <CodeMirrorEditor
                           mode="json"
@@ -441,8 +460,8 @@ export const DatasetForm = forwardRef<DatasetFormRef, DatasetFormProps>(
                   name="inputSchema"
                   render={({ field }) => (
                     <DatasetSchemaInput
-                      label="Input schema"
-                      description="Validate dataset item inputs against a JSON Schema. All new and existing items must conform to this schema."
+                      label={props.messages?.["Datasets.Form.InputSchema.Label"] ?? "输入 Schema"}
+                      description={props.messages?.["Datasets.Form.InputSchema.Description"] ?? "使用 JSON Schema 验证数据集项的输入。所有新建与现有项都必须符合此 schema。"}
                       value={field.value}
                       onChange={field.onChange}
                       initialValue={inputSchemaString}
@@ -454,8 +473,8 @@ export const DatasetForm = forwardRef<DatasetFormRef, DatasetFormProps>(
                   name="expectedOutputSchema"
                   render={({ field }) => (
                     <DatasetSchemaInput
-                      label="Expected output schema"
-                      description="Validate dataset item expected outputs against a JSON Schema. All new and existing items must conform to this schema."
+                      label={props.messages?.["Datasets.Form.ExpectedOutputSchema.Label"] ?? "预期输出 Schema"}
+                      description={props.messages?.["Datasets.Form.ExpectedOutputSchema.Description"] ?? "使用 JSON Schema 验证数据集项的预期输出。所有新建与现有项都必须符合此 schema。"}
                       value={field.value}
                       onChange={field.onChange}
                       initialValue={expectedOutputSchemaString}
@@ -491,14 +510,14 @@ export const DatasetForm = forwardRef<DatasetFormRef, DatasetFormProps>(
                   className="w-full"
                 >
                   {props.mode === "create"
-                    ? "Create dataset"
+                    ? props.messages?.["Datasets.Button.Create"] ?? "创建数据集"
                     : props.mode === "delete"
-                      ? "Delete Dataset"
-                      : "Update dataset"}
+                      ? props.messages?.["Datasets.Button.Delete"] ?? "删除数据集"
+                      : props.messages?.["Datasets.Button.Update"] ?? "更新数据集"}
                 </Button>
                 {formError && (
                   <p className="mt-4 text-center text-sm text-red-500">
-                    <span className="font-bold">Error:</span> {formError}
+                    <span className="font-bold">{props.messages?.["Datasets.Error.Label"] ?? "错误："}</span> {formError}
                   </p>
                 )}
               </div>

@@ -68,7 +68,7 @@ export const NewPrompt = ({ messages }: { messages?: PromptMessages }) => {
         </p>
       ) : null}
       <div className="my-8">
-        <NewPromptForm {...{ initialPrompt }} />
+        <NewPromptForm {...{ initialPrompt, messages }} />
       </div>
     </Page>
   );
