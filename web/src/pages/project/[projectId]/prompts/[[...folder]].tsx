@@ -13,8 +13,26 @@ import PromptMetrics from "./metrics";
 import { useQueryParams, StringParam } from "use-query-params";
 import React from "react";
 import { AutomationButton } from "@/src/features/automations/components/AutomationButton";
+import type { GetStaticPaths, GetStaticPropsContext } from "next";
 
-export default function PromptsWithFolder() {
+
+type Params = { projectId: string; };
+
+// 增加国际化的配置
+export async function getStaticProps({ locale }: GetStaticPropsContext<Params>) {
+  // 可根据 locale 加载翻译文件
+  const messages = await import(`@/public/locales/${locale}/prompts.json`);
+  return { props: { messages: messages.default } };
+}
+
+// 以修复动态 SSG 页面缺少 getStaticPaths 的报错
+export const getStaticPaths: GetStaticPaths = async () => ({
+  paths: [],
+  fallback: "blocking",
+});
+
+
+export default function PromptsWithFolder({ messages }: { projectId: string; messages: any; }) {
   const router = useRouter();
   const projectId = router.query.projectId as string;
   const routeSegments = router.query.folder;
@@ -111,7 +129,7 @@ export default function PromptsWithFolder() {
     >
       {/* Show onboarding screen if project has no prompts */}
       {showOnboarding ? (
-        <PromptsOnboarding projectId={projectId} />
+        <PromptsOnboarding projectId={projectId} messages={messages} />
       ) : (
         <PromptTable key={folderQueryParam} />
       )}
