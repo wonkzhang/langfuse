@@ -16,5 +16,8 @@
   "Routes.Upgrade": "Upgrade",
   "Routes.CloudStatus": "Cloud Status",
   "Routes.Settings": "Settings",
-  "Routes.Support": "Support"
+  "Routes.Support": "Support",
+  "RouteGroups.Observability": "Observability",
+  "RouteGroups.PromptManagement": "Prompt Management",
+  "RouteGroups.Evaluation": "Evaluation"
 }

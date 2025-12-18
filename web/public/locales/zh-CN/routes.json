@@ -16,5 +16,8 @@
   "Routes.Upgrade": "升级",
   "Routes.CloudStatus": "云状态",
   "Routes.Settings": "设置",
-  "Routes.Support": "支持"
+  "Routes.Support": "支持",
+  "RouteGroups.Observability": "可观测性",
+  "RouteGroups.PromptManagement": "提示词管理",
+  "RouteGroups.Evaluation": "评估"
 }
